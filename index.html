@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OATH — Where the Earth Remembers</title>
+  <meta name="description" content="Oath is a venue, a brand, a vow. Raw, rooted, and deeply human." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══ NAVIGATION ════════════════════════════════════════════ -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <a href="#" class="nav-logo">OATH</a>
+
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#venue">Our Venue</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#booking">Book</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile nav overlay -->
+  <div class="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigation">
+    <a href="#about">About</a>
+    <a href="#venue">Our Venue</a>
+    <a href="#products">Products</a>
+    <a href="#events">Events</a>
+    <a href="#booking">Book</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <!-- ═══ HERO ══════════════════════════════════════════════════ -->
+  <section id="hero" aria-label="Hero">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <canvas id="grain-overlay" aria-hidden="true"></canvas>
+
+    <div class="hero-content">
+      <h1 class="hero-title">OATH</h1>
+      <p class="hero-subtitle">Where the earth remembers</p>
+    </div>
+
+    <div class="scroll-indicator" role="button" tabindex="0" aria-label="Scroll down">
+      <span class="scroll-label">Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ═════════════════════════════════════════════════ -->
+  <section id="about" aria-labelledby="about-heading">
+    <div class="about-grid">
+
+      <div class="about-photo fade-in" role="img" aria-label="A textured earthy surface suggesting soil and bark"></div>
+
+      <div class="about-text fade-in">
+        <span class="section-label">Our Story</span>
+        <h2 id="about-heading">Born from<br />the quiet ground</h2>
+        <p>
+          Oath is not a place you arrive at — it is a place you return to. Founded in the belief
+          that beauty lives in honest things, we exist at the convergence of culture, craft, and
+          the slow intelligence of the natural world.
+        </p>
+        <p>
+          We are ceremony and gathering. We are the smell of wet earth after rain, the warmth
+          of fired clay, the amber hour before dark. Every gathering here is a small vow — to
+          presence, to authenticity, to the people who have shaped this land before us.
+        </p>
+        <span class="handwritten">A vow to what is real.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ VENUE ════════════════════════════════════════════════ -->
+  <section id="venue" aria-labelledby="venue-heading">
+    <span class="section-label fade-in">The Space</span>
+    <h2 id="venue-heading" class="fade-in">Our Venue</h2>
+
+    <div class="venue-cards">
+
+      <article class="venue-card fade-in">
+        <div class="venue-card-bg"></div>
+        <div class="venue-card-content">
+          <span class="venue-tag">The Hall</span>
+          <h3>The Stone Hall</h3>
+          <p>A vaulted gathering space for up to 180 guests. Raw limestone walls, warm candlelight, and the hush of thick stone between you and the world.</p>
+        </div>
+      </article>
+
+      <article class="venue-card fade-in">
+        <div class="venue-card-bg"></div>
+        <div class="venue-card-content">
+          <span class="venue-tag">The Garden</span>
+          <h3>The Burning Garden</h3>
+          <p>An open-air terrace framed by ancient olive trees and fire pits. For dusk rituals, open tables, and the kind of conversation that only starts after dark.</p>
+        </div>
+      </article>
+
+      <article class="venue-card fade-in">
+        <div class="venue-card-bg"></div>
+        <div class="venue-card-content">
+          <span class="venue-tag">The Studio</span>
+          <h3>The Clay Studio</h3>
+          <p>An intimate workshop and event space for up to 30. Kiln warmth, earth underfoot, and the meditative rhythm of making things by hand.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══ PRODUCTS ══════════════════════════════════════════════ -->
+  <section id="products" aria-labelledby="products-heading">
+    <div class="section-header">
+      <span class="section-label fade-in">Curated Objects</span>
+      <h2 id="products-heading" class="fade-in">Oath Products</h2>
+    </div>
+
+    <div class="products-grid">
+
+      <article class="product-card fade-in">
+        <span class="product-number">01</span>
+        <h3>Fired Earth Series</h3>
+        <p>Vessel forms thrown by hand on a foot wheel — irregular, warm, and shaped by the intelligence of the maker's touch.</p>
+        <a href="#" class="product-link">Explore</a>
+      </article>
+
+      <article class="product-card fade-in">
+        <span class="product-number">02</span>
+        <h3>Undyed Textiles</h3>
+        <p>Woven from raw linen and unbleached cotton, each textile is an act of restraint — colour belonging only to the fibre itself.</p>
+        <a href="#" class="product-link">Explore</a>
+      </article>
+
+      <article class="product-card fade-in">
+        <span class="product-number">03</span>
+        <h3>Foraged Provisions</h3>
+        <p>Preserved and fermented goods from land we know. Bitter honey, salted citrus, oil pressed cold from groves a short walk away.</p>
+        <a href="#" class="product-link">Explore</a>
+      </article>
+
+      <article class="product-card fade-in">
+        <span class="product-number">04</span>
+        <h3>Oath Tallow Candles</h3>
+        <p>Tallow-dipped and set with foraged botanicals. They burn slow, smokeless, and smell of woodsmoke and resin at the end of a day.</p>
+        <a href="#" class="product-link">Explore</a>
+      </article>
+
+      <article class="product-card fade-in">
+        <span class="product-number">05</span>
+        <h3>Archive Pigments</h3>
+        <p>Raw mineral pigments ground in-house. Ochre, umber, chalk. For those who still believe in painting walls by hand.</p>
+        <a href="#" class="product-link">Explore</a>
+      </article>
+
+      <article class="product-card fade-in">
+        <span class="product-number">06</span>
+        <h3>Wild Seed Collection</h3>
+        <p>Native wildflower and meadow grass seeds, harvested at the right moment and stored in folded paper. A slow gift.</p>
+        <a href="#" class="product-link">Explore</a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══ EVENTS ════════════════════════════════════════════════ -->
+  <section id="events" aria-labelledby="events-heading">
+    <div class="section-header">
+      <span class="section-label fade-in">What's Coming</span>
+      <h2 id="events-heading" class="fade-in">The Season Ahead</h2>
+    </div>
+
+    <div class="timeline" role="list">
+
+      <div class="timeline-item fade-in" role="listitem">
+        <div class="event-card">
+          <div class="event-date">June 14, 2026</div>
+          <span class="event-type" style="background:rgba(200,146,42,0.15);color:var(--ochre);">Workshop</span>
+          <h3>Soil &amp; Stone</h3>
+          <p>A day of hand-building in clay and conversation about what it means to work with material that outlives us.</p>
+        </div>
+        <div class="timeline-dot" style="background:var(--ochre);color:var(--ochre);"></div>
+      </div>
+
+      <div class="timeline-item fade-in" role="listitem">
+        <div class="event-card">
+          <div class="event-date">June 28, 2026</div>
+          <span class="event-type" style="background:rgba(90,107,75,0.15);color:var(--moss);">Gathering</span>
+          <h3>Dusk Gathering</h3>
+          <p>An open-table dinner in the garden. Long tables, slow food, fire. No programme — only time.</p>
+        </div>
+        <div class="timeline-dot" style="background:var(--moss);color:var(--moss);"></div>
+      </div>
+
+      <div class="timeline-item fade-in" role="listitem">
+        <div class="event-card">
+          <div class="event-date">July 12, 2026</div>
+          <span class="event-type" style="background:rgba(196,110,58,0.15);color:var(--terracotta);">Exhibition</span>
+          <h3>Living Archive</h3>
+          <p>A group exhibition of works made entirely from site-gathered materials. Bark, clay, lichen, ash.</p>
+        </div>
+        <div class="timeline-dot" style="background:var(--terracotta);color:var(--terracotta);"></div>
+      </div>
+
+      <div class="timeline-item fade-in" role="listitem">
+        <div class="event-card">
+          <div class="event-date">July 26, 2026</div>
+          <span class="event-type" style="background:rgba(200,146,42,0.15);color:var(--ochre);">Workshop</span>
+          <h3>Natural Dye Days</h3>
+          <p>Three days learning to dye cloth with foraged plants, roots, and bark. The kind of colour that fades beautifully.</p>
+        </div>
+        <div class="timeline-dot" style="background:var(--ochre);color:var(--ochre);"></div>
+      </div>
+
+      <div class="timeline-item fade-in" role="listitem">
+        <div class="event-card">
+          <div class="event-date">August 9, 2026</div>
+          <span class="event-type" style="background:rgba(90,107,75,0.15);color:var(--moss);">Gathering</span>
+          <h3>The Night Market</h3>
+          <p>Makers, growers, and craftspeople — candlelit, unhurried, trading in things made rather than manufactured.</p>
+        </div>
+        <div class="timeline-dot" style="background:var(--moss);color:var(--moss);"></div>
+      </div>
+
+      <div class="timeline-item fade-in" role="listitem">
+        <div class="event-card">
+          <div class="event-date">August 23, 2026</div>
+          <span class="event-type" style="background:rgba(160,82,45,0.15);color:var(--sienna);">Ritual</span>
+          <h3>Harvest Ceremony</h3>
+          <p>A close-of-season ritual gathering to mark the turning. Open to all. Bring something made, grown, or found.</p>
+        </div>
+        <div class="timeline-dot" style="background:var(--sienna);color:var(--sienna);"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ BOOKING ════════════════════════════════════════════════ -->
+  <section id="booking" aria-labelledby="booking-heading">
+    <span class="section-label">Reserve</span>
+    <h2 id="booking-heading">Reserve your moment</h2>
+    <p class="booking-subtitle">Every gathering here begins with an intention.</p>
+
+    <form class="booking-form" novalidate>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Full name" required />
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="date">Preferred Date</label>
+          <input type="date" id="date" name="date" required />
+        </div>
+        <div class="form-field">
+          <label for="occasion">Occasion</label>
+          <select id="occasion" name="occasion">
+            <option value="">Select type</option>
+            <option value="private">Private Gathering</option>
+            <option value="workshop">Workshop</option>
+            <option value="wedding">Ceremony / Wedding</option>
+            <option value="corporate">Corporate Retreat</option>
+            <option value="exhibition">Exhibition</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="message">Tell us about your vision</label>
+        <textarea id="message" name="message" placeholder="What are you imagining? There are no wrong answers here."></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Send Inquiry</button>
+    </form>
+  </section>
+
+  <!-- ═══ CONTACT ════════════════════════════════════════════════ -->
+  <section id="contact" aria-labelledby="contact-heading">
+    <div class="contact-inner">
+      <span class="section-label fade-in">Find Us</span>
+      <h2 id="contact-heading" class="fade-in">Come &amp; Find Us</h2>
+
+      <div class="contact-details fade-in">
+        <div class="contact-item">
+          <span class="contact-item-label">Address</span>
+          <span>12 Earthen Lane<br />The Moors, Devon EX20 4RL</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Email</span>
+          <a href="mailto:hello@oath.earth">hello@oath.earth</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Phone</span>
+          <a href="tel:+441392000000">+44 1392 000 000</a>
+        </div>
+      </div>
+
+      <div class="social-links fade-in">
+        <a href="#" class="social-link" aria-label="Oath on Instagram">Instagram</a>
+        <a href="#" class="social-link" aria-label="Oath on Pinterest">Pinterest</a>
+        <a href="#" class="social-link" aria-label="Oath Newsletter">Newsletter</a>
+      </div>
+
+      <div class="map-placeholder fade-in" role="img" aria-label="Map placeholder showing Oath's location in Devon">
+        <span class="map-pin-label">Devon, England</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+  <footer>
+    <span class="footer-logo">OATH</span>
+    <span class="footer-copy">&copy; 2026 Oath. All rights reserved.</span>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
