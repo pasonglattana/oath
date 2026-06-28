@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Per-machine / runtime data — never commit these
+server/oath.db
+server/oath.db-wal
+server/oath.db-shm
+server/config.json
+server/uploads/
+uploads/
+/data/
+
+# Editor / tooling
+.claude/
+_dna_backup/

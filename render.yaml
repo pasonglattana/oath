@@ -1,0 +1,23 @@
+# Render Blueprint — deploys Oath House (site + admin + API) in one click.
+# In the Render dashboard:  New +  →  Blueprint  →  pick this repo.
+services:
+  - type: web
+    name: oath-house
+    runtime: python
+    plan: starter            # Starter ($7/mo) is needed for a persistent disk
+    branch: main
+    buildCommand: "pip install -r requirements.txt"   # no deps, just satisfies the Python builder
+    startCommand: "python server/app.py"
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: DATA_DIR        # database, admin config & uploads live on the disk below
+        value: /data
+      - key: PYTHON_VERSION
+        value: "3.12.4"
+      - key: ADMIN_PASSWORD  # set your real admin password here (then it's never in the code)
+        sync: false
+    disk:
+      name: oath-data
+      mountPath: /data
+      sizeGB: 1              # holds the SQLite DB + uploaded photos/audio

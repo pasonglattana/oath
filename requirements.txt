@@ -1,0 +1,2 @@
+# Oath House runs on the Python standard library only — no third-party packages.
+# This file exists so hosting platforms detect a Python app and build cleanly.

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lost in the House · Oath House</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="logos/oath-mark-dark.png" />
+  <style>
+    :root { --earth:#161310; --bone:#ECE7DD; --soft:#ab9f93; --accent:#b9603f; }
+    * { box-sizing:border-box; margin:0; }
+    body { min-height:100svh; display:grid; place-items:center; text-align:center;
+      background:linear-gradient(rgba(18,12,10,.62),rgba(18,12,10,.74)), url("textures/earth-red.jpg") center/cover;
+      color:var(--bone); font-family:'Spectral',Georgia,serif; padding:2rem; }
+    .o { width:74px; height:auto; opacity:.9; margin:0 auto 2rem; display:block; }
+    .code { font-variant:small-caps; letter-spacing:.3em; font-size:.8rem; color:var(--soft); text-transform:lowercase; }
+    h1 { font-weight:400; font-size:clamp(1.8rem,5vw,3.4rem); line-height:1.2; margin:1.2rem 0; max-width:18ch; }
+    p { color:var(--soft); max-width:42ch; margin:0 auto 2.2rem; line-height:1.7; }
+    a { display:inline-flex; align-items:center; gap:.6rem; color:var(--bone); border:1px solid rgba(236,231,221,.35);
+      border-radius:40px; padding:.8rem 2rem; text-decoration:none; font-variant:small-caps; letter-spacing:.18em;
+      text-transform:lowercase; font-size:.9rem; transition:background .4s, color .4s, border-color .4s; }
+    a:hover { background:var(--accent); border-color:var(--accent); color:var(--bone); }
+    .wrap { display:flex; flex-direction:column; align-items:center; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <img class="o" src="logos/oath-ring-light.png" alt="Oath House" />
+    <p class="code">Error 404</p>
+    <h1>This room doesn't exist in the house.</h1>
+    <p>You've wandered down a corridor that leads nowhere. Let us walk you back to the door.</p>
+    <a href="/index.html">Return to Oath House</a>
+  </div>
+</body>
+</html>

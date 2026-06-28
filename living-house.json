@@ -1,0 +1,145 @@
+{
+  "_note": "OATH HOUSE — THE LIVING HOUSE content. Staff may edit this file to update today's rhythm, the soundtrack, object stories and availability. No code changes required.",
+  "soundtrack": "Japanese Jazz · 1978 – 1985",
+  "conditions": { "rain": false, "eventToday": false, "eventName": "" },
+  "rituals": [
+    { "time": "08:00", "phase": "morning",   "title": "The Garden Awakens", "lines": ["Coffee.", "Morning light.", "Fresh bread."] },
+    { "time": "12:00", "phase": "afternoon", "title": "Gather & Share",      "lines": ["Lunch service begins.", "The house becomes fuller."] },
+    { "time": "17:30", "phase": "evening",   "title": "Golden Hour",         "lines": ["Natural wine.", "Long shadows.", "The turn into evening."] },
+    { "time": "20:00", "phase": "night",     "title": "Listening Session",   "lines": ["Papersound opens.", "Tonight — {soundtrack}"] },
+    { "time": "21:30", "phase": "night",     "title": "After Dark",          "lines": ["Cocktails.", "Records.", "Conversation."] }
+  ],
+  "objects": [
+    {
+      "id": "coffee", "glyph": "cup", "name": "The Coffee Cup", "windows": ["morning"],
+      "kicker": "The Morning Ritual",
+      "title": "To begin slowly",
+      "body": [
+        "Before the house fills, there is the cup. Single origin, stone-ground, roasted three streets away and poured by hand while the light is still low and blue.",
+        "We do not rush the morning. The first ritual of the day is patience — to stand at the counter, to wait for the bloom, to begin with both hands warm."
+      ],
+      "meta": "Lao highland beans · roasted weekly"
+    },
+    {
+      "id": "bread", "glyph": "bread", "name": "The Loaf", "windows": ["morning"],
+      "kicker": "From the Oven",
+      "title": "Broken, not sliced",
+      "body": [
+        "A long ferment, a dark crust, a crumb that smells of the field. Bread is the oldest reason people gather — something made to be torn and passed along the table.",
+        "Each loaf is shaped the night before and baked at first light, so the house wakes to the smell of it."
+      ],
+      "meta": "48-hour levain · milled grain"
+    },
+    {
+      "id": "plant", "glyph": "plant", "name": "A Leaf in the Light", "windows": ["morning", "afternoon"],
+      "kicker": "The Garden",
+      "title": "People and plants",
+      "body": [
+        "The garden is not decoration. It is a second household — tended, watered, listened to. We grow what we can use, and we let the rest simply be green.",
+        "Watch a leaf move in the morning air and you understand the whole philosophy of the house: slow, alive, rooted."
+      ],
+      "meta": "Tended daily · Ban Wat Chan"
+    },
+    {
+      "id": "chair", "glyph": "chair", "name": "The Chair", "windows": ["afternoon", "evening"],
+      "kicker": "The Ritual of Gathering",
+      "title": "To sit together",
+      "body": [
+        "Hand-built from reclaimed timber, each chair carries the small imperfections of the hands that made it. It asks one thing of you: to stay a while.",
+        "The most radical act in a fast city is to sit down across from another person and give them your time. That is what this room is for."
+      ],
+      "meta": "Reclaimed teak · made in-house"
+    },
+    {
+      "id": "basket", "glyph": "basket", "name": "The Market Basket", "windows": ["afternoon"],
+      "kicker": "Ingredients",
+      "title": "What the day brings",
+      "body": [
+        "The menu is written by the morning market, not the other way around. Whatever is ripe, whatever is caught, whatever a neighbour leaves at the door — that becomes lunch.",
+        "Cooking this way means no two days taste the same. The house eats with the season."
+      ],
+      "meta": "Sourced each morning · within 20km"
+    },
+    {
+      "id": "bottle", "glyph": "bottle", "name": "The Bottle", "windows": ["evening", "night"],
+      "kicker": "Golden Hour",
+      "title": "Low intervention, high trust",
+      "body": [
+        "Natural wine, made by people we know, opened as the shadows grow long. Nothing added, nothing stripped away — only grapes, time and a little faith.",
+        "It is not about the label. It is about the hour: the light turning amber, the room loosening, the evening arriving without being announced."
+      ],
+      "meta": "Low-intervention · small growers"
+    },
+    {
+      "id": "ceramic", "glyph": "ceramic", "name": "The Ceramic Cup", "windows": ["evening", "night"],
+      "kicker": "The Ritual of Sharing",
+      "title": "Imperfect on purpose",
+      "body": [
+        "Thrown by a single pair of hands and fired at high heat, no two cups are alike. The thumb-mark of the maker is left where it fell — wabi, the beauty of the unfinished.",
+        "To drink from an object made by a person you could name is to remember that everything here was touched before it reached you."
+      ],
+      "meta": "Stoneware · thrown by hand in Luang Prabang"
+    },
+    {
+      "id": "candle", "glyph": "candle", "name": "The Candle", "windows": ["evening", "night"],
+      "kicker": "As the Light Falls",
+      "title": "Keeping a small fire",
+      "body": [
+        "When the sun leaves, we do not turn the house bright. We light it. Soy wax, dried botanicals, a slow cedar burn that marks the change from day into night.",
+        "A flame asks the eyes to soften and the voice to lower. The room becomes intimate the moment it is lit."
+      ],
+      "meta": "Soy & cedar · pressed botanicals"
+    },
+    {
+      "id": "vinyl", "glyph": "vinyl", "name": "The Vinyl", "windows": ["night"],
+      "kicker": "Now Playing at Papersound",
+      "title": "Tonight's listening",
+      "body": [
+        "{soundtrack}. A record set down with care on a warm valve system, played start to finish the way it was meant to be heard.",
+        "At Papersound, sound is not background. It is the reason. We play sides, not songs — and we ask you to listen the way you would read a letter."
+      ],
+      "meta": "Side A · vinyl only · no skipping"
+    },
+    {
+      "id": "speaker", "glyph": "speaker", "name": "The Speaker", "windows": ["night"],
+      "kicker": "The Listening Room",
+      "title": "Why listening matters",
+      "body": [
+        "Hand-built cabinets, vintage drivers, a single point in the room where everything resolves. The system was tuned by ear over many late nights until the music simply felt true.",
+        "We built a room for listening because attention has become the rarest thing we have. To give it fully — to a record, to a person — is the whole point of the night."
+      ],
+      "meta": "Valve amplification · field-coil drivers"
+    },
+    {
+      "id": "cocktail", "glyph": "cocktail", "name": "The Cocktail", "windows": ["night"],
+      "kicker": "After Dark",
+      "title": "Built slowly",
+      "body": [
+        "Stirred, not hurried. House ferments, foraged bitters, ice cut to order. A drink built with the same patience as the morning coffee, twelve hours later.",
+        "The last ritual of the day mirrors the first: both ask you to wait, and both reward you for it."
+      ],
+      "meta": "House ferments · foraged botanicals"
+    },
+    {
+      "id": "o", "glyph": "o", "name": "The O", "windows": ["any"], "rare": true,
+      "kicker": "A House of Rituals",
+      "title": "Rooted in the Real",
+      "body": [
+        "In a world moving too fast, Oath was made as a place to reconnect — through food, through sound, through movement. The two dots are the gathering: people, breath, presence, the pause between songs.",
+        "You found the mark. Most people walk straight past it. Come back at a different hour and the house will show you something else — there is always more here than is announced.",
+        "— A note from the founders"
+      ],
+      "meta": "Oath House · Vientiane · Est. 2026"
+    },
+    {
+      "id": "moon", "glyph": "moon", "name": "The Full Moon", "windows": ["night"], "special": "fullmoon",
+      "kicker": "Tonight Only",
+      "title": "Under a full moon",
+      "body": [
+        "The garden is open late tonight. On full-moon evenings the house lets the dark in — lanterns instead of lamps, the long table moved outside, a slower set on the turntable.",
+        "Some things only happen when the sky agrees. If you are reading this, you are here on one of those nights."
+      ],
+      "meta": "Full-moon gathering · garden open late"
+    }
+  ]
+}

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oath · Rituals &amp; Wonders — The Collections, MMXXVI</title>
+  <meta name="description" content="Oath — Rituals & Wonders. Three collections, one continuous breath: Oath Garden, Papersound and Oath Studio. A house of rituals, rooted in the real. Vientiane, Laos." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="icon" type="image/png" href="logos/oath-mark-dark.png" />
+  <link rel="stylesheet" href="dna.css?v=1" />
+</head>
+<body class="paused">
+
+  <!-- ═══ OVERLAYS ═══ -->
+  <div class="grain" aria-hidden="true"></div>
+  <canvas id="dust" aria-hidden="true"></canvas>
+  <div class="cursor cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"><span class="cursor-label"></span></div>
+
+  <!-- ═══ PRELOADER — curtain ═══ -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="pl-inner">
+      <img class="pl-mark" src="logos/oath-mark-light.png" alt="" />
+      <span class="pl-word">Rituals &amp; Wonders</span>
+      <span class="pl-count"><i id="plNum">0</i><b>%</b></span>
+    </div>
+    <div class="pl-line"><span id="plBar"></span></div>
+  </div>
+
+  <!-- ═══ TOP BAR ═══ -->
+  <header class="topbar" id="topbar">
+    <a class="tb-brand" href="#hero" aria-label="Oath — home">
+      <img src="logos/oath-wordmark-light.png" alt="Oath" />
+    </a>
+    <span class="tb-title">Rituals &amp; Wonders · MMXXVI</span>
+    <nav class="tb-nav" aria-label="Primary">
+      <a href="#collections">Collections</a>
+      <a href="#dna">The DNA</a>
+      <a class="tb-cta" href="#invitation">Reserve</a>
+    </nav>
+  </header>
+
+  <!-- ═══ CHAPTER PROGRESS (right rail) ═══ -->
+  <aside class="chapters" id="chapters" aria-hidden="true">
+    <span class="ch-now" id="chNow">00</span>
+    <span class="ch-rule"><i id="chBar"></i></span>
+    <span class="ch-total">07</span>
+    <span class="ch-name" id="chName">Arrival</span>
+  </aside>
+
+  <!-- ═══ 00 · HERO ═══ -->
+  <section id="hero" class="hero" data-chapter="00" data-name="Arrival">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="eyebrow line" data-split>Vientiane · Est. MMXXVI</p>
+      <h1 class="hero-title display">
+        <span class="ln"><span>Rituals</span></span>
+        <span class="ln amp"><span>&amp;&nbsp;Wonders</span></span>
+      </h1>
+      <p class="hero-sub line" data-split>Three collections. One continuous breath.</p>
+      <span class="dots" aria-hidden="true"><i></i><i></i></span>
+    </div>
+    <a class="scrollcue" href="#overture" aria-label="Begin">
+      <span>Enter</span><i></i>
+    </a>
+  </section>
+
+  <!-- ═══ 01 · OVERTURE / MAISON STATEMENT ═══ -->
+  <section id="overture" class="overture" data-chapter="01" data-name="The Maison">
+    <div class="wrap">
+      <p class="kicker reveal">The House of Oath</p>
+      <h2 class="overture-lead display reveal-words">
+        A living home and garden where we slow down within the city and honour
+        <em>ancient rhythms</em> — gathering through food, sound and movement.
+      </h2>
+      <div class="overture-foot reveal">
+        <span class="o-mark"><img src="logos/oath-mark-dark.png" alt="" /></span>
+        <p>Rooted in the real. Nothing glamorous, everything true — the grain of
+        the wood, the weight of a cup, the turn of a record, the breath before stillness.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 02 · COLLECTIONS INDEX ═══ -->
+  <section id="collections" class="index" data-chapter="02" data-name="The Collections">
+    <div class="wrap">
+      <div class="index-head reveal">
+        <p class="kicker">Explore</p>
+        <h2 class="display">The Collections</h2>
+        <p class="lede">Each ritual is a collection in its own right — its own light, its
+          own tempo, its own material truth. Together they are one house.</p>
+      </div>
+
+      <ul class="index-list" id="indexList">
+        <li class="ix-row reveal" data-go="garden" data-img="garden">
+          <span class="ix-no">01</span>
+          <span class="ix-name display">Oath&nbsp;Garden</span>
+          <span class="ix-tag">The Ritual of Gathering</span>
+          <span class="ix-go" aria-hidden="true">Discover<i></i></span>
+        </li>
+        <li class="ix-row reveal" data-go="papersound" data-img="paper">
+          <span class="ix-no">02</span>
+          <span class="ix-name display">Papersound</span>
+          <span class="ix-tag">The Ritual of Listening</span>
+          <span class="ix-go" aria-hidden="true">Discover<i></i></span>
+        </li>
+        <li class="ix-row reveal" data-go="studio" data-img="studio">
+          <span class="ix-no">03</span>
+          <span class="ix-name display">Oath&nbsp;Studio</span>
+          <span class="ix-tag">The Ritual of Returning</span>
+          <span class="ix-go" aria-hidden="true">Discover<i></i></span>
+        </li>
+      </ul>
+      <div class="index-peek" id="indexPeek" aria-hidden="true">
+        <div class="pk pk-garden"></div>
+        <div class="pk pk-paper"></div>
+        <div class="pk pk-studio"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 03 · COLLECTION 01 — OATH GARDEN ═══ -->
+  <section id="garden" class="collection col-light" data-chapter="03" data-name="Oath Garden">
+    <div class="col-grid">
+      <!-- sticky cinematic stage -->
+      <div class="col-stage">
+        <div class="stage-glow" aria-hidden="true"></div>
+        <figure class="piece piece-vessel" data-parallax="0.10" aria-label="A ceramic vessel — the slow pour">
+          <span class="steam" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="vessel">
+            <span class="v-body"></span>
+            <span class="v-rim"></span>
+            <span class="v-handle"></span>
+          </span>
+          <span class="pedestal" aria-hidden="true"></span>
+        </figure>
+      </div>
+
+      <!-- scrolling editorial beats -->
+      <div class="col-beats">
+        <div class="beat beat-open">
+          <p class="col-no">Collection 01</p>
+          <h2 class="col-title display reveal-words">Oath Garden</h2>
+          <p class="col-theme reveal">The Ritual of Gathering</p>
+        </div>
+
+        <div class="beat reveal">
+          <p>The day begins here. Hands grinding coffee, the slow pour, ceramics still
+          warm from the kiln. Bread broken over long tables, natural wine as the light
+          turns gold. This is the ritual of gathering — unhurried, human, alive.</p>
+        </div>
+
+        <div class="beat reveal">
+          <dl class="spec">
+            <div><dt>Light</dt><dd>Morning, turning gold</dd></div>
+            <div><dt>Material</dt><dd>Clay · Wood · Stone</dd></div>
+            <div><dt>Spirit</dt><dd>Coffee · Natural wine</dd></div>
+            <div><dt>Hours</dt><dd>08:00 — Afternoon</dd></div>
+          </dl>
+          <a class="discover magnetic" href="#invitation"><span>Reserve a Table</span><i></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 04 · COLLECTION 02 — PAPERSOUND ═══ -->
+  <section id="papersound" class="collection col-dark" data-chapter="04" data-name="Papersound">
+    <div class="col-grid reverse">
+      <div class="col-stage">
+        <div class="stage-glow" aria-hidden="true"></div>
+        <figure class="piece piece-vinyl" data-parallax="0.08" aria-label="A turning record">
+          <div class="vinyl" id="vinyl">
+            <span class="spindle"></span>
+            <div class="label-disc"><img class="disc-mark" src="logos/paper-mark-light.png" alt="" /></div>
+          </div>
+          <div class="tonearm" aria-hidden="true"></div>
+          <span class="pedestal pedestal-dark" aria-hidden="true"></span>
+        </figure>
+      </div>
+
+      <div class="col-beats">
+        <div class="beat beat-open">
+          <p class="col-no">Collection 02</p>
+          <h2 class="col-title display reveal-words">
+            <img class="paper-logo" src="logos/paper-wordmark-light.png" alt="Papersound" />
+          </h2>
+          <p class="col-theme reveal">The Ritual of Listening</p>
+        </div>
+
+        <div class="beat reveal">
+          <p>When the sun goes down, the house lowers its voice. A hidden listening
+          room of warm valves and turning records, of a cocktail built slowly and a
+          needle set down with care. Here sound is not background — it is the reason.</p>
+        </div>
+
+        <div class="beat reveal">
+          <dl class="spec spec-dark">
+            <div><dt>Light</dt><dd>Dim · Candle &amp; ember</dd></div>
+            <div><dt>Material</dt><dd>Vinyl · Smoke · Wood</dd></div>
+            <div><dt>Spirit</dt><dd>Cocktails, built slowly</dd></div>
+            <div><dt>Tempo</dt><dd>Sundown — Late</dd></div>
+          </dl>
+          <div class="now-playing">
+            <span class="np-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span id="npLabel">Side A — drag the record to spin · click the label to play</span>
+          </div>
+          <a class="discover magnetic light" href="#invitation"><span>Reserve a Session</span><i></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 05 · COLLECTION 03 — OATH STUDIO ═══ -->
+  <section id="studio" class="collection col-light col-concrete" data-chapter="05" data-name="Oath Studio">
+    <div class="col-grid">
+      <div class="col-stage">
+        <div class="stage-glow" aria-hidden="true"></div>
+        <figure class="piece piece-orb" data-parallax="0.12" aria-label="A breathing stone">
+          <span class="orb" id="orb"></span>
+          <span class="orb-ring" aria-hidden="true"></span>
+          <span class="pedestal pedestal-stone" aria-hidden="true"></span>
+        </figure>
+      </div>
+
+      <div class="col-beats">
+        <div class="beat beat-open">
+          <p class="col-no">Collection 03</p>
+          <h2 class="col-title display reveal-words">Oath Studio</h2>
+          <p class="col-theme reveal">The Ritual of Returning</p>
+        </div>
+
+        <div class="beat reveal">
+          <p>Concrete and linen. Natural light moving slowly across a bare floor. A room
+          built for the body to return to itself — through breath, through movement,
+          through stillness. This is where the house exhales. Come empty. Leave grounded.</p>
+        </div>
+
+        <div class="beat reveal">
+          <dl class="spec">
+            <div><dt>Light</dt><dd>Bare · Slow-moving</dd></div>
+            <div><dt>Material</dt><dd>Concrete · Linen</dd></div>
+            <div><dt>Practice</dt><dd>Breath · Movement</dd></div>
+            <div><dt>Hours</dt><dd>Dawn · Stillness</dd></div>
+          </dl>
+          <a class="discover magnetic" href="#invitation"><span>Reserve a Class</span><i></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 06 · THE GALLERY — horizontal showcase ═══ -->
+  <section id="gallery" class="gallery" data-chapter="06" data-name="The Gallery">
+    <div class="gal-track" id="galTrack">
+      <div class="gal-intro gal-panel">
+        <p class="kicker">Rituals &amp; Wonders</p>
+        <h2 class="display">The<br/>Gallery</h2>
+        <p class="lede">A passage through the house — drag, or keep scrolling.</p>
+        <span class="gal-hint" aria-hidden="true">Scroll<i></i></span>
+      </div>
+
+      <figure class="gal-panel gal-card" data-plate="garden-a">
+        <div class="plate"></div>
+        <figcaption><span class="gc-no">I</span><span class="gc-cap">The slow pour</span><span class="gc-room">Oath Garden</span></figcaption>
+      </figure>
+      <figure class="gal-panel gal-card" data-plate="garden-b">
+        <div class="plate"></div>
+        <figcaption><span class="gc-no">II</span><span class="gc-cap">Hands &amp; clay</span><span class="gc-room">Oath Garden</span></figcaption>
+      </figure>
+      <figure class="gal-panel gal-card" data-plate="paper-a">
+        <div class="plate"></div>
+        <figcaption><span class="gc-no">III</span><span class="gc-cap">Needle &amp; ember</span><span class="gc-room">Papersound</span></figcaption>
+      </figure>
+      <figure class="gal-panel gal-card" data-plate="paper-b">
+        <div class="plate"></div>
+        <figcaption><span class="gc-no">IV</span><span class="gc-cap">Side A, late</span><span class="gc-room">Papersound</span></figcaption>
+      </figure>
+      <figure class="gal-panel gal-card" data-plate="studio-a">
+        <div class="plate"></div>
+        <figcaption><span class="gc-no">V</span><span class="gc-cap">Morning practice</span><span class="gc-room">Oath Studio</span></figcaption>
+      </figure>
+      <figure class="gal-panel gal-card" data-plate="studio-b">
+        <div class="plate"></div>
+        <figcaption><span class="gc-no">VI</span><span class="gc-cap">The long exhale</span><span class="gc-room">Oath Studio</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ═══ 07 · THE WONDER — convergence ═══ -->
+  <section id="wonder" class="wonder" data-chapter="07" data-name="The Wonder">
+    <div class="wonder-veil" aria-hidden="true"></div>
+    <div class="wonder-inner">
+      <span class="wonder-o" aria-hidden="true"><img src="logos/oath-mark-light.png" alt="" /></span>
+      <p class="kicker reveal">Once a year, the whole house opens at once</p>
+      <h2 class="wonder-title display reveal-words">When the three<br/>become one</h2>
+      <p class="wonder-body reveal">Fire in the garden, records in Papersound, breath in the
+      studio — a single evening where food, sound and movement become one ritual.</p>
+      <p class="wonder-date reveal">Solstice · 21 June 2026 · Sundown — Late</p>
+    </div>
+  </section>
+
+  <!-- ═══ 08 · THE DNA / SIGNATURE ═══ -->
+  <section id="dna" class="dna" data-chapter="08" data-name="The DNA">
+    <div class="wrap">
+      <div class="dna-head reveal">
+        <p class="kicker">Know-how</p>
+        <h2 class="display">The Oath DNA</h2>
+        <p class="lede">A house is known by its signatures. Four devices carry the spirit
+          of Oath across everything we make.</p>
+      </div>
+
+      <div class="dna-grid">
+        <article class="dna-cell reveal">
+          <span class="dna-fig"><span class="fig-o"></span></span>
+          <h3>The Circle</h3>
+          <p>The O — gathering, return, the unbroken round of a day. Our mark and our
+          aperture, the way the house frames the world.</p>
+        </article>
+        <article class="dna-cell reveal">
+          <span class="dna-fig"><span class="fig-dots"><i></i><i></i></span></span>
+          <h3>The Two Dots</h3>
+          <p>Breath and pause. Connection between people, between body and spirit. The
+          smallest device, repeated like a heartbeat.</p>
+        </article>
+        <article class="dna-cell reveal">
+          <span class="dna-fig"><span class="fig-red"></span></span>
+          <h3>Laotian Earth Red</h3>
+          <p>Our single point of colour — the vitality of the soil. Used sparingly, like
+          a seal pressed into clay.</p>
+        </article>
+        <article class="dna-cell reveal">
+          <span class="dna-fig"><span class="fig-mat"></span></span>
+          <h3>Honest Material</h3>
+          <p>Clay, paper, linen, wood, stone. Nothing pretends to be other than it is.
+          Rooted in the real.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 09 · INVITATION ═══ -->
+  <section id="invitation" class="invitation" data-chapter="09" data-name="Invitation">
+    <div class="wrap">
+      <span class="dots" aria-hidden="true"><i></i><i></i></span>
+      <h2 class="display reveal-words">Arrive.</h2>
+      <p class="inv-sub reveal">Reserve a table, a listening session, or a class — and let the
+        house hold you for an afternoon, an evening, a breath.</p>
+      <a class="btn-reserve magnetic reveal" href="index.html#reserve"><span>Begin a Reservation</span><i></i></a>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-foot">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <img class="foot-logo-img" src="logos/oath-wordmark-light.png" alt="Oath" />
+          <p>A living home and garden in the heart of Vientiane. We gather through food,
+          sound and movement to cultivate intimacy between people and plants, body and
+          spirit, earth and sky.</p>
+        </div>
+        <div>
+          <h4>Visit</h4>
+          <p>Ban Wat Chan, Chanthabouly<br/>Vientiane, Laos</p>
+          <p>Tue – Sun · 08:00 – Late</p>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <a href="mailto:hello@oathhouse.la">hello@oathhouse.la</a>
+          <a href="#">Instagram</a>
+          <a href="index.html">The House →</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Oath House</span>
+        <span>Rituals &amp; Wonders · Food · Sound · Movement</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ LIBS ═══ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="dna.js?v=1"></script>
+</body>
+</html>
