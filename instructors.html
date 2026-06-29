@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Instructors · Oath Studio</title>
+  <link rel="icon" type="image/png" href="logos/oath-mark-dark.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root{ --earth:#863A24; --ink:#25241f; --soft:#7c7264; --paper:#F4EFE6; --line:rgba(37,36,31,.14);
+      --serif:'Spectral',Georgia,serif; --sans:'Inter',system-ui,sans-serif; }
+    *{box-sizing:border-box;margin:0}
+    body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    .top{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;
+      padding:1.1rem clamp(1.4rem,5vw,3rem);background:rgba(244,239,230,.86);backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line);font-family:var(--sans)}
+    .top a{font-variant:small-caps;letter-spacing:.16em;font-size:.82rem;text-decoration:none;color:var(--soft);transition:color .3s}
+    .top a:hover{color:var(--earth)}
+    .top .brand{font-family:var(--serif);letter-spacing:.2em;color:var(--ink)}
+    .wrap{max-width:1040px;margin:0 auto;padding:clamp(2.6rem,7vw,5.5rem) clamp(1.4rem,5vw,2.5rem) 5rem}
+    .head{max-width:46ch;margin-bottom:clamp(2.6rem,6vw,5rem)}
+    .eyebrow{font-family:var(--sans);font-variant:small-caps;letter-spacing:.24em;font-size:.78rem;color:var(--earth);margin-bottom:1.1rem}
+    .head h1{font-weight:400;font-size:clamp(2.3rem,6vw,4rem);line-height:1.04;letter-spacing:-.01em}
+    .head p{color:var(--soft);margin-top:1.2rem;font-size:clamp(1.05rem,1.6vw,1.25rem);max-width:50ch}
+    .people{display:flex;flex-direction:column;gap:clamp(3.4rem,8vw,6.5rem)}
+    .person{display:grid;grid-template-columns:0.85fr 1.15fr;gap:clamp(1.6rem,4vw,3.4rem);align-items:center}
+    .person:nth-child(even) .ph{order:2}
+    .ph{aspect-ratio:4/5;border-radius:3px;overflow:hidden;background:#e6ddcb}
+    .ph img{width:100%;height:100%;object-fit:cover;display:block}
+    .role{font-family:var(--sans);font-variant:small-caps;letter-spacing:.2em;font-size:.78rem;color:var(--earth);margin-bottom:.5rem}
+    .person h2{font-weight:400;font-size:clamp(1.7rem,3.4vw,2.6rem);line-height:1.05}
+    .bio{margin-top:1.2rem;color:#332f28;font-size:clamp(1rem,1.4vw,1.12rem);max-width:46ch}
+    .bio p{margin:0 0 1rem}
+    .tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
+    .tags span{font-family:var(--sans);font-variant:small-caps;letter-spacing:.1em;font-size:.74rem;color:var(--soft);
+      border:1px solid var(--line);border-radius:30px;padding:.3rem .9rem}
+    .foot{max-width:1040px;margin:0 auto;padding:2.2rem clamp(1.4rem,5vw,2.5rem) 4rem;border-top:1px solid var(--line);
+      display:flex;gap:2rem;flex-wrap:wrap}
+    .foot a{font-variant:small-caps;letter-spacing:.18em;font-size:.9rem;text-decoration:none;color:var(--earth);display:inline-flex;gap:.5em;transition:gap .3s}
+    .foot a:hover{gap:1em}
+    .msg{font-style:italic;color:var(--soft);text-align:center;padding:5rem 1rem}
+    @media(max-width:720px){ .person{grid-template-columns:1fr;gap:1.4rem} .person:nth-child(even) .ph{order:0} .ph{max-width:340px} }
+    @media(prefers-reduced-motion:no-preference){.wrap{animation:rise .8s cubic-bezier(.2,.8,.2,1)}}
+    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a href="/#studio">← Oath Studio</a>
+    <a class="brand" href="/">Oath House</a>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Oath Studio · The Practice</p>
+        <h1>Our Instructors</h1>
+        <p>The hands and voices that hold the studio — breath, movement and stillness, guided by people who live the practice.</p>
+      </div>
+      <div class="people" id="people"><p class="msg">Loading…</p></div>
+    </div>
+    <footer class="foot">
+      <a href="/#studio">← Back to Oath Studio</a>
+      <a href="/#reserve">Book a session →</a>
+    </footer>
+  </main>
+
+  <script>
+    (async function(){
+      const esc = s => String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+      const host = document.getElementById('people');
+      let people;
+      try{
+        const r = await fetch('/api/instructors');
+        if(!r.ok) throw 0;
+        people = (await r.json()).instructors || [];
+      }catch(e){
+        host.innerHTML = '<p class="msg">Our instructors will be introduced here soon. <a href="/#reserve">Book a session →</a></p>'; return;
+      }
+      if(!people.length){ host.innerHTML = '<p class="msg">Our instructors will be introduced here soon.</p>'; return; }
+      host.innerHTML = people.map(function(p){
+        const bio = (p.bio||'').split(/\n{2,}/).filter(Boolean).map(t=>'<p>'+esc(t).replace(/\n/g,'<br>')+'</p>').join('');
+        const tags = (p.specialties||'').split(',').map(t=>t.trim()).filter(Boolean).map(t=>'<span>'+esc(t)+'</span>').join('');
+        return '<article class="person">'
+          + '<div class="ph">'+(p.image?'<img src="'+esc(p.image)+'" alt="'+esc(p.name)+'">':'')+'</div>'
+          + '<div class="bd">'
+            + (p.role?'<p class="role">'+esc(p.role)+'</p>':'')
+            + '<h2>'+esc(p.name||'')+'</h2>'
+            + (bio?'<div class="bio">'+bio+'</div>':'')
+            + (tags?'<div class="tags">'+tags+'</div>':'')
+          + '</div></article>';
+      }).join('');
+    })();
+  </script>
+</body>
+</html>

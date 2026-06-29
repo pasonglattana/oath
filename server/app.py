@@ -42,10 +42,12 @@ mimetypes.add_type("application/json", ".json")
 COLLECTIONS = {
     "events":      ["featured","date","day","month","room","title","description","time","published","sort"],
     "experiences": ["key","label","where_txt","party_type","slots","full","classes","published","sort"],
-    "stories":     ["featured","category","date","title","excerpt","image","link","published","sort"],
+    "stories":     ["featured","category","date","title","excerpt","body","image","link","published","sort"],
     "media":       ["key","label","image","sort"],
     "music":       ["title","artist","src","active","sort"],
     "reservations":["status"],   # admin only flips status; rows are created via /api/reserve
+    "instructors": ["name","role","bio","image","specialties","published","sort"],
+    "subscribers": [],   # admin can view/remove; rows created via /api/subscribe
 }
 BOOL_FIELDS = {"featured", "published", "active"}
 UPLOAD_DIR = os.path.join(DATA_DIR, "uploads")
@@ -77,7 +79,7 @@ def init_db():
     CREATE TABLE IF NOT EXISTS stories (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       featured INTEGER DEFAULT 0, category TEXT, date TEXT, title TEXT,
-      excerpt TEXT, image TEXT, link TEXT, published INTEGER DEFAULT 1, sort INTEGER DEFAULT 0
+      excerpt TEXT, body TEXT, image TEXT, link TEXT, published INTEGER DEFAULT 1, sort INTEGER DEFAULT 0
     );
     CREATE TABLE IF NOT EXISTS media (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -93,14 +95,46 @@ def init_db():
       name TEXT, email TEXT, phone TEXT, notes TEXT,
       status TEXT DEFAULT 'new', created TEXT, sort INTEGER DEFAULT 0
     );
+    CREATE TABLE IF NOT EXISTS instructors (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT, role TEXT, bio TEXT, image TEXT, specialties TEXT,
+      published INTEGER DEFAULT 1, sort INTEGER DEFAULT 0
+    );
+    CREATE TABLE IF NOT EXISTS subscribers (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      email TEXT UNIQUE, created TEXT, sort INTEGER DEFAULT 0
+    );
     """)
+    # migrations for databases created before a column existed
+    try: c.execute("ALTER TABLE stories ADD COLUMN body TEXT")
+    except Exception: pass
     c.commit()
     # seed only when empty, so the site looks identical until the team edits
     if c.execute("SELECT COUNT(*) n FROM events").fetchone()["n"] == 0:
         seed(c)
     if c.execute("SELECT COUNT(*) n FROM media").fetchone()["n"] == 0:
         seed_media(c)
+    if c.execute("SELECT COUNT(*) n FROM instructors").fetchone()["n"] == 0:
+        seed_instructors(c)
     c.close()
+
+def seed_instructors(c):
+    rows = [
+        ("Noi Souvannavong", "Breath & Stillness",
+         "Noi guides the house's breathwork and sound sessions. Trained between Vientiane and Chiang Mai, she works with the breath as a way back into the body — slow, deliberate, unforced.\n\n"
+         "Her mornings open the studio: a guided breath as the first light crosses the floor, and a closing sound bath that lets the week dissolve.",
+         "photos/studio/studio-tool.webp", "Breathwork, Sound healing, Meditation", 1, 0),
+        ("Maly Phongsavanh", "Slow Flow Yoga",
+         "Maly teaches an unhurried vinyasa — long holds, deep breath, the body finding its own pace. Strength through softness, never strain.\n\n"
+         "She believes a practice should leave you steadier than it found you, and builds each class around that single idea.",
+         "photos/garden/garden-light.webp", "Vinyasa, Mobility, Alignment", 1, 1),
+        ("Khampha Inthavong", "Movement & Mobility",
+         "Khampha leads the evening movement and mobility sessions — functional, grounded work to release the desk and the day. For bodies that sit too long.\n\n"
+         "His sessions are practical and warm: real movement for real people, with room to laugh.",
+         "photos/garden/garden-hands.webp", "Mobility, Strength, Recovery", 1, 2),
+    ]
+    c.executemany("INSERT INTO instructors (name,role,bio,image,specialties,published,sort) VALUES (?,?,?,?,?,?,?)", rows)
+    c.commit()
 
 def seed_media(c):
     # named photo "slots" on the site, pointed at the current images. Editing a
@@ -151,15 +185,31 @@ def seed(c):
     stories = [
         (1,"Culture","June 2026","The slow return — why we built a House of Rituals",
          "In a city that never stops, we made a place that does. A note on gathering, sound and stillness — and the year that brought Oath House to the heart of Vientiane.",
+         "Vientiane is changing quickly. New towers, new traffic, new speed. Somewhere in that rush we felt a quieter need — for a place that remembers how to slow down, how to gather, how to listen.\n\n"
+         "Oath House began as a habit long before it became a building. A long table on trestles. A borrowed turntable. A morning of breath on a bare floor. For nine years it had no address — it lived in courtyards and borrowed kitchens, on cassette reels and in a thousand sketches.\n\n"
+         "What we built is not a restaurant, or a bar, or a studio, though it is all of those things. It is a house of rituals: food shared slowly, sound that asks to be heard, movement that returns the body to itself. Three rooms under one roof, each a different way of arriving.\n\n"
+         "We named it Oath because that is what it is — a promise to keep things real. The grain of the wood. The weight of a cup. The conversation between strangers who leave as friends. Come empty. Stay late. Let the room hold you.",
          "photos/garden/garden-light.webp","#",1,0),
-        (0,"Sound","May 2026","Notes from the listening room — Japanese jazz, 1978–1985","",
+        (0,"Sound","May 2026","Notes from the listening room — Japanese jazz, 1978–1985",
+         "Some records ask to be played loud. These ask to be played close.",
+         "There is a particular warmth to Japanese jazz of the late seventies and early eighties — a softness in the recording, a patience in the playing, that suits a dim room and a single turntable.\n\n"
+         "At Papersound we play it on Side A nights, two sets, one needle. No skipping, no shuffling. The record decides the pace, and so do you.\n\n"
+         "Sit close. The room is built for it.",
          "textures/earth-red.jpg","#",1,1),
-        (0,"Food","April 2026","On natural wine & the ritual of the long table","",
+        (0,"Food","April 2026","On natural wine & the ritual of the long table",
+         "A shared harvest, low-intervention wine, and bread torn by hand.",
+         "The long table is the oldest ritual we have. Strangers seated shoulder to shoulder, plates passed, glasses filled by whoever sits nearest the bottle.\n\n"
+         "We pour natural wine — low-intervention, alive, a little unpredictable — because it tastes like the place it came from. Fire-cooked vegetables, bread torn by hand, conversation that outlasts the meal.\n\n"
+         "Come hungry. Leave as kin.",
          "photos/garden/garden-table.webp","#",1,2),
-        (0,"Wellness","March 2026","Breath, concrete & light — a morning inside Oath Studio","",
+        (0,"Wellness","March 2026","Breath, concrete & light — a morning inside Oath Studio",
+         "Concrete and linen, natural light moving slowly across a bare floor.",
+         "The studio is where the house exhales. A bare floor, soft shadow, the smell of linen. A room built for the body to return to itself — through breath, through movement, through stillness.\n\n"
+         "Mornings begin with guided breath as the first light crosses the floor. No mirrors, no rush. Just the slow work of arriving.\n\n"
+         "Come empty. Leave grounded.",
          "photos/garden/garden-hands.webp","#",1,3),
     ]
-    c.executemany("INSERT INTO stories (featured,category,date,title,excerpt,image,link,published,sort) VALUES (?,?,?,?,?,?,?,?,?)", stories)
+    c.executemany("INSERT INTO stories (featured,category,date,title,excerpt,body,image,link,published,sort) VALUES (?,?,?,?,?,?,?,?,?,?)", stories)
     c.commit()
 
 def row_to_obj(row):
@@ -269,6 +319,8 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = urlparse(self.path).path
         if path == "/api/content":      return self.api_content()
+        if path == "/api/instructors":  return self.api_instructors()
+        if path.startswith("/api/story/"): return self.api_story(path)
         if path == "/api/session":      return self.send_json({"authed": self.authed()})
         if path.startswith("/api/admin/"): return self.api_admin("GET", path)
         return self.serve_static(path)
@@ -278,6 +330,7 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/login":  return self.api_login()
         if path == "/api/logout": return self.api_logout()
         if path == "/api/reserve": return self.api_reserve()
+        if path == "/api/subscribe": return self.api_subscribe()
         if path == "/api/admin/password": return self.api_password()
         if path == "/api/admin/upload": return self.api_upload()
         if path.startswith("/api/admin/"): return self.api_admin("POST", path)
@@ -337,6 +390,20 @@ class Handler(BaseHTTPRequestHandler):
         except Exception as e: print("  (reservation email skipped:", e, ")")
         return self.send_json({"ok": True, "ref": rid})
 
+    # -- newsletter signup (public) --
+    def api_subscribe(self):
+        email = (self.read_json().get("email") or "").strip().lower()
+        if "@" not in email or "." not in email.split("@")[-1]:
+            return self.send_json({"ok": False, "error": "Enter a valid email"}, 400)
+        c = db()
+        try:
+            c.execute("INSERT OR IGNORE INTO subscribers (email, created) VALUES (?, ?)",
+                      (email, time.strftime("%Y-%m-%d %H:%M")))
+            c.commit()
+        finally:
+            c.close()
+        return self.send_json({"ok": True})
+
     # -- image upload (base64 from the admin) --
     def api_upload(self):
         if not self.authed():
@@ -368,11 +435,31 @@ class Handler(BaseHTTPRequestHandler):
         ev = [row_to_obj(r) for r in c.execute("SELECT * FROM events WHERE published=1 ORDER BY sort, id")]
         ex = [row_to_obj(r) for r in c.execute("SELECT * FROM experiences WHERE published=1 ORDER BY sort, id")]
         st = [row_to_obj(r) for r in c.execute("SELECT * FROM stories WHERE published=1 ORDER BY sort, id")]
+        for s in st: s.pop("body", None)        # keep the homepage payload lean
         md = {r["key"]: r["image"] for r in c.execute("SELECT key, image FROM media")}
         song = c.execute("SELECT title, artist, src FROM music WHERE active=1 AND src!='' ORDER BY sort, id LIMIT 1").fetchone()
         c.close()
         self.send_json({"events": ev, "experiences": ex, "stories": st, "media": md,
                         "music": (row_to_obj(song) if song else None)})
+
+    # -- instructors (for the Our Instructors page) --
+    def api_instructors(self):
+        c = db()
+        rows = [row_to_obj(r) for r in c.execute("SELECT * FROM instructors WHERE published=1 ORDER BY sort, id")]
+        c.close()
+        self.send_json({"instructors": rows})
+
+    # -- single article (full body) --
+    def api_story(self, path):
+        sid = path.rsplit("/", 1)[-1]
+        if not sid.isdigit():
+            return self.send_json({"error": "not found"}, 404)
+        c = db()
+        row = c.execute("SELECT * FROM stories WHERE id=? AND published=1", (sid,)).fetchone()
+        c.close()
+        if not row:
+            return self.send_json({"error": "not found"}, 404)
+        self.send_json({"story": row_to_obj(row)})
 
     # -- admin CRUD --
     def api_admin(self, method, path):

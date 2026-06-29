@@ -198,7 +198,7 @@ body.is-night .sound-toggle:hover, body.at-arrival .sound-toggle:hover { color: 
 
 /* ═══════ FRAME — fixed UI (nav · progress · time) ═════════════ */
 .frame { position: fixed; z-index: 200; pointer-events: none; }
-.frame a, .frame button { pointer-events: auto; }
+.frame a, .frame button, a.frame, button.frame { pointer-events: auto; }
 
 .brand {
   top: clamp(1.4rem,3vw,2.4rem); left: var(--gutter);
@@ -251,10 +251,10 @@ body.at-arrival .theme-toggle:hover { color: #e6a978; border-color: #e6a978; }
 .drawer-veil { position: fixed; inset: 0; z-index: 1300; background: rgba(18,12,8,.32);
   backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity .6s var(--ease); }
 .drawer-veil.show { opacity: 1; pointer-events: auto; }
-.drawer { position: fixed; top: 0; left: 0; bottom: 0; z-index: 1301; width: min(540px, 100%);
+.drawer { position: fixed; top: 0; left: 0; bottom: 0; z-index: 1301; width: min(460px, 100%);
   transform: translateX(-101%); transition: transform .8s var(--ease);
   background: #F1ECE2; color: #1F1F1C;
-  padding: clamp(1.4rem,3vw,2.4rem) var(--gutter) clamp(2.4rem,5vh,3.4rem);
+  padding: clamp(1.6rem,3vw,2.4rem) clamp(2.4rem,6vw,4rem) clamp(2.6rem,5vh,3.6rem);
   display: flex; flex-direction: column; box-shadow: 40px 0 120px rgba(20,14,8,.18);
   overflow-y: auto; -webkit-overflow-scrolling: touch; }
 .drawer.show { transform: translateX(0); }
@@ -270,24 +270,27 @@ body.at-arrival .theme-toggle:hover { color: #e6a978; border-color: #e6a978; }
   letter-spacing: .26em; font-size: 1rem; font-weight: 500; }
 .drawer-toggle:hover { color: var(--earth-red); }
 
-/* navigation — grouped with generous whitespace */
-.drawer-nav { display: flex; flex-direction: column; margin: clamp(3rem,9vh,6rem) 0 auto; }
-.dn-group { display: flex; flex-direction: column; }
-.dn-group + .dn-group { margin-top: clamp(1.6rem,3.4vh,2.6rem); }
+/* navigation — minimal, vertically centred, generous air */
+.drawer-nav { display: flex; flex-direction: column; justify-content: center;
+  flex: 1 1 auto; padding: clamp(2.5rem,6vh,4rem) 0; }
+.dn-group { display: flex; flex-direction: column; gap: clamp(.8rem,1.7vh,1.25rem); }
+.dn-group + .dn-group { margin-top: clamp(2.4rem,5vh,3.4rem); padding-top: clamp(2.4rem,5vh,3.4rem); position: relative; }
+.dn-group + .dn-group::before { content: ''; position: absolute; top: 0; left: 0;
+  width: 28px; height: 1px; background: rgba(31,31,28,.18); }
 .drawer-nav a { display: inline-block; width: fit-content; cursor: none;
   font-family: var(--serif); font-variant: small-caps; text-transform: lowercase;
-  letter-spacing: .14em; font-weight: 500; font-size: clamp(1.4rem,2.2vw,1.7rem);
-  line-height: 1.85; color: #1F1F1C; transition: color .35s var(--ease), transform .5s var(--ease); }
-.drawer-nav a:hover { color: var(--earth-red); transform: translateX(.5rem); }
+  letter-spacing: .1em; font-weight: 400; font-size: clamp(1.55rem,2.5vw,2.05rem);
+  line-height: 1.2; color: #25241f; transition: color .4s var(--ease), transform .55s var(--ease); }
+.drawer-nav a:hover, .drawer-nav a:focus-visible { color: var(--earth-red); transform: translateX(.6rem); outline: none; }
 .drawer-nav a.here { color: var(--earth-red); }
 .drawer-nav a.here::before { content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%;
-  background: var(--earth-red); margin-right: .7rem; vertical-align: middle; }
+  background: var(--earth-red); margin-right: .75rem; vertical-align: middle; }
 
 /* social row — quiet, at the foot */
-.drawer-social { display: flex; flex-wrap: wrap; gap: 1.6rem 2.2rem; margin-top: clamp(2.5rem,5vh,3.5rem);
-  padding-top: 1.6rem; border-top: 1px solid rgba(31,31,28,.14); }
+.drawer-social { display: flex; flex-wrap: wrap; gap: 1.4rem 2.4rem; margin-top: auto;
+  padding-top: 1.8rem; border-top: 1px solid rgba(31,31,28,.12); }
 .drawer-social a { font-family: var(--serif); font-variant: small-caps; text-transform: lowercase;
-  letter-spacing: .18em; font-size: .92rem; color: #6b6258; cursor: none; transition: color .3s; }
+  letter-spacing: .2em; font-size: .88rem; color: #8a8076; cursor: none; transition: color .3s; }
 .drawer-social a:hover { color: var(--earth-red); }
 
 .meta {
@@ -627,6 +630,16 @@ body.is-night .floor-name .fn-light { display: block; }
 .np-eq i:nth-child(2){ animation-delay:.2s } .np-eq i:nth-child(3){ animation-delay:.4s } .np-eq i:nth-child(4){ animation-delay:.1s }
 @keyframes eq { 0%,100%{height:30%} 50%{height:100%} }
 body.paused .np-eq i { animation-play-state: paused; }
+
+/* "Explore Papersound" — a cream pill that pops on the brick red */
+.paper-explore { margin-top: clamp(2rem,4vw,2.6rem); display: inline-flex; align-items: center; gap: .7rem;
+  background: var(--paper-cream, #f4ead8); color: #7C2722; border-radius: 40px;
+  padding: .85rem 1.7rem; font-family: var(--serif); font-variant: small-caps; text-transform: lowercase;
+  letter-spacing: .14em; font-size: 1rem; text-decoration: none; cursor: none;
+  box-shadow: 0 16px 40px -18px rgba(0,0,0,.5); transition: transform .4s var(--ease), background .4s, gap .4s; }
+.paper-explore i { font-style: normal; transition: transform .4s var(--ease); }
+.paper-explore:hover { transform: translateY(-2px); gap: 1.1rem; background: #fff; }
+.paper-explore:hover i { transform: translateX(.25rem); }
 
 /* — Room 03 · Studio Oath (concrete, light) — */
 #studio { background: linear-gradient(180deg,#e9e6df,#dcd7cc); color: #2a2824; }

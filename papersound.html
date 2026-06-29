@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paper Sound Bar · Oath House</title>
+  <meta name="description" content="Paper Sound Bar — the listening room at Oath House. Vinyl, cocktails, and a little jungle vitality." />
+  <link rel="icon" type="image/png" href="logos/oath-mark-dark.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Yellowtail&family=Permanent+Marker&family=Caveat:wght@400;700&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --paper:#F0E7D2; --paper2:#F8F1E0; --ink:#22180f; --red:#B23A33; --green:#3b7a4e;
+      --gold:#E0A12E; --blue:#34597a; --pink:#d2607c; --cream:#FBF6EA;
+      --glam:'Shrikhand',cursive; --script:'Yellowtail',cursive; --marker:'Permanent Marker',cursive;
+      --hand:'Caveat',cursive; --body:'Kalam',cursive;
+    }
+    *{box-sizing:border-box;margin:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--paper);color:var(--ink);font-family:var(--body);font-weight:300;line-height:1.55;overflow-x:hidden;
+      background-image:
+        radial-gradient(60% 40% at 12% 8%, rgba(59,122,78,.16), transparent 60%),
+        radial-gradient(50% 40% at 90% 14%, rgba(224,161,46,.18), transparent 60%),
+        radial-gradient(55% 45% at 85% 88%, rgba(178,58,51,.14), transparent 60%),
+        radial-gradient(50% 40% at 8% 90%, rgba(52,89,122,.14), transparent 60%);}
+    .grain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;mix-blend-mode:multiply;
+      background:url("textures/crumple.jpg");background-size:460px}
+    a{color:inherit}
+    ::selection{background:var(--gold);color:var(--ink)}
+    .doodle{stroke:currentColor;overflow:visible}
+
+    /* nav — scrappy */
+    .nav{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;
+      padding:.8rem clamp(1rem,4vw,2.4rem);background:rgba(240,231,210,.85);backdrop-filter:blur(5px);
+      border-bottom:2.5px solid var(--ink)}
+    .nav a{text-decoration:none}
+    .nav .back{font-family:var(--hand);font-size:1.35rem;color:var(--ink)}
+    .nav .back:hover{color:var(--red)}
+    .nav .mark{font-family:var(--glam);font-size:1.3rem;color:var(--red);transform:rotate(-2deg)}
+    .nav .resv{font-family:var(--marker);font-size:.92rem;color:var(--cream);background:var(--green);
+      border:2.5px solid var(--ink);border-radius:30px;padding:.4rem 1.1rem;transform:rotate(1.5deg);box-shadow:3px 3px 0 var(--ink)}
+    .nav .resv:hover{transform:rotate(-1deg) translateY(-1px)}
+
+    /* hero — the collage */
+    .hero{position:relative;z-index:2;min-height:96svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      text-align:center;padding:clamp(3rem,8vw,5rem) 1rem 3rem;max-width:1100px;margin:0 auto}
+    .kick{font-family:var(--marker);font-size:.92rem;letter-spacing:.04em;color:var(--blue);transform:rotate(-1.5deg);margin-bottom:.6rem}
+
+    .ps-logo{position:relative;display:flex;flex-direction:column;align-items:center;line-height:.82;margin:.4rem 0 .2rem}
+    .ps-logo .w{display:block;text-shadow:3px 3px 0 rgba(34,24,15,.12)}
+    .w-paper{font-family:var(--glam);color:var(--red);font-size:clamp(3.2rem,12vw,6.6rem);transform:rotate(-3deg)}
+    .w-sound{font-family:var(--script);color:var(--green);font-size:clamp(4.4rem,17vw,10rem);transform:rotate(2deg);margin:-.08em 0 -.04em}
+    .w-bar{font-family:var(--marker);color:var(--gold);font-size:clamp(2.8rem,9vw,5rem);transform:rotate(-2deg);-webkit-text-stroke:1.5px var(--ink)}
+    .logo-underline{position:absolute;left:50%;bottom:-1.6rem;transform:translateX(-50%) rotate(-1deg);width:clamp(230px,42vw,440px);color:var(--ink)}
+
+    .tag{font-family:var(--hand);font-size:clamp(1.3rem,2.4vw,1.9rem);color:var(--ink);max-width:24ch;margin-top:2.4rem;transform:rotate(-.6deg);line-height:1.3}
+    .tag em{color:var(--red);font-style:normal}
+
+    .cta-row{display:flex;gap:1.1rem;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:1.8rem}
+    .needle{font-family:var(--marker);font-size:1.05rem;color:var(--cream);background:var(--red);border:3px solid var(--ink);
+      border-radius:40px;padding:.85rem 1.7rem;cursor:pointer;transform:rotate(-1.5deg);box-shadow:4px 4px 0 var(--ink);transition:transform .15s}
+    .needle:hover{transform:rotate(1deg) translate(-1px,-1px);box-shadow:6px 6px 0 var(--ink)}
+    .stamp{font-family:var(--marker);font-size:.8rem;color:var(--ink);border:2.5px dashed var(--ink);border-radius:50%;
+      width:96px;height:96px;display:grid;place-items:center;text-align:center;line-height:1.1;transform:rotate(8deg);padding:.4rem}
+
+    /* scattered doodles in hero */
+    .hero .float{position:absolute;z-index:1;pointer-events:none}
+    .f-lion{top:9%;left:4%;width:clamp(70px,11vw,120px);color:var(--gold);transform:rotate(-8deg)}
+    .f-dancer{top:16%;right:5%;width:clamp(54px,8vw,92px);color:var(--red);transform:rotate(7deg)}
+    .f-note{top:48%;left:7%;width:clamp(30px,4vw,46px);color:var(--blue);transform:rotate(-12deg)}
+    .f-leaf{bottom:20%;right:8%;width:clamp(42px,6vw,66px);color:var(--green);transform:rotate(12deg)}
+    .f-glass{bottom:9%;left:9%;width:clamp(46px,7vw,72px);color:var(--blue);transform:rotate(-6deg)}
+    .f-star1{top:33%;right:13%;width:26px;color:var(--gold)}
+    .f-star2{top:60%;left:18%;width:20px;color:var(--red)}
+    .f-squig{top:6%;right:30%;width:70px;color:var(--green);transform:rotate(6deg)}
+    @media(max-width:640px){ .f-note,.f-star1,.f-star2,.f-squig{display:none} .f-lion{width:64px;left:2%} .f-dancer{width:50px;right:2%} }
+
+    /* record — illustrated, spins on click */
+    .deckwrap{margin-top:2.4rem;position:relative;display:grid;place-items:center}
+    .deck{cursor:pointer;width:min(58vw,270px);position:relative}
+    .rec{width:100%;display:block;transform-origin:50% 50%}
+    .rec.spin{animation:spin 3.4s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .arm{position:absolute;top:-6%;right:6%;width:30%;color:var(--ink);transform-origin:90% 12%;transform:rotate(-22deg);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+    .deck.on .arm{transform:rotate(4deg)}
+    .now{font-family:var(--hand);font-size:1.25rem;color:var(--ink);margin-top:.8rem;display:flex;gap:.5rem;align-items:center;justify-content:center}
+    .eq{display:inline-flex;gap:2px;align-items:flex-end;height:.9em}
+    .eq i{width:3px;height:40%;background:var(--red);animation:eq .9s ease-in-out infinite}
+    .eq i:nth-child(2){animation-delay:.2s;background:var(--green)}.eq i:nth-child(3){animation-delay:.4s;background:var(--gold)}.eq i:nth-child(4){animation-delay:.15s;background:var(--blue)}
+    @keyframes eq{0%,100%{height:25%}50%{height:100%}}
+    .deck:not(.on) .eq i{animation-play-state:paused}
+
+    /* marquee */
+    .marquee{position:relative;z-index:2;display:flex;overflow:hidden;white-space:nowrap;background:var(--ink);color:var(--paper);
+      border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:.55rem 0}
+    .marquee .row{display:inline-flex;flex:0 0 auto;animation:slide 24s linear infinite}
+    .marquee span{font-family:var(--marker);font-size:clamp(1.2rem,3vw,2rem);padding:0 1.1rem}
+    .marquee .g{color:var(--gold)}.marquee .r{color:var(--pink)}.marquee .e{color:var(--green)}
+    @keyframes slide{to{transform:translateX(-100%)}}
+
+    /* sections */
+    .sec{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:clamp(3.5rem,8vw,6rem) clamp(1.1rem,5vw,3rem)}
+    .sec-k{font-family:var(--marker);font-size:.9rem;color:var(--blue);transform:rotate(-1deg);display:inline-block}
+    .sec-h{font-family:var(--glam);font-size:clamp(2.4rem,7vw,4.6rem);line-height:.98;margin-top:.5rem}
+    .sec-h.red{color:var(--red)} .sec-h.green{color:var(--green)} .sec-h.gold{color:var(--gold);-webkit-text-stroke:1.5px var(--ink)}
+
+    /* liner cards — taped, rotated, mismatched */
+    .liner{display:flex;flex-wrap:wrap;gap:clamp(1.2rem,3vw,2.4rem);margin-top:clamp(2rem,5vw,3.2rem);justify-content:center}
+    .card{position:relative;flex:1 1 240px;max-width:330px;background:var(--cream);border:2.5px solid var(--ink);border-radius:4px;
+      padding:1.6rem 1.5rem;box-shadow:5px 6px 0 rgba(34,24,15,.18)}
+    .card:nth-child(1){transform:rotate(-2deg)}.card:nth-child(2){transform:rotate(1.5deg);margin-top:1.4rem}.card:nth-child(3){transform:rotate(-1deg)}
+    .card::before{content:'';position:absolute;top:-12px;left:50%;width:64px;height:22px;transform:translateX(-50%) rotate(-3deg);
+      background:rgba(224,161,46,.6);border:1px dashed rgba(34,24,15,.4)}
+    .card h3{font-family:var(--marker);font-size:1.35rem;margin-bottom:.5rem}
+    .card:nth-child(1) h3{color:var(--red)}.card:nth-child(2) h3{color:var(--green)}.card:nth-child(3) h3{color:var(--blue)}
+    .card p{font-family:var(--body);font-size:1.05rem}
+    .card .mini{position:absolute;bottom:-14px;right:-10px;width:46px;color:var(--gold)}
+
+    /* tracklist — a scribbled setlist */
+    .setlist{margin-top:clamp(2rem,5vw,3rem);background:var(--paper2);border:3px solid var(--ink);border-radius:6px;
+      padding:clamp(1.4rem,4vw,2.6rem);transform:rotate(-.6deg);box-shadow:7px 8px 0 rgba(34,24,15,.16);max-width:760px}
+    .setlist .sides{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.4rem,4vw,3rem)}
+    .setlist h4{font-family:var(--marker);font-size:1.05rem;color:var(--red);border-bottom:2.5px solid var(--ink);padding-bottom:.4rem;margin-bottom:.6rem}
+    .trk{display:flex;align-items:baseline;gap:.7rem;font-family:var(--hand);font-size:1.45rem;padding:.28rem 0}
+    .trk .n{color:var(--green);font-family:var(--marker);font-size:.95rem;min-width:1.6em}
+    .trk .d{margin-left:auto;color:var(--blue);font-size:1.1rem}
+
+    /* pours — handwritten menu */
+    .pours{margin-top:clamp(2rem,5vw,3rem);display:grid;grid-template-columns:1fr 1fr;gap:.4rem clamp(1.6rem,4vw,3.4rem);max-width:840px}
+    .pour{border-bottom:2px dotted rgba(34,24,15,.4);padding:.9rem 0}
+    .pour h3{font-family:var(--script);font-size:1.7rem;color:var(--red);line-height:1}
+    .pour:nth-child(2) h3{color:var(--green)}.pour:nth-child(3) h3{color:var(--blue)}.pour:nth-child(4) h3{color:var(--gold);-webkit-text-stroke:1px var(--ink)}
+    .pour p{font-family:var(--body);font-size:1.02rem;margin-top:.2rem}
+
+    /* footer */
+    .foot{position:relative;z-index:2;text-align:center;padding:clamp(4rem,9vw,6.5rem) 1.2rem 5rem;border-top:3px solid var(--ink);background:var(--paper2)}
+    .foot .when{font-family:var(--hand);font-size:1.5rem;color:var(--green);transform:rotate(-1deg)}
+    .foot h2{font-family:var(--glam);font-size:clamp(2.8rem,10vw,6rem);color:var(--red);line-height:.92;margin:.6rem 0 1.6rem;transform:rotate(-1deg)}
+    .foot .big{display:inline-block;font-family:var(--marker);font-size:1.2rem;color:var(--cream);background:var(--ink);
+      border-radius:40px;padding:1rem 2.4rem;text-decoration:none;transform:rotate(1deg);box-shadow:5px 5px 0 var(--gold)}
+    .foot .big:hover{transform:rotate(-1deg) translateY(-2px)}
+    .foot .hours{font-family:var(--hand);font-size:1.4rem;margin-top:2rem;display:flex;gap:1rem 2.2rem;justify-content:center;flex-wrap:wrap}
+    .foot .back2{display:block;margin-top:2.6rem;font-family:var(--marker);font-size:.86rem;color:var(--ink);text-decoration:none;opacity:.75}
+    .foot .back2:hover{color:var(--red)}
+
+    @media(max-width:640px){ .setlist .sides{grid-template-columns:1fr} .pours{grid-template-columns:1fr} .setlist{transform:none} }
+    @media(prefers-reduced-motion:reduce){.rec.spin{animation:none}.marquee .row{animation:none}}
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <a class="back" href="/#papersound">← back home</a>
+    <a class="mark" href="/papersound.html">Paper Sound</a>
+    <a class="resv" href="/#reserve">reserve!</a>
+  </nav>
+
+  <!-- HERO COLLAGE -->
+  <header class="hero">
+    <!-- scattered hand-drawn doodles -->
+    <svg class="float f-lion doodle" viewBox="0 0 130 130" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M65 20v12M89 26 80 36M104 44 92 50M110 65 97 65M104 86 92 80M89 104 80 94M65 110v-12M41 104 50 94M26 86 38 80M20 65 33 65M26 44 38 50M41 26 50 36"/>
+      <circle cx="65" cy="65" r="30"/><circle cx="56" cy="62" r="2.6" fill="currentColor"/><circle cx="74" cy="62" r="2.6" fill="currentColor"/>
+      <path d="M62 73c2 3 6 3 8 0"/><path d="M65 66l-2 4h4z" fill="currentColor"/>
+    </svg>
+    <svg class="float f-dancer doodle" viewBox="0 0 80 120" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="44" cy="16" r="9" fill="currentColor"/><path d="M44 26c-2 14-6 20-2 30"/><path d="M44 32c8-6 18-4 22-12"/>
+      <path d="M40 34c-10-2-16 4-24 0"/><path d="M42 56c-8 8-10 18-20 22"/><path d="M44 56c6 10 6 22 14 30"/>
+    </svg>
+    <svg class="float f-note doodle" viewBox="0 0 40 50" fill="none" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M16 40V10l16-5v26"/><ellipse cx="11" cy="40" rx="6" ry="5" fill="currentColor" stroke="none"/><ellipse cx="27" cy="36" rx="6" ry="5" fill="currentColor" stroke="none"/></svg>
+    <svg class="float f-leaf doodle" viewBox="0 0 60 84" fill="none" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M30 82V14"/><path d="M30 32c-12-2-18-10-18-18 10 0 18 6 18 16"/><path d="M30 46c12-2 18-10 18-18-10 0-18 6-18 16"/><path d="M30 20c-8-2-12-8-12-14 8 0 12 4 12 12"/></svg>
+    <svg class="float f-glass doodle" viewBox="0 0 70 82" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16h50L35 44z"/><path d="M35 44v24"/><path d="M22 68h26"/><path d="M44 26l9-7"/><circle cx="54" cy="18" r="3.4" fill="currentColor"/></svg>
+    <svg class="float f-star1 doodle" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1C12.8 8 16 11.2 23 12 16 12.8 12.8 16 12 23 11.2 16 8 12.8 1 12 8 11.2 11.2 8 12 1Z" fill="currentColor"/></svg>
+    <svg class="float f-star2 doodle" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1C12.8 8 16 11.2 23 12 16 12.8 12.8 16 12 23 11.2 16 8 12.8 1 12 8 11.2 11.2 8 12 1Z" fill="currentColor"/></svg>
+    <svg class="float f-squig doodle" viewBox="0 0 90 24" fill="none" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M4 16c8-14 16-14 22 0s14 14 22 0 16-14 22 0"/></svg>
+
+    <p class="kick">★ the listening room · oath house ★</p>
+
+    <h1 class="ps-logo" aria-label="Paper Sound Bar">
+      <span class="w w-paper">Paper</span>
+      <span class="w w-sound">Sound</span>
+      <span class="w w-bar">Bar</span>
+      <svg class="logo-underline doodle" viewBox="0 0 360 30" fill="none" stroke-width="3.4" stroke-linecap="round" aria-hidden="true">
+        <path d="M10 18C70 6 130 26 196 14c50-9 92 12 150 0"/>
+        <path d="M300 14c10-3 16 4 9 9"/>
+      </svg>
+    </h1>
+
+    <p class="tag">dim light · vinyl only · two sets, <em>one needle</em>. sit close — the room is built for it.</p>
+
+    <div class="cta-row">
+      <button class="needle" id="play">▶ drop the needle</button>
+      <span class="stamp">33⅓<br/>vinyl<br/>only</span>
+    </div>
+
+    <div class="deckwrap">
+      <div class="deck" id="deck" role="button" tabindex="0" aria-label="Play the record">
+        <svg class="rec" id="rec" viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="100" cy="100" r="96" fill="#221810"/>
+          <circle cx="100" cy="100" r="78" fill="none" stroke="#6a5743" stroke-width="1.2"/>
+          <circle cx="100" cy="100" r="64" fill="none" stroke="#6a5743" stroke-width="1.2"/>
+          <circle cx="100" cy="100" r="50" fill="none" stroke="#6a5743" stroke-width="1.2"/>
+          <circle cx="100" cy="100" r="34" fill="#B23A33"/>
+          <path d="M86 100c6-10 22-10 28 0" fill="none" stroke="#FBF6EA" stroke-width="2.4" stroke-linecap="round"/>
+          <circle cx="100" cy="100" r="4" fill="#221810"/>
+        </svg>
+        <svg class="arm doodle" viewBox="0 0 60 70" fill="none" stroke-width="3.2" stroke-linecap="round" aria-hidden="true"><circle cx="48" cy="12" r="7" fill="currentColor"/><path d="M48 18 20 58"/><path d="M20 58l-8 4 6 6z" fill="currentColor"/></svg>
+        <div class="now" id="now"><span class="eq"><i></i><i></i><i></i><i></i></span><span id="nowText">tap the record to play</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="row" id="mq"></div><div class="row" id="mqb"></div>
+  </div>
+
+  <!-- LINER NOTES -->
+  <section class="sec">
+    <span class="sec-k">★ liner notes ★</span>
+    <h2 class="sec-h green">a room with<br/>the lights low</h2>
+    <div class="liner">
+      <div class="card"><h3>sound is the reason</h3><p>not background, not a playlist. one record at a time, chosen for the hour. requests welcome — skipping is not.</p>
+        <svg class="mini doodle" viewBox="0 0 40 50" fill="none" stroke-width="3" stroke-linecap="round"><path d="M16 40V10l16-5v26"/><ellipse cx="11" cy="40" rx="6" ry="5" fill="currentColor" stroke="none"/><ellipse cx="27" cy="36" rx="6" ry="5" fill="currentColor" stroke="none"/></svg></div>
+      <div class="card"><h3>built slowly</h3><p>a cocktail folded with care, a needle set down with both hands. everything here moves at the speed of a turning record.</p>
+        <svg class="mini doodle" viewBox="0 0 70 82" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16h50L35 44z"/><path d="M35 44v24"/><path d="M22 68h26"/></svg></div>
+      <div class="card"><h3>jungle vitality</h3><p>warm valves, low amber light, a little wildness. lively, expressive, uplifting — come for the sound, stay for the dark.</p>
+        <svg class="mini doodle" viewBox="0 0 60 84" fill="none" stroke-width="2.6" stroke-linecap="round"><path d="M30 82V14"/><path d="M30 32c-12-2-18-10-18-18 10 0 18 6 18 16"/><path d="M30 46c12-2 18-10 18-18-10 0-18 6-18 16"/></svg></div>
+    </div>
+  </section>
+
+  <!-- TONIGHT'S SET -->
+  <section class="sec">
+    <span class="sec-k">★ tonight on the turntable ★</span>
+    <h2 class="sec-h red">japanese jazz<br/>1978 – 1985</h2>
+    <div class="setlist">
+      <div class="sides">
+        <div>
+          <h4>side a · 20:00</h4>
+          <p class="trk"><span class="n">1</span> needle down <span class="d">4:12</span></p>
+          <p class="trk"><span class="n">2</span> warm valves <span class="d">5:38</span></p>
+          <p class="trk"><span class="n">3</span> rhodes &amp; rain <span class="d">6:01</span></p>
+          <p class="trk"><span class="n">4</span> smoke, slowly <span class="d">4:55</span></p>
+        </div>
+        <div>
+          <h4>side b · 21:30</h4>
+          <p class="trk"><span class="n">5</span> after midnight <span class="d">5:20</span></p>
+          <p class="trk"><span class="n">6</span> the long pour <span class="d">7:14</span></p>
+          <p class="trk"><span class="n">7</span> last call <span class="d">3:48</span></p>
+          <p class="trk"><span class="n">8</span> lights up, softly <span class="d">5:02</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POURS -->
+  <section class="sec">
+    <span class="sec-k">★ from behind the bar ★</span>
+    <h2 class="sec-h gold">house pours</h2>
+    <div class="pours">
+      <div class="pour"><h3>the quiet negroni</h3><p>bittersweet, stirred long, served in low light.</p></div>
+      <div class="pour"><h3>paper plane</h3><p>the house favourite — bright, folded just so.</p></div>
+      <div class="pour"><h3>smoke &amp; wood</h3><p>mezcal, a whisper of fire, a long finish.</p></div>
+      <div class="pour"><h3>vinyl sour</h3><p>sharp, bright, spins on the tongue.</p></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <p class="when">when the sun goes down…</p>
+    <h2>pull up a chair</h2>
+    <a class="big" href="/#reserve">reserve a seat →</a>
+    <div class="hours"><span>tue–thu · 18:00–late</span><span>fri–sat · 18:00–very late</span><span>sun–mon · the room rests</span></div>
+    <a class="back2" href="/#papersound">← back to oath house</a>
+  </footer>
+
+  <script>
+    // marquee
+    (function(){
+      const its=['dim light','vinyl only','two sets, one needle','smoke &amp; wood','sit close','stay late'];
+      const cls=['g','r','e'];
+      const html=its.map((t,i)=>'<span class="'+cls[i%3]+'">'+t+'</span><span>✺</span>').join('');
+      ['mq','mqb'].forEach(id=>{const e=document.getElementById(id);if(e)e.innerHTML=html+html;});
+    })();
+    // record play / pause + cycling now-playing
+    (function(){
+      const deck=document.getElementById('deck'),rec=document.getElementById('rec'),
+            btn=document.getElementById('play'),nowText=document.getElementById('nowText');
+      const set=['needle down · 20:00','warm valves','rhodes & rain','smoke, slowly','after midnight','the long pour'];
+      let on=false,i=0,t=null;
+      function cyc(){nowText.textContent=set[i%set.length];i++;}
+      function toggle(){
+        on=!on; rec.classList.toggle('spin',on); deck.classList.toggle('on',on);
+        btn.textContent = on ? '❚❚ lift the needle' : '▶ drop the needle';
+        if(on){i=0;cyc();t=setInterval(cyc,3200);} else {clearInterval(t);nowText.textContent='tap the record to play';}
+      }
+      deck.addEventListener('click',toggle);
+      deck.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+      btn.addEventListener('click',e=>{e.stopPropagation();toggle();});
+    })();
+  </script>
+</body>
+</html>

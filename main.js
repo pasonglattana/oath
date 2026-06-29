@@ -1082,19 +1082,19 @@ if (!TOUCH && !REDUCED) {
 })();
 
 /* ─────────────────────────────────────────────────────────────
-   18 · NEWSLETTER (front-end capture; wire to a service later)
+   18 · NEWSLETTER — saved to the backend (Newsletter tab in admin)
    ───────────────────────────────────────────────────────────── */
 (function newsletter() {
   const form = document.getElementById('newsForm');
   if (!form) return;
   const input = document.getElementById('newsEmail');
   const msg = document.getElementById('newsMsg');
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const v = (input.value || '').trim();
     if (!/\S+@\S+\.\S+/.test(v)) { msg.textContent = 'Please enter a valid email.'; msg.style.color = '#c8896a'; return; }
-    // TODO: POST to Klaviyo / Mailchimp / Resend
     try { localStorage.setItem('oath_news', v); } catch (err) {}
+    try { await fetch('/api/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: v }) }); } catch (err) {}
     form.classList.add('is-done');
     msg.style.color = '#8f9a82';
     msg.textContent = 'Your oath is sealed — we will write to you soon.';

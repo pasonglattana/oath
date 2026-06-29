@@ -123,6 +123,7 @@
   }
 
   // ── JOURNAL / STORIES ──
+  function articleHref(s) { return 'article.html?id=' + encodeURIComponent(s.id); }
   function hydrateStories(stories) {
     if (!stories.length) return;
     const feature = stories.find(s => s.featured) || stories[0];
@@ -130,21 +131,23 @@
 
     const sf = document.querySelector('.story-feature');
     if (sf && feature) {
+      const href = articleHref(feature);
       const img = sf.querySelector('.sf-media img'); if (img) img.src = feature.image || img.src;
       const cat = sf.querySelector('.st-cat'); if (cat) cat.textContent = feature.category || '';
       const date = sf.querySelector('.st-date'); if (date) date.textContent = feature.date || '';
-      const tt = sf.querySelector('.sf-title a'); if (tt) { tt.textContent = feature.title || ''; tt.href = feature.link || '#'; }
+      const tt = sf.querySelector('.sf-title a'); if (tt) { tt.textContent = feature.title || ''; tt.href = href; }
       const ex = sf.querySelector('.sf-excerpt'); if (ex) ex.textContent = feature.excerpt || '';
-      const media = sf.querySelector('.sf-media'); if (media && feature.link) media.href = feature.link;
+      const media = sf.querySelector('.sf-media'); if (media) media.href = href;
+      const read = sf.querySelector('.story-read'); if (read) read.href = href;
     }
 
     const grid = document.querySelector('.stories-grid');
     if (grid) {
       grid.innerHTML = rest.map(s => `
         <article class="story-card">
-          <a class="sc-media" href="${esc(s.link || '#')}"><img src="${esc(s.image || '')}" alt="" loading="lazy" /></a>
+          <a class="sc-media" href="${esc(articleHref(s))}"><img src="${esc(s.image || '')}" alt="" loading="lazy" /></a>
           <div class="story-meta"><span class="st-cat">${esc(s.category || '')}</span><span class="st-date">${esc(s.date || '')}</span></div>
-          <h3 class="sc-title"><a href="${esc(s.link || '#')}">${esc(s.title || '')}</a></h3>
+          <h3 class="sc-title"><a href="${esc(articleHref(s))}">${esc(s.title || '')}</a></h3>
         </article>`).join('');
     }
   }

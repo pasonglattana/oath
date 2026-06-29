@@ -44,17 +44,39 @@
         { k: 'title', t: 'text', label: 'Title' },
         { k: 'category', t: 'text', label: 'Category', placeholder: 'Culture', half: true },
         { k: 'date', t: 'text', label: 'Date (as shown)', placeholder: 'June 2026', half: true },
-        { k: 'excerpt', t: 'textarea', label: 'Excerpt', hint: 'Shown on the featured story' },
+        { k: 'excerpt', t: 'textarea', label: 'Excerpt', hint: 'Short teaser shown on the cards' },
+        { k: 'body', t: 'textarea', label: 'Full article', hint: 'The full story — leave a blank line between paragraphs' },
         { k: 'image', t: 'image', label: 'Image' },
-        { k: 'link', t: 'text', label: 'Link', placeholder: '# or https://…' },
+        { k: 'link', t: 'text', label: 'External link', hint: 'Optional — only if this story lives on another site' },
         { k: 'featured', t: 'toggle', label: 'Featured — large story' },
         { k: 'published', t: 'toggle', label: 'Published' },
         { k: 'sort', t: 'number', label: 'Order' },
       ],
     },
+    instructors: {
+      title: 'Instructors', sub: 'The studio team shown on the “Our Instructors” page.',
+      empty: 'No instructors yet. Add your first.', thumbs: true,
+      fields: [
+        { k: 'name', t: 'text', label: 'Name' },
+        { k: 'role', t: 'text', label: 'Role', placeholder: 'Breath & Stillness' },
+        { k: 'image', t: 'image', label: 'Photo' },
+        { k: 'bio', t: 'textarea', label: 'Bio', hint: 'Leave a blank line between paragraphs' },
+        { k: 'specialties', t: 'text', label: 'Specialties', hint: 'Comma-separated, e.g. Breathwork, Sound healing' },
+        { k: 'published', t: 'toggle', label: 'Published — visible on the site' },
+        { k: 'sort', t: 'number', label: 'Order' },
+      ],
+    },
+    subscribers: {
+      title: 'Newsletter', sub: 'People who signed up for the letter, newest first.', noAdd: true,
+      empty: 'No signups yet.',
+      fields: [
+        { k: 'email', t: 'readonly', label: 'Email' },
+        { k: 'created', t: 'readonly', label: 'Signed up' },
+      ],
+    },
     media: {
       title: 'Photos', sub: 'The main photography on the site. Upload a new image to swap any of these.',
-      empty: 'No photo slots.', noAdd: true, thumbs: true,
+      empty: 'No photo slots.', noAdd: true, noDelete: true, thumbs: true,
       fields: [
         { k: 'label', t: 'readonly', label: 'Where this appears' },
         { k: 'image', t: 'image', label: 'Photo' },
@@ -139,7 +161,7 @@
     try {
       const data = await api('GET', `/api/admin/${v}`);
       items = data.items || [];
-      if (v === 'reservations') items.reverse();   // newest first
+      if (v === 'reservations' || v === 'subscribers') items.reverse();   // newest first
       renderList();
     } catch (err) { $('#list').innerHTML = `<p class="list-empty">${err.message}</p>`; }
   }
@@ -154,21 +176,27 @@
   function renderRow(it) {
     const row = el('div', 'row' + (it.published ? '' : ' unpub'));
     if (SCHEMA[view].thumbs) {
+      const tTitle = it.name || it.label || it.key || '(untitled)';
+      const tSub = it.role || it.image || (it.image ? '' : 'No image');
+      const tag = SCHEMA[view].noAdd ? '<span class="tag">Change ▸</span>'
+                : (!it.published ? '<span class="tag draft">Draft</span>' : '');
+      row.className = 'row' + (it.published === 0 ? ' unpub' : '');
       row.innerHTML = `<div class="row-thumb">${it.image ? `<img src="${esc(it.image)}" alt=""/>` : ''}</div>
-        <div class="row-main"><h3>${esc(it.label || it.key)}</h3><p>${esc(it.image || 'No image')}</p></div>
-        <div class="row-tags"><span class="tag">Change ▸</span></div>`;
+        <div class="row-main"><h3>${esc(tTitle)}</h3><p>${esc(tSub)}</p></div>
+        <div class="row-tags">${tag}</div>`;
       row.addEventListener('click', () => openEditor(it));
       return row;
     }
     let left = '';
     if (view === 'events') left = `<div class="row-date"><span class="d">${it.day || '—'}</span><span class="m">${it.month || ''}</span></div>`;
-    const title = it.title || it.label || it.name || '(untitled)';
+    const title = it.title || it.label || it.name || it.email || '(untitled)';
     let meta = '';
     if (view === 'events') meta = [it.room, it.time].filter(Boolean).join(' · ');
     else if (view === 'experiences') meta = [it.where_txt, it.party_type === 'class' ? 'Class' : 'Guests'].filter(Boolean).join(' · ');
     else if (view === 'stories') meta = [it.category, it.date].filter(Boolean).join(' · ');
     else if (view === 'music') meta = [it.artist, it.src ? '' : 'no file'].filter(Boolean).join(' · ');
     else if (view === 'reservations') meta = [it.exp_label, it.date, it.time, it.party].filter(Boolean).join(' · ');
+    else if (view === 'subscribers') meta = 'Signed up ' + (it.created || '');
     const tags = [];
     if (it.featured) tags.push('<span class="tag feat">Featured</span>');
     if (view === 'music' && it.active) tags.push('<span class="tag feat">♪ Playing</span>');
@@ -196,7 +224,7 @@
     editing = it;
     const isNew = !it.id;
     $('#editorTitle').textContent = (isNew ? 'New ' : 'Edit ') + SCHEMA[view].title.replace(/s$/, '').toLowerCase();
-    $('#deleteBtn').hidden = isNew || !!SCHEMA[view].noAdd;
+    $('#deleteBtn').hidden = isNew || !!SCHEMA[view].noDelete;
     buildForm(it);
     $('#drawerVeil').hidden = false;
     $('#editor').hidden = false;
