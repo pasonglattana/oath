@@ -54,6 +54,31 @@
     "sameAs": ["https://www.instagram.com/oath.house/", "https://www.facebook.com/Nomadeclubhouse"]
   }
   </script>
+
+  <!-- Safety net: never leave the page blank, and surface fatal JS errors on screen -->
+  <script>
+    (function () {
+      function reveal() {
+        try {
+          document.body && document.body.classList.remove('is-loading');
+          var p = document.getElementById('preloader'); if (p) p.style.display = 'none';
+          var els = document.querySelectorAll('[data-reveal]');
+          for (var i = 0; i < els.length; i++) els[i].style.opacity = '1';
+        } catch (e) {}
+      }
+      // if scripts haven't finished after 5s, show the page anyway
+      setTimeout(function () { if (document.body && document.body.classList.contains('is-loading')) reveal(); }, 5000);
+      window.addEventListener('error', function (e) {
+        reveal();
+        try {
+          var d = document.createElement('div');
+          d.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#7C2722;color:#fff;font:12px/1.5 monospace;padding:10px;white-space:pre-wrap';
+          d.textContent = 'JS error: ' + (e.message || '') + '  [' + ((e.filename || '').split('/').pop()) + ':' + (e.lineno || '') + ']';
+          (document.body || document.documentElement).appendChild(d);
+        } catch (_) {}
+      });
+    })();
+  </script>
 </head>
 <body class="is-afternoon paused is-loading">
 
