@@ -1375,7 +1375,10 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
    touch device regardless of how the browser reports pointer type.
    Harmless on desktop (mouse drag is unaffected). */
 #vinyl { touch-action: none; -webkit-user-select: none; user-select: none; }  /* finger-spun, no scroll fight */
-.tower { touch-action: pan-y; }  /* finger-swipe drives the floors; at the top/bottom floor it releases so the page scrolls past */
+/* the tower owns vertical finger-gestures so iOS can't hijack them for page
+   scroll; the swipe handler manually scrolls the page once you reach the top/
+   bottom floor, so a finger on the building is never a dead end */
+.tower { touch-action: none; -webkit-user-select: none; user-select: none; }
 
 /* swipe affordance — only shown where a finger is actually the input */
 .tower-hint { display: none; }

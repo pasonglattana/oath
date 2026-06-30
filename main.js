@@ -855,7 +855,7 @@ if (hasGSAP && !window.ScrollTrigger) {
 
   // a real swipe/drag sets `moved`, so the tap-handlers below know to stand down
   let moved = false;
-  const STEP = 44;                                   // px of finger travel = one floor
+  const STEP = 38;                                   // px of finger travel = one floor
 
   // tap a floor: if not active → bring it forward; if active → enter that room
   floors.forEach((f) => f.addEventListener('click', () => {
@@ -894,28 +894,29 @@ if (hasGSAP && !window.ScrollTrigger) {
     if (Math.abs(dy) > STEP) setActive(active + (dy < 0 ? 1 : -1)); // drag up → ascend
   });
 
-  // touch finger-swipe — we claim clearly-vertical gestures inside the tower and
-  // turn them into floor changes; at the top/bottom floor the swipe is released
-  // so the page can still scroll past the building (no finger-trap).
-  let tY = null, tX = null;
+  // touch finger-swipe — the building owns the vertical gesture (CSS sets
+  // touch-action:none), so swiping reliably moves between floors on iOS. Once
+  // you reach the top/bottom floor we hand the gesture back to the page by
+  // scrolling it ourselves, so a finger on the building is never a dead end.
+  let tY = null, tX = null, lastY = null, acc = 0;
   towerEl.addEventListener('touchstart', (e) => {
     if (e.touches.length !== 1) { tY = null; return; }
-    tY = e.touches[0].clientY; tX = e.touches[0].clientX; moved = false;
+    tY = lastY = e.touches[0].clientY; tX = e.touches[0].clientX; acc = 0; moved = false;
   }, { passive: true });
   towerEl.addEventListener('touchmove', (e) => {
     if (tY === null || e.touches.length !== 1) return;
-    const dy = e.touches[0].clientY - tY;
-    const dx = e.touches[0].clientX - tX;
-    if (Math.abs(dy) < 8 || Math.abs(dx) > Math.abs(dy)) return;    // ignore taps / sideways
-    const dir = dy < 0 ? 1 : -1;                                    // swipe up → ascend
-    const atEnd = (dir > 0 && active >= N - 1) || (dir < 0 && active <= 0);
-    if (atEnd) return;                                             // edge → let the page scroll
-    if (e.cancelable) e.preventDefault();                          // claim this vertical gesture
+    const y = e.touches[0].clientY, x = e.touches[0].clientX;
+    const dyInc = y - lastY; lastY = y;
+    if (Math.abs(x - tX) > Math.abs(y - tY) + 6) return;           // mostly sideways → ignore
+    if (Math.abs(y - tY) < 6) return;                             // tiny → keep it a tap
     moved = true;
-    if (Math.abs(dy) > STEP) {
-      setActive(active + dir);
-      tY = e.touches[0].clientY; tX = e.touches[0].clientX;         // re-anchor for the next floor
-    }
+    const goingUp = dyInc < 0;                                    // finger moving up the screen
+    const canStep = goingUp ? (active < N - 1) : (active > 0);
+    if (!canStep) { window.scrollBy(0, -dyInc); return; }         // end floor → scroll the page
+    if (e.cancelable) e.preventDefault();
+    acc += dyInc;
+    if (acc <= -STEP) { setActive(active + 1); acc = 0; }         // swipe up → ascend
+    else if (acc >= STEP) { setActive(active - 1); acc = 0; }     // swipe down → descend
   }, { passive: false });
   towerEl.addEventListener('touchend', () => { tY = null; }, { passive: true });
 
