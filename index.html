@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>html,body{background:#1a0f0a;margin:0}</style>   <!-- instant dark base: never a white flash, even before CSS -->
   <title>Oath House · A House of Rituals — Vientiane, Laos</title>
   <meta name="description" content="Oath House — a living home and garden in the heart of Vientiane, where we gather through food, sound and movement. A House of Rituals. Rooted in the Real." />
   <meta name="theme-color" content="#161310" />
@@ -30,10 +31,12 @@
   <!-- Fallback faces: Spectral (≈ Arno Pro) + Inter (≈ Neue Haas Grotesk) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Caveat:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- fonts load non-render-blocking, so a slow/blocked Google Fonts (some mobile networks) never white-screens the page -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Caveat:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Caveat:wght@400;500&display=swap" /></noscript>
   <link rel="preload" as="image" href="photos/landing-hero-1600.webp" />
 
-  <link rel="stylesheet" href="style.css?v=56" />
+  <link rel="stylesheet" href="style.css?v=57" />
 
   <!-- Structured data — local business -->
   <script type="application/ld+json">
