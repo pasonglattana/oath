@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>html,body{background:#F4EFE6;margin:0}</style>
+  <title>Our Program · Oath Studio</title>
+  <meta name="description" content="The classes at Oath Studio — Yoga Ball, Yoga Calm, Chair Yoga, Yoga Sticks, Swing Yoga, Pilates Mat and Yoga Fly. Movement, breath and stillness for every body." />
+  <link rel="icon" type="image/png" href="logos/oath-mark-dark.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" /></noscript>
+  <style>
+    :root{ --earth:#863A24; --ink:#25241f; --soft:#7c7264; --paper:#F4EFE6; --card:#FBF8F1; --line:rgba(37,36,31,.14);
+      --serif:'Spectral',Georgia,serif; --sans:'Inter',system-ui,sans-serif; }
+    *{box-sizing:border-box;margin:0}
+    body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    .top{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;
+      padding:1.1rem clamp(1.4rem,5vw,3rem);background:rgba(244,239,230,.86);backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line);font-family:var(--sans)}
+    .top a{font-variant:small-caps;letter-spacing:.16em;font-size:.82rem;text-decoration:none;color:var(--soft);transition:color .3s}
+    .top a:hover{color:var(--earth)}
+    .top .brand{font-family:var(--serif);letter-spacing:.2em;color:var(--ink)}
+    .wrap{max-width:1080px;margin:0 auto;padding:clamp(2.6rem,7vw,5.5rem) clamp(1.4rem,5vw,2.5rem) 5rem}
+    .head{max-width:52ch;margin-bottom:clamp(2.6rem,6vw,4.5rem)}
+    .eyebrow{font-family:var(--sans);font-variant:small-caps;letter-spacing:.24em;font-size:.78rem;color:var(--earth);margin-bottom:1.1rem}
+    .head h1{font-weight:400;font-size:clamp(2.3rem,6vw,4rem);line-height:1.04;letter-spacing:-.01em}
+    .head p{color:var(--soft);margin-top:1.2rem;font-size:clamp(1.05rem,1.6vw,1.25rem);max-width:52ch}
+
+    .programs{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.2rem,2.4vw,1.8rem)}
+    .prog{position:relative;background:var(--card);border:1px solid var(--line);border-radius:4px;
+      padding:clamp(1.7rem,3vw,2.3rem) clamp(1.6rem,3vw,2.2rem);
+      display:flex;flex-direction:column;transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .5s,box-shadow .5s}
+    .prog:hover{transform:translateY(-3px);border-color:rgba(134,58,36,.5);box-shadow:0 22px 44px -28px rgba(37,36,31,.5)}
+    .prog .no{font-family:var(--serif);font-variant:small-caps;letter-spacing:.2em;font-size:.74rem;color:var(--earth);opacity:.8}
+    .prog h2{font-weight:400;font-size:clamp(1.5rem,2.5vw,2rem);line-height:1.06;margin:.5rem 0 .2rem}
+    .prog .kicker{font-family:var(--sans);font-variant:small-caps;letter-spacing:.16em;font-size:.74rem;color:var(--soft);margin-bottom:1rem}
+    .prog p{color:#3a352d;font-size:clamp(.98rem,1.35vw,1.08rem);line-height:1.62}
+    .prog::before{content:"";position:absolute;left:0;top:clamp(1.9rem,3vw,2.5rem);width:3px;height:1.7rem;background:var(--earth);opacity:.55;border-radius:0 2px 2px 0}
+
+    .foot{max-width:1080px;margin:0 auto;padding:2.4rem clamp(1.4rem,5vw,2.5rem) 4rem;border-top:1px solid var(--line);
+      display:flex;gap:2rem;flex-wrap:wrap;align-items:center}
+    .foot a{font-family:var(--sans);font-variant:small-caps;letter-spacing:.18em;font-size:.86rem;text-decoration:none;color:var(--earth);display:inline-flex;gap:.5em;transition:gap .3s}
+    .foot a:hover{gap:1em}
+    .foot .note{font-style:italic;color:var(--soft);flex:1;min-width:220px}
+
+    @media(max-width:680px){ .programs{grid-template-columns:1fr} }
+    @media(prefers-reduced-motion:no-preference){.wrap{animation:rise .8s cubic-bezier(.2,.8,.2,1)}}
+    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a href="/#studio">← Oath Studio</a>
+    <a class="brand" href="/">Oath House</a>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Oath Studio · The Practice</p>
+        <h1>Our Program</h1>
+        <p>A practice for every body — breath, movement and stillness, chosen to meet you where you are. Below are the classes held at the studio.</p>
+      </div>
+
+      <div class="programs">
+        <article class="prog">
+          <span class="no">01</span>
+          <h2>Yoga Ball</h2>
+          <p class="kicker">Balance &amp; Flexibility</p>
+          <p>Yoga Ball helps with balance and flexibility. The classes suit those with no prior exercise experience or who lack strength, as well as people who sit in an office for long periods.</p>
+        </article>
+
+        <article class="prog">
+          <span class="no">02</span>
+          <h2>Yoga Calm</h2>
+          <p class="kicker">Release &amp; Restore</p>
+          <p>Yoga Calm focuses on addressing most physical problems — muscle tension, office syndrome, and inflexible muscles caused by excessive forms of other exercise.</p>
+        </article>
+
+        <article class="prog">
+          <span class="no">03</span>
+          <h2>Chair Yoga</h2>
+          <p class="kicker">Gentle &amp; Supported</p>
+          <p>Chair Yoga improves balance, especially for those with weak limbs, poor balance or limited movement. It is also suitable for the elderly and can aid physical recovery, particularly for pre-existing injuries or general physical weakness.</p>
+        </article>
+
+        <article class="prog">
+          <span class="no">04</span>
+          <h2>Yoga Sticks</h2>
+          <p class="kicker">Alignment &amp; Posture</p>
+          <p>Yoga Sticks helps with body alignment, stretching, and correcting the body's posture.</p>
+        </article>
+
+        <article class="prog">
+          <span class="no">05</span>
+          <h2>Swing Yoga</h2>
+          <p class="kicker">Pilates in Motion</p>
+          <p>Swing Yoga is a combination of Pilates and body-alignment techniques woven together with stretching.</p>
+        </article>
+
+        <article class="prog">
+          <span class="no">06</span>
+          <h2>Pilates Mat</h2>
+          <p class="kicker">Core &amp; Spine</p>
+          <p>Pilates Mat focuses on the central parts of the body along the spine — the nervous system, the smaller muscle groups and the deep core muscles.</p>
+        </article>
+
+        <article class="prog">
+          <span class="no">07</span>
+          <h2>Yoga Fly &amp; Yoga Hammock</h2>
+          <p class="kicker">Five Arts, One Flow</p>
+          <p>Yoga Fly and Yoga Hammock bring together five types of training — yoga, pilates, ballet, stretching and dancing — into a single aerial routine.</p>
+        </article>
+      </div>
+    </div>
+
+    <footer class="foot">
+      <p class="note">Not sure where to begin? Our instructors will guide you to the right practice.</p>
+      <a href="/#reserve">Book a session →</a>
+      <a href="instructors.html">Meet the instructors →</a>
+    </footer>
+  </main>
+</body>
+</html>
