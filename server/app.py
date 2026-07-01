@@ -229,10 +229,25 @@ def load_config():
             "password_hash": hash_pw(DEFAULT_PASSWORD, salt),
             "secret": secrets.token_hex(32),
         }
+        env_pw = os.environ.get("ADMIN_PASSWORD")
+        if env_pw:
+            cfg["pw_env_sig"] = cfg["password_hash"]   # remember which env value we applied
         save_config(cfg)
         print(f"  ↳ created {CONFIG}  (default admin password: {DEFAULT_PASSWORD})")
     with open(CONFIG) as f:
-        return json.load(f)
+        cfg = json.load(f)
+    # Let ADMIN_PASSWORD reset the admin password from Render's dashboard: when the
+    # env value CHANGES, re-apply it. A password changed from the admin panel still
+    # persists across deploys (the env value is unchanged, so we don't touch it).
+    env_pw = os.environ.get("ADMIN_PASSWORD")
+    if env_pw:
+        sig = hash_pw(env_pw, cfg["salt"])
+        if cfg.get("pw_env_sig") != sig:
+            cfg["password_hash"] = sig
+            cfg["pw_env_sig"] = sig
+            save_config(cfg)
+            print("  ↳ admin password reset from the ADMIN_PASSWORD environment variable")
+    return cfg
 
 def save_config(cfg):
     with open(CONFIG, "w") as f:
