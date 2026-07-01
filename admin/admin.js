@@ -66,6 +66,17 @@
         { k: 'sort', t: 'number', label: 'Order' },
       ],
     },
+    hours: {
+      title: 'Opening Hours', sub: 'The opening hours shown in the footer of the site. Each row is one line — reorder with the “Order” field.',
+      empty: 'No hours yet. Add your first row.',
+      fields: [
+        { k: 'label', t: 'text', label: 'Days', placeholder: 'Tue – Thu' },
+        { k: 'value', t: 'text', label: 'Hours', placeholder: '08:00 – 23:00', hint: 'What shows on the right — e.g. “08:00 – Late” or “Closed”' },
+        { k: 'closed', t: 'toggle', label: 'Closed — style this row as a closed day' },
+        { k: 'published', t: 'toggle', label: 'Published — visible on the site' },
+        { k: 'sort', t: 'number', label: 'Order (lower shows first)' },
+      ],
+    },
     subscribers: {
       title: 'Newsletter', sub: 'People who signed up for the letter, newest first.', noAdd: true,
       empty: 'No signups yet.',
@@ -196,6 +207,7 @@
     else if (view === 'stories') meta = [it.category, it.date].filter(Boolean).join(' · ');
     else if (view === 'music') meta = [it.artist, it.src ? '' : 'no file'].filter(Boolean).join(' · ');
     else if (view === 'reservations') meta = [it.exp_label, it.date, it.time, it.party].filter(Boolean).join(' · ');
+    else if (view === 'hours') meta = it.closed ? 'Closed' : (it.value || '');
     else if (view === 'subscribers') meta = 'Signed up ' + (it.created || '');
     const tags = [];
     if (it.featured) tags.push('<span class="tag feat">Featured</span>');
@@ -204,7 +216,7 @@
       const cls = it.status === 'confirmed' ? 'feat' : it.status === 'cancelled' ? 'draft' : 'feat';
       tags.push(`<span class="tag ${it.status === 'new' ? 'feat' : cls}">${esc((it.status || 'new').replace(/^./, c => c.toUpperCase()))}</span>`);
     }
-    if (['events', 'stories'].includes(view) && !it.published) tags.push('<span class="tag draft">Draft</span>');
+    if (['events', 'stories', 'hours'].includes(view) && !it.published) tags.push('<span class="tag draft">Draft</span>');
     row.innerHTML = `${left}
       <div class="row-main"><h3>${esc(title)}</h3><p>${esc(meta)}</p></div>
       <div class="row-tags">${tags.join('')}</div>`;

@@ -18,6 +18,7 @@
   if (content.media) hydrateMedia(content.media);
   if (Array.isArray(content.events)) hydrateCalendar(content.events);
   if (Array.isArray(content.stories)) hydrateStories(content.stories);
+  if (Array.isArray(content.hours)) hydrateHours(content.hours);
   if (content.music) setupMusic(content.music);
   // let the booking module pick up live experiences
   window.dispatchEvent(new CustomEvent('oath:content', { detail: content }));
@@ -71,6 +72,16 @@
     }
     EVT.forEach(function (ev) { window.addEventListener(ev, firstGesture, { capture: true, passive: true }); });
     if (wantsSound) playSong();     // also try right away (allowed on some browsers)
+  }
+
+  // ── HOURS (footer opening hours) ──
+  function hydrateHours(hours) {
+    if (!hours.length) return;
+    const box = document.getElementById('hoursList');
+    if (!box) return;
+    box.innerHTML = hours.map(h =>
+      `<p class="hours-row${h.closed ? ' hours-closed' : ''}"><span>${esc(h.label || '')}</span><span>${esc(h.value || '')}</span></p>`
+    ).join('');
   }
 
   // ── MEDIA (site photos) ──

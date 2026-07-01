@@ -47,9 +47,10 @@ COLLECTIONS = {
     "music":       ["title","artist","src","active","sort"],
     "reservations":["status"],   # admin only flips status; rows are created via /api/reserve
     "instructors": ["name","role","bio","image","specialties","published","sort"],
+    "hours":       ["label","value","closed","published","sort"],
     "subscribers": [],   # admin can view/remove; rows created via /api/subscribe
 }
-BOOL_FIELDS = {"featured", "published", "active"}
+BOOL_FIELDS = {"featured", "published", "active", "closed"}
 UPLOAD_DIR = os.path.join(DATA_DIR, "uploads")
 ALLOWED_IMG = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif", ".svg"}
 ALLOWED_AUDIO = {".mp3", ".m4a", ".aac", ".wav", ".ogg", ".oga", ".flac"}
@@ -104,6 +105,11 @@ def init_db():
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       email TEXT UNIQUE, created TEXT, sort INTEGER DEFAULT 0
     );
+    CREATE TABLE IF NOT EXISTS hours (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      label TEXT, value TEXT, closed INTEGER DEFAULT 0,
+      published INTEGER DEFAULT 1, sort INTEGER DEFAULT 0
+    );
     """)
     # migrations for databases created before a column existed
     try: c.execute("ALTER TABLE stories ADD COLUMN body TEXT")
@@ -116,7 +122,20 @@ def init_db():
         seed_media(c)
     if c.execute("SELECT COUNT(*) n FROM instructors").fetchone()["n"] == 0:
         seed_instructors(c)
+    if c.execute("SELECT COUNT(*) n FROM hours").fetchone()["n"] == 0:
+        seed_hours(c)
     c.close()
+
+def seed_hours(c):
+    # the opening hours shown in the site footer — editable from the admin
+    rows = [
+        ("Tue – Thu", "08:00 – 23:00", 0, 1, 0),
+        ("Fri – Sat", "08:00 – Late",  0, 1, 1),
+        ("Sunday",    "08:00 – 18:00", 0, 1, 2),
+        ("Monday",    "Closed",        1, 1, 3),
+    ]
+    c.executemany("INSERT INTO hours (label,value,closed,published,sort) VALUES (?,?,?,?,?)", rows)
+    c.commit()
 
 def seed_instructors(c):
     rows = [
@@ -452,9 +471,10 @@ class Handler(BaseHTTPRequestHandler):
         st = [row_to_obj(r) for r in c.execute("SELECT * FROM stories WHERE published=1 ORDER BY sort, id")]
         for s in st: s.pop("body", None)        # keep the homepage payload lean
         md = {r["key"]: r["image"] for r in c.execute("SELECT key, image FROM media")}
+        hr = [row_to_obj(r) for r in c.execute("SELECT * FROM hours WHERE published=1 ORDER BY sort, id")]
         song = c.execute("SELECT title, artist, src FROM music WHERE active=1 AND src!='' ORDER BY sort, id LIMIT 1").fetchone()
         c.close()
-        self.send_json({"events": ev, "experiences": ex, "stories": st, "media": md,
+        self.send_json({"events": ev, "experiences": ex, "stories": st, "media": md, "hours": hr,
                         "music": (row_to_obj(song) if song else None)})
 
     # -- instructors (for the Our Instructors page) --
