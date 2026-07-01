@@ -171,26 +171,20 @@ def seed_media(c):
 
 def seed(c):
     events = [
-        (1,"2026-06-21","21","Jun","All three rooms","Solstice — A Night of Gathering",
-         "Once a year the whole house opens at once — fire in the garden, records in Papersound, breath in the studio. A single evening where food, sound and movement become one ritual.",
+        (1,"2026-06-21","21","Jun","Both rooms","Solstice — A Night of Gathering",
+         "Once a year the whole house opens at once — fire and a long table in the garden, breath in the studio. A single evening where food, sound and movement become one ritual.",
          "Sundown — Late",1,0),
-        (0,"2026-06-12","12","Jun","Papersound","Listening Session — Lao Modern",
-         "An evening tracing the thread between Lao molam, dub and ambient. Records only. Two sets, one needle.","20:00 — Late",1,1),
         (0,"2026-06-19","19","Jun","Oath Garden","Natural Wine & Long Table",
          "A shared harvest dinner. Low-intervention wine, fire-cooked vegetables, bread torn by hand.","18:30 — 22:00",1,2),
         (0,"2026-06-28","28","Jun","Oath Studio","Breathwork & Sound Bath",
          "A morning of guided breath and resonant tone. Linen, concrete, and the body returning to stillness.","07:30 — 09:00",1,3),
         (0,"2026-07-05","05","Jul","The House","Makers in Residence — Clay",
          "A week-long open studio with a guest ceramicist. Throw, fire, gather. Closing exhibition Sunday.","All week",1,4),
-        (0,"2026-07-17","17","Jul","Papersound","Cinema of Sound — Film Night",
-         "Moving image and live score under low light. A conversation around the bar afterward.","20:30 — Late",1,5),
     ]
     c.executemany("INSERT INTO events (featured,date,day,month,room,title,description,time,published,sort) VALUES (?,?,?,?,?,?,?,?,?,?)", events)
     experiences = [
         ("table","Table · Oath Garden","Oath Garden","guests",
          json.dumps(["08:00","09:30","11:00","12:30","14:00","18:00","19:30","21:00"]), json.dumps(["12:30"]), json.dumps(None),1,0),
-        ("session","Listening Session · Papersound","Papersound","guests",
-         json.dumps(["20:00","21:30"]), json.dumps([]), json.dumps(None),1,1),
         ("class","Class · Oath Studio","Oath Studio","class",
          json.dumps(None), json.dumps([]), json.dumps([
             {"name":"Sunrise Breathwork","slots":["07:30"]},
@@ -206,15 +200,9 @@ def seed(c):
          "In a city that never stops, we made a place that does. A note on gathering, sound and stillness — and the year that brought Oath House to the heart of Vientiane.",
          "Vientiane is changing quickly. New towers, new traffic, new speed. Somewhere in that rush we felt a quieter need — for a place that remembers how to slow down, how to gather, how to listen.\n\n"
          "Oath House began as a habit long before it became a building. A long table on trestles. A borrowed turntable. A morning of breath on a bare floor. For nine years it had no address — it lived in courtyards and borrowed kitchens, on cassette reels and in a thousand sketches.\n\n"
-         "What we built is not a restaurant, or a bar, or a studio, though it is all of those things. It is a house of rituals: food shared slowly, sound that asks to be heard, movement that returns the body to itself. Three rooms under one roof, each a different way of arriving.\n\n"
+         "What we built is not a restaurant, or a kitchen, or a studio, though it is all of those things. It is a house of rituals: food shared slowly, movement that returns the body to itself. Two rooms under one roof, each a different way of arriving.\n\n"
          "We named it Oath because that is what it is — a promise to keep things real. The grain of the wood. The weight of a cup. The conversation between strangers who leave as friends. Come empty. Stay late. Let the room hold you.",
          "photos/garden/garden-light.webp","#",1,0),
-        (0,"Sound","May 2026","Notes from the listening room — Japanese jazz, 1978–1985",
-         "Some records ask to be played loud. These ask to be played close.",
-         "There is a particular warmth to Japanese jazz of the late seventies and early eighties — a softness in the recording, a patience in the playing, that suits a dim room and a single turntable.\n\n"
-         "At Papersound we play it on Side A nights, two sets, one needle. No skipping, no shuffling. The record decides the pace, and so do you.\n\n"
-         "Sit close. The room is built for it.",
-         "textures/earth-red.jpg","#",1,1),
         (0,"Food","April 2026","On natural wine & the ritual of the long table",
          "A shared harvest, low-intervention wine, and bread torn by hand.",
          "The long table is the oldest ritual we have. Strangers seated shoulder to shoulder, plates passed, glasses filled by whoever sits nearest the bottle.\n\n"

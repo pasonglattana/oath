@@ -36,7 +36,7 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Caveat:wght@400;500&display=swap" /></noscript>
   <link rel="preload" as="image" href="photos/landing-hero-1600.webp" />
 
-  <link rel="stylesheet" href="style.css?v=60" />
+  <link rel="stylesheet" href="style.css?v=61" />
 
   <!-- Structured data — local business -->
   <script type="application/ld+json">
@@ -136,7 +136,6 @@
       </div>
       <div class="dn-group">
         <a data-go="garden">Oath Garden</a>
-        <a data-go="papersound">Papersound</a>
         <a data-go="studio">Oath Studio</a>
       </div>
       <div class="dn-group">
@@ -167,7 +166,6 @@
     <button data-go="arrival"    data-label="Arrival"></button>
     <button data-go="map"        data-label="The House"></button>
     <button data-go="garden"     data-label="Oath Garden"></button>
-    <button data-go="papersound" data-label="Papersound"></button>
     <button data-go="studio"     data-label="Oath Studio"></button>
     <button data-go="calendar"   data-label="Calendar"></button>
     <button data-go="reserve"    data-label="Reservations"></button>
@@ -197,33 +195,21 @@
       <div class="map-head" data-reveal>
         <p class="label">The Building</p>
         <span class="dots" aria-hidden="true"><i></i><i></i></span>
-        <h2 class="display">One house, three floors — a vertical world of gathering, sound and stillness. Step in and move between them.</h2>
+        <h2 class="display">One house, two floors — a vertical world of gathering and stillness. Step in and move between them.</h2>
       </div>
 
       <div class="tower-wrap" data-reveal>
-        <!-- the interactive 3-floor building -->
-        <div class="tower" id="tower" tabindex="0" aria-label="Oath House — three floors. Swipe, drag or use arrow keys to move between floors.">
+        <!-- the interactive 2-floor building -->
+        <div class="tower" id="tower" tabindex="0" aria-label="Oath House — two floors. Swipe, drag or use arrow keys to move between floors.">
           <div class="tower-stage" id="towerStage">
-            <article class="floor" data-floor="2" data-go="studio">
+            <article class="floor" data-floor="1" data-go="studio">
               <div class="floor-card">
                 <div class="floor-media fm-studio" aria-hidden="true"></div>
                 <div class="floor-text">
-                  <span class="floor-no">Floor 03</span>
+                  <span class="floor-no">Floor 02</span>
                   <h3 class="floor-name"><img class="fn-dark" src="logos/oath-studio-wordmark-dark.png" alt="Oath Studio" /><img class="fn-light" src="logos/oath-studio-wordmark-light.png" alt="" aria-hidden="true" /></h3>
                   <p class="floor-fn">Wellness · The Ritual of Returning</p>
                   <p class="floor-desc">Concrete, linen and breath — where the body returns to itself.</p>
-                  <span class="floor-enter">Enter the floor <i></i></span>
-                </div>
-              </div>
-            </article>
-            <article class="floor" data-floor="1" data-go="papersound">
-              <div class="floor-card">
-                <div class="floor-media fm-paper" aria-hidden="true"></div>
-                <div class="floor-text">
-                  <span class="floor-no">Floor 02</span>
-                  <h3 class="floor-name"><img class="fn-dark" src="logos/paper-wordmark-dark.png" alt="Papersound" /><img class="fn-light" src="logos/paper-wordmark-light.png" alt="" aria-hidden="true" /></h3>
-                  <p class="floor-fn">The Bar · The Ritual of Listening</p>
-                  <p class="floor-desc">Dim light, vinyl and cocktails — a hidden listening room.</p>
                   <span class="floor-enter">Enter the floor <i></i></span>
                 </div>
               </div>
@@ -253,8 +239,7 @@
             <small>Vientiane · Est. 2026</small>
           </div>
           <nav class="tower-index" id="towerIndex" aria-label="Floors">
-            <button data-floor="2"><b>03</b><span>Oath Studio</span><em>Wellness</em></button>
-            <button data-floor="1"><b>02</b><span>Papersound</span><em>The Bar</em></button>
+            <button data-floor="1"><b>02</b><span>Oath Studio</span><em>Wellness</em></button>
             <button data-floor="0"><b>01</b><span>Oath Garden</span><em>Garden</em></button>
           </nav>
           <div class="tower-arrows" aria-hidden="true">
@@ -301,53 +286,9 @@
     </div>
   </section>
 
-  <!-- ═══ 03 · PAPERSOUND ═══ -->
-  <section id="papersound" class="room">
-    <span class="chapter-no">03 — Papersound</span>
-    <div class="wrap">
-      <div class="room-grid">
-        <div class="room-visual">
-          <div class="vinyl-stage">
-            <div class="vinyl" id="vinyl">
-              <span class="spindle"></span>
-              <div class="label-disc"><img class="disc-mark" src="logos/paper-mark-light.png" alt="" /></div>
-            </div>
-            <div class="tonearm"></div>
-          </div>
-        </div>
-        <div class="room-text">
-          <p class="label" data-reveal>The Ritual of Listening</p>
-          <h2 class="room-title display" data-reveal>
-            <img class="paper-logo" src="logos/paper-wordmark-light.png" alt="Paper Sound Bar" />
-          </h2>
-          <p class="room-theme" data-reveal>Dim light · Vinyl · Cocktails · Smoke &amp; wood</p>
-          <div class="room-body" data-reveal>
-            <p>When the sun goes down, the house lowers its voice. A hidden listening room of warm valves and turning records, of a cocktail built slowly and a needle set down with care.</p>
-            <p>Here sound is not background. It is the reason. Sit close. Stay late. Let the room hold you.</p>
-          </div>
-          <div class="now-playing" data-reveal>
-            <span class="np-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-            <span id="npLabel">Side A — drag to spin · click to play</span>
-          </div>
-          <a class="paper-explore" href="papersound.html" data-reveal>Explore Papersound <i aria-hidden="true">→</i></a>
-        </div>
-      </div>
-
-      <!-- tonight's record -->
-      <div class="paper-extra paper-extra--solo">
-        <div class="tonight" data-reveal>
-          <p class="label">Tonight on the Turntable</p>
-          <h3 class="tonight-title">Japanese Jazz · 1978 – 1985</h3>
-          <p class="tonight-sub">A side traced through warm valves and turning vinyl. Two sets, one needle.</p>
-          <a class="tonight-listen" href="papersound.html">Step into Papersound <i></i></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ 04 · STUDIO OATH ═══ -->
+  <!-- ═══ 03 · STUDIO OATH ═══ -->
   <section id="studio" class="room">
-    <span class="chapter-no">04 — Oath Studio</span>
+    <span class="chapter-no">03 — Oath Studio</span>
     <div class="wrap">
       <div class="room-grid">
         <div class="room-text">
@@ -379,9 +320,9 @@
     </div>
   </section>
 
-  <!-- ═══ 05 · CULTURAL CALENDAR ═══ -->
+  <!-- ═══ 04 · CULTURAL CALENDAR ═══ -->
   <section id="calendar">
-    <span class="chapter-no">05 — Calendar</span>
+    <span class="chapter-no">04 — Calendar</span>
     <div class="wrap">
       <div class="o-divider" data-reveal aria-hidden="true"><img src="logos/oath-mark-light.png" alt="" /></div>
       <div class="cal-head" data-reveal>
@@ -402,22 +343,11 @@
           <p class="cf-tag">Featured · The House</p>
           <h3>Solstice — A Night of Gathering</h3>
           <div class="cf-meta"><span>21 June 2026</span><span>Sundown — Late</span><span>All three rooms</span></div>
-          <p>Once a year the whole house opens at once — fire in the garden, records in Papersound, breath in the studio. A single evening where food, sound and movement become one ritual.</p>
+          <p>Once a year the whole house opens at once — fire and a long table in the garden, breath in the studio. A single evening where food, sound and movement become one ritual.</p>
         </div>
       </div>
 
       <div class="journal">
-        <article data-reveal>
-          <span class="j-hover"></span>
-          <div class="j-date"><span class="d">12</span><span class="m">Jun</span></div>
-          <div class="j-body">
-            <p class="j-room">Papersound</p>
-            <h3>Listening Session — Lao Modern</h3>
-            <p>An evening tracing the thread between Lao molam, dub and ambient. Records only. Two sets, one needle.</p>
-          </div>
-          <div class="j-time">20:00 — Late</div>
-        </article>
-
         <article data-reveal>
           <span class="j-hover"></span>
           <div class="j-date"><span class="d">19</span><span class="m">Jun</span></div>
@@ -451,23 +381,13 @@
           <div class="j-time">All week</div>
         </article>
 
-        <article data-reveal>
-          <span class="j-hover"></span>
-          <div class="j-date"><span class="d">17</span><span class="m">Jul</span></div>
-          <div class="j-body">
-            <p class="j-room">Papersound</p>
-            <h3>Cinema of Sound — Film Night</h3>
-            <p>Moving image and live score under low light. A conversation around the bar afterward.</p>
-          </div>
-          <div class="j-time">20:30 — Late</div>
-        </article>
       </div>
     </div>
   </section>
 
-  <!-- ═══ 06 · RESERVATIONS ═══ -->
+  <!-- ═══ 05 · RESERVATIONS ═══ -->
   <section id="reserve">
-    <span class="chapter-no">06 — Reservations</span>
+    <span class="chapter-no">05 — Reservations</span>
     <div class="wrap">
       <div class="reserve-head" data-reveal>
         <p class="label">Three Ways to Arrive</p>
@@ -494,14 +414,8 @@
                 <p>Coffee, the long table, natural wine in Oath Garden.</p>
                 <span class="p-go">Choose <i></i></span>
               </button>
-              <button type="button" class="path" data-path="session">
-                <span class="p-no">02</span>
-                <h3>A Listening Session</h3>
-                <p>An evening in Papersound. Intimate, seated, vinyl only.</p>
-                <span class="p-go">Choose <i></i></span>
-              </button>
               <button type="button" class="path" data-path="class">
-                <span class="p-no">03</span>
+                <span class="p-no">02</span>
                 <h3>A Class</h3>
                 <p>Breath, movement and stillness in Oath Studio.</p>
                 <span class="p-go">Choose <i></i></span>
@@ -559,9 +473,9 @@
     </div>
   </section>
 
-  <!-- ═══ 07 · THE JOURNAL — stories & news ═══ -->
+  <!-- ═══ 06 · THE JOURNAL — stories & news ═══ -->
   <section id="stories">
-    <span class="chapter-no">07 — The Journal</span>
+    <span class="chapter-no">06 — The Journal</span>
     <div class="wrap">
       <div class="stories-head" data-reveal>
         <div>
@@ -834,7 +748,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="main.js?v=60"></script>
-  <script src="oath-live.js?v=60"></script>
+  <script src="main.js?v=61"></script>
+  <script src="oath-live.js?v=61"></script>
 </body>
 </html>

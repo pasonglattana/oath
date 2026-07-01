@@ -4,7 +4,7 @@
   const el = (t, c, h) => { const n = document.createElement(t); if (c) n.className = c; if (h != null) n.innerHTML = h; return n; };
 
   // ── content schemas drive the lists + editor forms ──
-  const ROOMS = ['Oath Garden', 'Papersound', 'Oath Studio', 'The House', 'All three rooms'];
+  const ROOMS = ['Oath Garden', 'Oath Studio', 'The House', 'Both rooms'];
   const SCHEMA = {
     events: {
       title: 'Calendar Events', sub: 'What the house is hosting — these appear in the Calendar section of the site.',

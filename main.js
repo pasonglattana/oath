@@ -284,64 +284,7 @@ if ('IntersectionObserver' in window) {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   7 · PAPERSOUND — vinyl spin (scroll + drag + play)
-   ───────────────────────────────────────────────────────────── */
-(function vinyl() {
-  const disc = document.getElementById('vinyl');
-  if (!disc) return;
-  let angle = 0, spinning = false, dragging = false, lastA = 0, velocity = 0;
-
-  if (hasGSAP && window.ScrollTrigger) {
-    ScrollTrigger.create({
-      trigger: '#papersound', start: 'top bottom', end: 'bottom top', scrub: 1.2,
-      onUpdate: (self) => { if (!spinning && !dragging) { angle = self.progress * 360; disc.style.transform = `rotate(${angle}deg)`; } }
-    });
-  }
-
-  function center() { const r = disc.getBoundingClientRect(); return { x: r.left + r.width/2, y: r.top + r.height/2 }; }
-  function pointAngle(x, y) { const c = center(); return Math.atan2(y - c.y, x - c.x) * 180 / Math.PI; }
-
-  disc.addEventListener('pointerdown', (e) => {
-    dragging = true; spinning = false; lastA = pointAngle(e.clientX, e.clientY);
-    try { disc.setPointerCapture(e.pointerId); } catch (err) {}
-  });
-  window.addEventListener('pointermove', (e) => {
-    if (!dragging) return;
-    const a = pointAngle(e.clientX, e.clientY);
-    let delta = a - lastA;
-    if (delta > 180) delta -= 360; if (delta < -180) delta += 360;
-    angle += delta; velocity = delta; lastA = a;
-    disc.style.transform = `rotate(${angle}deg)`;
-  });
-  window.addEventListener('pointerup', () => { if (dragging) { dragging = false; momentum(); } });
-
-  function momentum() {
-    if (Math.abs(velocity) < 0.1 || spinning || dragging) return;
-    angle += velocity; velocity *= 0.95;
-    disc.style.transform = `rotate(${angle}deg)`;
-    requestAnimationFrame(momentum);
-  }
-
-  const label = document.getElementById('npLabel');
-  const labelDisc = disc.querySelector('.label-disc');
-  if (labelDisc) {
-    labelDisc.addEventListener('click', (e) => {
-      e.stopPropagation();
-      spinning = !spinning;
-      document.body.classList.toggle('paused', !spinning);
-      if (label) label.textContent = spinning ? 'Now playing — Side A' : 'Paused — click to play';
-      if (spinning) play();
-    });
-  }
-  function play() {
-    if (!spinning) return;
-    angle += 0.6; disc.style.transform = `rotate(${angle}deg)`;
-    requestAnimationFrame(play);
-  }
-})();
-
-/* ─────────────────────────────────────────────────────────────
-   8 · RESERVATIONS — multi-step booking flow
+   7 · RESERVATIONS — multi-step booking flow
    ───────────────────────────────────────────────────────────── */
 (function booking() {
   const root = document.getElementById('booking');
@@ -350,8 +293,6 @@ if ('IntersectionObserver' in window) {
   const DEFAULT_EXP = {
     table:   { label: 'Table · Oath Garden',     where: 'Oath Garden',  partyType: 'guests',
                slots: ['08:00','09:30','11:00','12:30','14:00','18:00','19:30','21:00'], full: ['12:30'] },
-    session: { label: 'Listening Session · Papersound', where: 'Papersound', partyType: 'guests',
-               slots: ['20:00','21:30'], full: [] },
     class:   { label: 'Class · Oath Studio',      where: 'Oath Studio',  partyType: 'class',
                classes: [
                  { name: 'Sunrise Breathwork', slots: ['07:30'] },
@@ -362,7 +303,7 @@ if ('IntersectionObserver' in window) {
                ] }
   };
   // EXP can be overridden by the backend (admin-managed reservations). The step-1
-  // choices map to keys table/session/class; live data refreshes their details.
+  // choices map to keys table/class; live data refreshes their details.
   let EXP = DEFAULT_EXP;
   function applyLiveExp(list) {
     if (!Array.isArray(list) || !list.length) return;
@@ -629,7 +570,7 @@ if (hasGSAP && !window.ScrollTrigger) {
     rituals:[{time:'08:00',phase:'morning',title:'The Garden Awakens',lines:['Coffee.','Morning light.','Fresh bread.']},
       {time:'12:00',phase:'afternoon',title:'Gather & Share',lines:['Lunch service begins.','The house becomes fuller.']},
       {time:'17:30',phase:'evening',title:'Golden Hour',lines:['Natural wine.','Long shadows.']},
-      {time:'20:00',phase:'night',title:'Listening Session',lines:['Papersound opens.','Tonight — {soundtrack}']},
+      {time:'20:00',phase:'night',title:'The House After Dark',lines:['The house lowers its voice.','Tonight — {soundtrack}']},
       {time:'21:30',phase:'night',title:'After Dark',lines:['Cocktails.','Records.','Conversation.']}],
     objects:[{id:'o',glyph:'o',name:'The O',windows:['any'],rare:true,kicker:'A House of Rituals',title:'Rooted in the Real',body:['You found the mark.'],meta:'Oath House'}] };
 
@@ -991,7 +932,6 @@ if (!TOUCH && !REDUCED) {
     arrival:    { root: 110.0, cutoff: 600,  crackle: false, chord: [1, 1.5, 2] },
     map:        { root: 110.0, cutoff: 650,  crackle: false, chord: [1, 1.5, 2] },
     garden:     { root: 130.8, cutoff: 900,  crackle: false, chord: [1, 1.25, 2] },   // brighter, open
-    papersound: { root: 98.0,  cutoff: 420,  crackle: true,  chord: [1, 1.5, 1.875] }, // warm, vinyl
     studio:     { root: 116.5, cutoff: 520,  crackle: false, chord: [1, 1.5, 3] },     // airy, calm
     program:    { root: 116.5, cutoff: 540,  crackle: false, chord: [1, 1.5, 3] },
     calendar:   { root: 103.8, cutoff: 480,  crackle: false, chord: [1, 1.2, 1.8] },
@@ -1095,7 +1035,7 @@ if (!TOUCH && !REDUCED) {
   // Reserve button adapts its wording to the room you're in
   const reserve = document.querySelector('.reserve-btn');
   if (reserve && 'IntersectionObserver' in window) {
-    const MAP = { garden: { t: 'Reserve a table', e: 'table' }, papersound: { t: 'Reserve a seat', e: 'session' },
+    const MAP = { garden: { t: 'Reserve a table', e: 'table' },
                   studio: { t: 'Reserve a class', e: 'class' }, program: { t: 'Reserve a class', e: 'class' } };
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
@@ -1107,7 +1047,7 @@ if (!TOUCH && !REDUCED) {
         }
       });
     }, { threshold: 0.55 });
-    ['arrival','garden','papersound','studio','program'].forEach(id => { const s = document.getElementById(id); if (s) io.observe(s); });
+    ['arrival','garden','studio','program'].forEach(id => { const s = document.getElementById(id); if (s) io.observe(s); });
   }
 
   // drawer reflects the current section

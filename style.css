@@ -425,7 +425,6 @@ body.is-night .arrival-light { background: radial-gradient(120% 90% at 60% 20%, 
 .floor-media::after { content: ''; position: absolute; inset: 0; background: url("textures/clay.jpg") center/cover;
   mix-blend-mode: multiply; opacity: .34; }
 .fm-garden { background: linear-gradient(145deg,#cdb98f,#a98a57 45%,#6f5836); }
-.fm-paper  { background: linear-gradient(160deg,#7c2722,#b23a33 58%,#581f1a); }
 .fm-studio { background: linear-gradient(160deg,#d8d2c6,#b3ac9d 60%,#8c8576); }
 .floor-text { padding: clamp(1.1rem,2.2vw,1.9rem); display: flex; flex-direction: column; justify-content: center; }
 .floor-no { font-family: var(--serif); font-variant: small-caps; letter-spacing: .2em; font-size: .68rem; color: var(--accent); }
@@ -472,7 +471,6 @@ body.is-night .floor-name .fn-light { display: block; }
 .room { padding: clamp(7rem,15vh,13rem) 0; overflow: hidden; }
 .room-grid { display: grid; gap: clamp(2.5rem,5vw,5rem); align-items: center; }
 .room-title { font-size: clamp(2.6rem,7vw,6rem); color: inherit; }
-.paper-logo { width: min(360px, 78%); height: auto; display: block; }
 .studio-logo { width: min(440px, 88%); height: auto; display: block; }
 .garden-logo { width: min(248px, 58%); height: auto; display: block; }
 .room-theme { margin: 1.4rem 0 1.8rem; font-family: var(--serif); font-variant: small-caps;
@@ -497,17 +495,6 @@ body.is-night .floor-name .fn-light { display: block; }
 .rm-col li b { font-weight: 400; font-variant: small-caps; letter-spacing: .06em; opacity: .85; }
 .rm-foot { margin-top: clamp(1.4rem,3vw,2.2rem); font-family: var(--serif); font-style: italic; font-size: .82rem; opacity: .6; }
 
-/* tonight's record + bar (Papersound) */
-.paper-extra { margin-top: clamp(3rem,6vw,5rem); display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem,5vw,4.5rem); align-items: start; }
-.paper-extra--solo { grid-template-columns: 1fr; max-width: 620px; }
-.tonight { padding-top: clamp(2rem,4vw,3rem); border-top: 1px solid rgba(244,234,216,.2); }
-.tonight .label { color: #c8a26a; }
-.tonight-title { font-family: var(--serif); font-weight: 400; font-size: clamp(1.5rem,2.6vw,2.1rem); margin: 1rem 0 .6rem; color: var(--paper-cream, #f4ead8); }
-.tonight-sub { color: rgba(244,234,216,.7); line-height: 1.6; max-width: 32ch; }
-.tonight-listen { margin-top: 1.4rem; display: inline-flex; align-items: center; gap: .6rem; font-family: var(--serif);
-  font-variant: small-caps; letter-spacing: .14em; font-size: .86rem; color: #e6a978; }
-.tonight-listen i { width: 1.6rem; height: 1px; background: #e6a978; transition: width .4s var(--ease); display: inline-block; }
-.tonight-listen:hover i { width: 2.6rem; }
 .room-menu--dark { border-top-color: rgba(244,234,216,.2); margin-top: 0; }
 .room-menu--dark .label { color: #c8a26a; }
 .room-menu--dark .rm-col h4, .room-menu--dark .rm-col li, .room-menu--dark .rm-note, .room-menu--dark .rm-foot { color: var(--paper-cream, #f4ead8); }
@@ -577,74 +564,7 @@ body.is-night .floor-name .fn-light { display: block; }
 .garden-strip { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: clamp(3rem,6vw,5rem); }
 .garden-strip .plate { aspect-ratio: 3/4; }
 
-/* — Room 02 · Papersound (dark, intimate) — */
-/* — Room 02 · Papersound — the Paper Sound Bar brand colour, on rough paper.
-   Key colour: brick red.  Marks & type: cream paper. — */
-#papersound {
-  --paper-red: #B23A33; --paper-red-deep: #7C2722; --paper-cream: #F4EAD8;
-  position: relative; isolation: isolate; color: var(--paper-cream);
-  background:
-    radial-gradient(135% 115% at 50% 32%, rgba(0,0,0,0) 36%, rgba(34,9,7,.66) 100%),
-    url("textures/crumple.jpg") center / cover,
-    linear-gradient(165deg, #B23A33 0%, #9A2F29 52%, #7C2722 100%);
-  background-blend-mode: normal, multiply, normal;
-}
-/* torn rough-paper edges top & bottom — the section reads as a sheet of paper */
-#papersound::before, #papersound::after {
-  content: ''; position: absolute; left: 0; right: 0; height: 26px; z-index: 2; pointer-events: none;
-  background: #E8DCC8;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='26' preserveAspectRatio='none'%3E%3Cpath d='M0 0 H1200 V12 C1150 22 1100 6 1040 14 C980 22 930 8 870 16 C810 24 760 9 700 15 C640 21 590 8 530 15 C470 22 420 7 360 14 C300 21 250 8 190 15 C130 22 80 9 0 14 Z' fill='%23000'/%3E%3C/svg%3E") top/100% 100% no-repeat;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='26' preserveAspectRatio='none'%3E%3Cpath d='M0 0 H1200 V12 C1150 22 1100 6 1040 14 C980 22 930 8 870 16 C810 24 760 9 700 15 C640 21 590 8 530 15 C470 22 420 7 360 14 C300 21 250 8 190 15 C130 22 80 9 0 14 Z' fill='%23000'/%3E%3C/svg%3E") top/100% 100% no-repeat;
-}
-#papersound::before { top: -1px; }
-#papersound::after  { bottom: -1px; transform: scaleY(-1); }
-#papersound .wrap { position: relative; z-index: 1; }
-#papersound .chapter-no { color: rgba(244,234,216,.5); }
-#papersound .room-grid { grid-template-columns: .9fr 1.1fr; }
-#papersound .label { color: var(--paper-cream); }
-#papersound .room-theme { color: #f0c9a6; }
-#papersound .room-body p { color: rgba(244,234,216,.86); }
-.vinyl-stage { position: relative; aspect-ratio: 1; display: grid; place-items: center; }
-.vinyl-stage .vinyl { position: relative; z-index: 1; }
-.vinyl-stage .tonearm { z-index: 2; }
-.vinyl { position: relative; width: min(86%, 460px); aspect-ratio: 1; border-radius: 50%;
-  background:
-    repeating-radial-gradient(circle at 50% 50%, rgba(124,39,34,.12) 0 1px, rgba(124,39,34,0) 1px 3px),
-    url("textures/rough-paper.jpg") center / 150%,
-    #F2E9D5;
-  background-blend-mode: normal, soft-light, normal;
-  box-shadow: 0 16px 44px rgba(28,8,6,.5), 0 0 0 1px rgba(244,234,216,.22);
-  display: grid; place-items: center; will-change: transform; }
-.vinyl::before { content: ''; position: absolute; inset: 0; border-radius: 50%;
-  background: conic-gradient(from 0deg, rgba(124,39,34,0) 0deg, rgba(124,39,34,.12) 40deg, rgba(124,39,34,0) 90deg, rgba(124,39,34,.08) 200deg, rgba(124,39,34,0) 260deg); mix-blend-mode: multiply; }
-.vinyl .label-disc { width: 32%; aspect-ratio: 1; border-radius: 50%;
-  background: radial-gradient(circle at 42% 38%, #C0453B, #8E2A24); display: grid; place-items: center; text-align: center;
-  box-shadow: inset 0 0 0 3px rgba(0,0,0,.18), inset 0 0 18px rgba(0,0,0,.25); }
-.vinyl .label-disc span { font-family: var(--serif); font-variant: small-caps; letter-spacing: .12em; font-size: .68rem; color: #f4e6cf; }
-.vinyl .disc-mark { width: 58%; height: auto; opacity: .92; }
-.vinyl .spindle { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: #2a2520; }
-.tonearm { position: absolute; top: 6%; right: 6%; width: 38%; height: 6px; background: linear-gradient(90deg,#5a5046,#8a7c68);
-  border-radius: 6px; transform-origin: right center; transform: rotate(-18deg); box-shadow: 0 6px 16px rgba(0,0,0,.5); }
-.tonearm::after { content: ''; position: absolute; left: -6px; top: -6px; width: 18px; height: 18px; background: #2c2620;
-  border-radius: 3px; }
-.now-playing { margin-top: 2rem; display: flex; align-items: center; gap: .9rem; color: rgba(244,234,216,.8); }
-.np-eq { display: inline-flex; gap: 3px; align-items: flex-end; height: 16px; }
-.np-eq i { width: 3px; background: var(--paper-cream, #f4ead8); height: 40%; animation: eq 1s ease-in-out infinite; }
-.np-eq i:nth-child(2){ animation-delay:.2s } .np-eq i:nth-child(3){ animation-delay:.4s } .np-eq i:nth-child(4){ animation-delay:.1s }
-@keyframes eq { 0%,100%{height:30%} 50%{height:100%} }
-body.paused .np-eq i { animation-play-state: paused; }
-
-/* "Explore Papersound" — a cream pill that pops on the brick red */
-.paper-explore { margin-top: clamp(2rem,4vw,2.6rem); display: inline-flex; align-items: center; gap: .7rem;
-  background: var(--paper-cream, #f4ead8); color: #7C2722; border-radius: 40px;
-  padding: .85rem 1.7rem; font-family: var(--serif); font-variant: small-caps; text-transform: lowercase;
-  letter-spacing: .14em; font-size: 1rem; text-decoration: none; cursor: none;
-  box-shadow: 0 16px 40px -18px rgba(0,0,0,.5); transition: transform .4s var(--ease), background .4s, gap .4s; }
-.paper-explore i { font-style: normal; transition: transform .4s var(--ease); }
-.paper-explore:hover { transform: translateY(-2px); gap: 1.1rem; background: #fff; }
-.paper-explore:hover i { transform: translateX(.25rem); }
-
-/* — Room 03 · Studio Oath (concrete, light) — */
+/* — Room 02 · Studio Oath (concrete, light) — */
 #studio { background: linear-gradient(180deg,#e9e6df,#dcd7cc); color: #2a2824; }
 #studio .room-grid { grid-template-columns: 1fr 1fr; }
 #studio .label { color: #7c3320; }
@@ -1080,7 +1000,7 @@ body.artifact-open { overflow: hidden; }
   .tower-arrows { flex: 0 0 auto; }
   #today .today-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .scene-wrap { position: static; }
-  #garden .room-grid, #papersound .room-grid, #studio .room-grid { grid-template-columns: 1fr; }
+  #garden .room-grid, #studio .room-grid { grid-template-columns: 1fr; }
   .garden-strip { grid-template-columns: 1fr 1fr; }
   .paths { grid-template-columns: 1fr; }
   .path { border-left: none; border-top: 1px solid var(--line); }
@@ -1089,7 +1009,6 @@ body.artifact-open { overflow: hidden; }
   .foot-news { grid-template-columns: 1fr; gap: 1.4rem; }
   .foot-brand-col { grid-column: 1 / -1; }
   .rm-cols { grid-template-columns: 1fr 1fr; gap: 1.6rem 2.5rem; }
-  .paper-extra { grid-template-columns: 1fr; gap: 2.5rem; }
   .journal article { grid-template-columns: 4.5rem 1fr; }
   .journal .j-time { grid-column: 1 / -1; text-align: left; padding-left: 4.5rem; }
   .story-feature { grid-template-columns: 1fr; gap: 1.6rem; }
@@ -1374,7 +1293,6 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 /* Drag-control touch behaviour — set unconditionally so it applies on every
    touch device regardless of how the browser reports pointer type.
    Harmless on desktop (mouse drag is unaffected). */
-#vinyl { touch-action: none; -webkit-user-select: none; user-select: none; }  /* finger-spun, no scroll fight */
 /* the tower owns vertical finger-gestures so iOS can't hijack them for page
    scroll; the swipe handler manually scrolls the page once you reach the top/
    bottom floor, so a finger on the building is never a dead end */
