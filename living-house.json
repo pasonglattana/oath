@@ -6,7 +6,7 @@
     { "time": "08:00", "phase": "morning",   "title": "The Garden Awakens", "lines": ["Coffee.", "Morning light.", "Fresh bread."] },
     { "time": "12:00", "phase": "afternoon", "title": "Gather & Share",      "lines": ["Lunch service begins.", "The house becomes fuller."] },
     { "time": "17:30", "phase": "evening",   "title": "Golden Hour",         "lines": ["Natural wine.", "Long shadows.", "The turn into evening."] },
-    { "time": "20:00", "phase": "night",     "title": "Listening Session",   "lines": ["Papersound opens.", "Tonight — {soundtrack}"] },
+    { "time": "20:00", "phase": "night",     "title": "The House After Dark", "lines": ["The house lowers its voice.", "Tonight — {soundtrack}"] },
     { "time": "21:30", "phase": "night",     "title": "After Dark",          "lines": ["Cocktails.", "Records.", "Conversation."] }
   ],
   "objects": [
@@ -92,11 +92,11 @@
     },
     {
       "id": "vinyl", "glyph": "vinyl", "name": "The Vinyl", "windows": ["night"],
-      "kicker": "Now Playing at Papersound",
+      "kicker": "Now Playing",
       "title": "Tonight's listening",
       "body": [
-        "{soundtrack}. A record set down with care on a warm valve system, played start to finish the way it was meant to be heard.",
-        "At Papersound, sound is not background. It is the reason. We play sides, not songs — and we ask you to listen the way you would read a letter."
+        "{soundtrack}. A record set down with care and played start to finish the way it was meant to be heard.",
+        "In the house, sound is not background. We play sides, not songs — and we ask you to listen the way you would read a letter."
       ],
       "meta": "Side A · vinyl only · no skipping"
     },
