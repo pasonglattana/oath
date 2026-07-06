@@ -569,7 +569,7 @@ body.is-night .floor-name .fn-light { display: block; }
 #studio .room-grid { grid-template-columns: 1fr 1fr; }
 #studio .label { color: #7c3320; }
 #studio .room-theme { color: #6f6552; }
-.studio-actions { display: flex; flex-wrap: wrap; gap: .9rem 1.6rem; margin-top: 2.2rem; }
+.studio-actions, .garden-actions { display: flex; flex-wrap: wrap; gap: .9rem 1.6rem; margin-top: 2.2rem; }
 .btn-ghost { display: inline-flex; align-items: center; gap: .7rem; font-family: var(--serif);
   font-variant: small-caps; letter-spacing: .14em; font-size: .92rem; color: #2a2824;
   padding: .7rem 1.4rem; border: 1px solid rgba(42,40,36,.28); border-radius: 40px;
@@ -1055,8 +1055,8 @@ body.artifact-open { overflow: hidden; }
   .foot-grid { grid-template-columns: 1fr; }
   .foot-bottom { flex-direction: column; align-items: flex-start; gap: 1rem; }
   #scene .obj { width: 60px !important; height: 60px !important; }
-  .studio-actions { gap: .7rem; }
-  .studio-actions .btn-ghost { width: 100%; justify-content: space-between; }
+  .studio-actions, .garden-actions { gap: .7rem; }
+  .studio-actions .btn-ghost, .garden-actions .btn-ghost { width: 100%; justify-content: space-between; }
   .room-tags span, .path h3 { hyphens: none; }
   .artifact { padding: 2rem 1.5rem; }
   .artifact-title { font-size: clamp(1.6rem, 8vw, 2.2rem); }

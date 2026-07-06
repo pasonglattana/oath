@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>html,body{background:#F4EFE6;margin:0}</style>
+  <title>Our Menu · Oath Garden</title>
+  <meta name="description" content="The menu at Oath Garden — coffee and the slow morning, garden plates from the kitchen, and a natural-wine bar. Seasonal, low-intervention, shared." />
+  <link rel="icon" type="image/png" href="logos/oath-mark-dark.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" /></noscript>
+  <style>
+    :root{ --earth:#863A24; --ink:#25241f; --soft:#7c7264; --paper:#F4EFE6; --card:#FBF8F1; --line:rgba(37,36,31,.14);
+      --serif:'Spectral',Georgia,serif; --sans:'Inter',system-ui,sans-serif; }
+    *{box-sizing:border-box;margin:0}
+    body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    .top{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;
+      padding:1.1rem clamp(1.4rem,5vw,3rem);background:rgba(244,239,230,.86);backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line);font-family:var(--sans)}
+    .top a{font-variant:small-caps;letter-spacing:.16em;font-size:.82rem;text-decoration:none;color:var(--soft);transition:color .3s}
+    .top a:hover{color:var(--earth)}
+    .top .brand{font-family:var(--serif);letter-spacing:.2em;color:var(--ink)}
+    .wrap{max-width:900px;margin:0 auto;padding:clamp(2.6rem,7vw,5.5rem) clamp(1.4rem,5vw,2.5rem) 4rem}
+    .head{max-width:54ch;margin-bottom:clamp(2.4rem,6vw,4rem)}
+    .eyebrow{font-family:var(--sans);font-variant:small-caps;letter-spacing:.24em;font-size:.78rem;color:var(--earth);margin-bottom:1.1rem}
+    .head h1{font-weight:400;font-size:clamp(2.3rem,6vw,4rem);line-height:1.04;letter-spacing:-.01em}
+    .head p{color:var(--soft);margin-top:1.2rem;font-size:clamp(1.05rem,1.6vw,1.25rem)}
+
+    .cat{margin-bottom:clamp(2.6rem,5vw,3.8rem)}
+    .cat-head{display:flex;align-items:baseline;gap:1rem;border-bottom:1px solid var(--line);padding-bottom:.7rem;margin-bottom:1.6rem}
+    .cat-head h2{font-weight:400;font-size:clamp(1.5rem,3vw,2.1rem);line-height:1}
+    .cat-head .cat-when{font-family:var(--sans);font-variant:small-caps;letter-spacing:.18em;font-size:.72rem;color:var(--earth);margin-left:auto}
+    .item{margin:0 0 1.3rem}
+    .item h3{font-weight:500;font-size:clamp(1.08rem,1.7vw,1.22rem);display:flex;align-items:baseline;gap:.6rem}
+    .item h3 .dots{flex:1;border-bottom:1px dotted rgba(37,36,31,.28);transform:translateY(-.25em)}
+    .item p{color:var(--soft);font-size:.98rem;line-height:1.55;margin-top:.15rem;max-width:60ch}
+
+    .note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--earth);border-radius:4px;
+      padding:1.3rem 1.5rem;color:#3a352d;font-style:italic;margin-top:1rem}
+    .foot{max-width:900px;margin:0 auto;padding:2.2rem clamp(1.4rem,5vw,2.5rem) 4rem;border-top:1px solid var(--line);
+      display:flex;gap:2rem;flex-wrap:wrap}
+    .foot a{font-family:var(--sans);font-variant:small-caps;letter-spacing:.18em;font-size:.86rem;text-decoration:none;color:var(--earth);display:inline-flex;gap:.5em;transition:gap .3s}
+    .foot a:hover{gap:1em}
+    @media(prefers-reduced-motion:no-preference){.wrap{animation:rise .8s cubic-bezier(.2,.8,.2,1)}}
+    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a href="/#garden">← Oath Garden</a>
+    <a class="brand" href="/">Oath House</a>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Oath Garden · The Kitchen &amp; Bar</p>
+        <h1>Our Menu</h1>
+        <p>Seasonal, low-intervention, made to be shared. The kitchen cooks with what the day and the garden give — so the menu shifts with the season. Below is the shape of it.</p>
+      </div>
+
+      <section class="cat">
+        <div class="cat-head"><h2>The Morning</h2><span class="cat-when">Coffee &amp; slow starts</span></div>
+        <div class="item"><h3>Filter &amp; Espresso<span class="dots"></span></h3><p>Beans ground by hand, the slow pour. Black, or with steamed milk.</p></div>
+        <div class="item"><h3>House Pastry<span class="dots"></span></h3><p>Baked in-house, warm from the oven — whatever the morning brings.</p></div>
+        <div class="item"><h3>Bread &amp; Butter<span class="dots"></span></h3><p>Torn by hand, cultured butter, a little salt.</p></div>
+      </section>
+
+      <section class="cat">
+        <div class="cat-head"><h2>The Table</h2><span class="cat-when">Garden plates</span></div>
+        <div class="item"><h3>Fire-Cooked Vegetables<span class="dots"></span></h3><p>From the garden, cooked over flame, dressed simply.</p></div>
+        <div class="item"><h3>The Long-Table Spread<span class="dots"></span></h3><p>A shared harvest board — seasonal, generous, meant for the middle of the table.</p></div>
+        <div class="item"><h3>Ceramic Bowls<span class="dots"></span></h3><p>The day's grain, greens and ferment, served warm from the kiln-fired bowl.</p></div>
+      </section>
+
+      <section class="cat">
+        <div class="cat-head"><h2>The Bar</h2><span class="cat-when">Natural wine &amp; more</span></div>
+        <div class="item"><h3>Natural Wine<span class="dots"></span></h3><p>Low-intervention, by the glass or the bottle. Ask for the pour of the day.</p></div>
+        <div class="item"><h3>House Ferments &amp; Sodas<span class="dots"></span></h3><p>Non-alcoholic, made in-house — bright, alive, changing.</p></div>
+        <div class="item"><h3>Tea<span class="dots"></span></h3><p>Loose-leaf, steeped slow, for the end of the day.</p></div>
+      </section>
+
+      <p class="note">The full seasonal menu is served in the house — dishes and pours change with what's fresh. For today's list, or to plan a long-table gathering, <a href="/#reserve" style="color:var(--earth)">reserve a table</a>.</p>
+    </div>
+
+    <footer class="foot">
+      <a href="/#garden">← Back to Oath Garden</a>
+      <a href="/#reserve">Reserve a table →</a>
+    </footer>
+  </main>
+</body>
+</html>

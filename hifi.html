@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>html,body{background:#F4EFE6;margin:0}</style>
+  <title>Our Hi-Fi System · Oath Garden</title>
+  <meta name="description" content="The sound of the house — a considered hi-fi system built for warmth and presence. Valve amplification, vinyl, and speakers that fill the garden with analog sound." />
+  <link rel="icon" type="image/png" href="logos/oath-mark-dark.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" /></noscript>
+  <style>
+    :root{ --earth:#863A24; --ink:#25241f; --soft:#7c7264; --paper:#F4EFE6; --card:#FBF8F1; --line:rgba(37,36,31,.14);
+      --serif:'Spectral',Georgia,serif; --sans:'Inter',system-ui,sans-serif; }
+    *{box-sizing:border-box;margin:0}
+    body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    .top{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;
+      padding:1.1rem clamp(1.4rem,5vw,3rem);background:rgba(244,239,230,.86);backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line);font-family:var(--sans)}
+    .top a{font-variant:small-caps;letter-spacing:.16em;font-size:.82rem;text-decoration:none;color:var(--soft);transition:color .3s}
+    .top a:hover{color:var(--earth)}
+    .top .brand{font-family:var(--serif);letter-spacing:.2em;color:var(--ink)}
+    .wrap{max-width:820px;margin:0 auto;padding:clamp(2.6rem,7vw,5.5rem) clamp(1.4rem,5vw,2.2rem) 4rem}
+    .eyebrow{font-family:var(--sans);font-variant:small-caps;letter-spacing:.24em;font-size:.78rem;color:var(--earth);margin-bottom:1.1rem}
+    h1{font-weight:400;font-size:clamp(2.3rem,6vw,4rem);line-height:1.04;letter-spacing:-.01em;max-width:16ch}
+    .lede{color:#332f28;margin-top:1.4rem;font-size:clamp(1.15rem,1.9vw,1.4rem);line-height:1.5;max-width:50ch}
+    .body{font-size:clamp(1.05rem,1.5vw,1.18rem);color:#3a352d;margin-top:clamp(2rem,4vw,3rem)}
+    .body p{margin:0 0 1.4rem;max-width:62ch}
+    .pull{font-family:var(--serif);font-style:italic;font-size:clamp(1.3rem,2.4vw,1.7rem);line-height:1.4;color:var(--earth);
+      border-left:2px solid var(--earth);padding-left:1.3rem;margin:2.4rem 0;max-width:38ch}
+    .rig{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1rem,2.4vw,1.6rem);margin:2.6rem 0 1rem}
+    .rig .piece{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:1.3rem 1.4rem}
+    .rig .piece .k{font-family:var(--sans);font-variant:small-caps;letter-spacing:.16em;font-size:.7rem;color:var(--earth)}
+    .rig .piece h3{font-weight:400;font-size:clamp(1.15rem,1.9vw,1.4rem);margin:.35rem 0 .3rem}
+    .rig .piece p{color:var(--soft);font-size:.95rem;line-height:1.5;margin:0}
+    .note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--earth);border-radius:4px;
+      padding:1.2rem 1.4rem;color:#3a352d;font-style:italic;margin-top:1.4rem;font-size:.98rem}
+    .foot{max-width:820px;margin:0 auto;padding:2.2rem clamp(1.4rem,5vw,2.2rem) 4rem;border-top:1px solid var(--line);
+      display:flex;gap:2rem;flex-wrap:wrap}
+    .foot a{font-family:var(--sans);font-variant:small-caps;letter-spacing:.18em;font-size:.86rem;text-decoration:none;color:var(--earth);display:inline-flex;gap:.5em;transition:gap .3s}
+    .foot a:hover{gap:1em}
+    @media(max-width:620px){ .rig{grid-template-columns:1fr} }
+    @media(prefers-reduced-motion:no-preference){.wrap{animation:rise .8s cubic-bezier(.2,.8,.2,1)}}
+    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a href="/#garden">← Oath Garden</a>
+    <a class="brand" href="/">Oath House</a>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <p class="eyebrow">Oath Garden · The Sound of the House</p>
+      <h1>Our Hi-Fi System</h1>
+      <p class="lede">Sound you feel as much as hear. A system built not for volume, but for warmth, presence and the pleasure of listening.</p>
+
+      <div class="body">
+        <p>Music is one of the three rituals of the house, and in the garden it moves through the air all day — low in the morning, fuller as the light turns gold. We built the system around analog warmth: valve amplification, vinyl, and speakers chosen for how they fill a room rather than how loud they can go.</p>
+
+        <p class="pull">The record decides the pace, and so do you.</p>
+
+        <p>Nothing here is background wallpaper. Records are played side by side, needle down, no shuffle — the way an album was meant to be heard. On quieter nights, the garden becomes a listening room.</p>
+
+        <div class="rig">
+          <div class="piece"><span class="k">Source</span><h3>Turntable &amp; Vinyl</h3><p>A single deck and a growing wall of records — Lao modern, dub, jazz, ambient.</p></div>
+          <div class="piece"><span class="k">Amplification</span><h3>Valve Amplifier</h3><p>Tube warmth — rounder, more human than digital, the way analog should feel.</p></div>
+          <div class="piece"><span class="k">Speakers</span><h3>Full-Range Loudspeakers</h3><p>Chosen for presence and ease, filling the garden without ever shouting.</p></div>
+          <div class="piece"><span class="k">The Room</span><h3>The Garden Itself</h3><p>Wood, stone and plants — surfaces that soften and hold the sound.</p></div>
+        </div>
+
+        <p class="note">Curious about the exact rig, or want to bring records for a listening evening? Ask us in the house — and if you'd like the specific components listed here, send them over and we'll add them.</p>
+      </div>
+    </div>
+
+    <footer class="foot">
+      <a href="/#garden">← Back to Oath Garden</a>
+      <a href="/#calendar">Listening evenings →</a>
+      <a href="/#reserve">Reserve a table →</a>
+    </footer>
+  </main>
+</body>
+</html>

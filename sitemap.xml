@@ -5,4 +5,7 @@
   <url><loc>https://oathhouse.co/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://oathhouse.co/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://oathhouse.co/programs.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://oathhouse.co/menu.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://oathhouse.co/farm.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://oathhouse.co/hifi.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
