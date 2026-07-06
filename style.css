@@ -578,6 +578,19 @@ body.is-night .floor-name .fn-light { display: block; }
   transition: width .4s var(--ease); opacity: .7; }
 .btn-ghost:hover { color: #7c3320; border-color: #7c3320; background: rgba(124,51,32,.05); }
 .btn-ghost:hover i { width: 2.2rem; opacity: 1; }
+
+/* Garden's three feature links — solid, warm, they stand out on the section */
+.garden-actions { gap: 1rem; margin-top: 2.6rem; }
+.garden-actions .btn-ghost {
+  color: var(--bone); background: var(--accent); border-color: transparent;
+  padding: .95rem 1.7rem; font-size: .95rem; letter-spacing: .1em; font-weight: 400;
+  box-shadow: 0 14px 30px -16px rgba(134,58,36,.8);
+  transition: transform .45s var(--ease), background .45s var(--ease), box-shadow .45s var(--ease), color .45s var(--ease); }
+.garden-actions .btn-ghost i { background: currentColor; opacity: .85; }
+.garden-actions .btn-ghost:hover {
+  color: #fff; background: var(--accent-2); border-color: transparent; transform: translateY(-3px);
+  box-shadow: 0 22px 40px -16px rgba(72,41,29,.9); }
+.garden-actions .btn-ghost:hover i { width: 2.6rem; opacity: 1; }
 .plate-studio-a { background: linear-gradient(160deg,#d8d2c6 0%,#b3ac9d 60%,#8c8576 100%); }
 .plate-studio-b { background: linear-gradient(200deg,#cfc8ba 0%,#9a9384 100%); }
 .studio-breathe { margin-top: clamp(3rem,6vw,5rem); text-align: center; }
