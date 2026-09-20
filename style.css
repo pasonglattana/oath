@@ -567,7 +567,7 @@ body.is-night .floor-name .fn-light { display: block; }
 .plate-garden-a { background: linear-gradient(145deg,#cdb98f 0%,#a98a57 45%,#6f5836 100%); }
 .plate-garden-b { background: radial-gradient(120% 120% at 30% 20%,#e3d3ad,#b89a68 55%,#7c6240); }
 .plate-garden-c { background: linear-gradient(160deg,#9a9478 0%,#6e6b4d 50%,#403a2b 100%); }
-.garden-strip { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: clamp(3rem,6vw,5rem); }
+.garden-strip { display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; margin-top: clamp(3rem,6vw,5rem); }
 .garden-strip .plate { aspect-ratio: 3/4; }
 
 /* — Room 02 · Studio Oath (concrete, light) — */
