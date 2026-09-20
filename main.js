@@ -462,12 +462,31 @@ if ('IntersectionObserver' in window) {
     foot.hidden = false; goTo(1);
   });
 
-  // context-aware Reserve button in the header → preselect & open
-  document.querySelectorAll('[data-reserve-exp]').forEach(btn => btn.addEventListener('click', () => {
-    const exp = btn.dataset.reserveExp;
-    const p = root.querySelector(`.path[data-path="${exp}"]`);
-    if (p) setTimeout(() => p.click(), 900);
+  // ── the reservation popup (opened by the Reserve button & friends) ──
+  const modal = document.getElementById('reserve');
+  function openReserve(exp) {
+    if (!modal) return;
+    const dc = document.getElementById('drawerClose');            // close the menu first if open
+    if (document.body.classList.contains('menu-open') && dc) dc.click();
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('reserve-open');
+    if (exp) { const p = root.querySelector(`.path[data-path="${exp}"]`); if (p) p.click(); }
+  }
+  function closeReserve() {
+    if (!modal) return;
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('reserve-open');
+  }
+  window.oathOpenReserve = openReserve;
+  document.querySelectorAll('[data-reserve-open]').forEach((btn) => btn.addEventListener('click', (e) => {
+    e.preventDefault(); openReserve(btn.dataset.reserveExp || '');
   }));
+  document.querySelectorAll('[data-reserve-close]').forEach((el) => el.addEventListener('click', closeReserve));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) closeReserve(); });
+  // a sub-page linking to /#reserve opens the popup on arrival
+  if (location.hash === '#reserve') setTimeout(() => openReserve(''), 350);
 
   validate();
 })();

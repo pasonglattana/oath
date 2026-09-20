@@ -698,6 +698,27 @@ body.is-night .floor-name .fn-light { display: block; }
 /* ═══════ 06 · RESERVATIONS ════════════════════════════════════ */
 #reserve { background: var(--bg); color: var(--fg); padding: clamp(7rem,15vh,13rem) 0; transition: background 1.2s var(--ease), color 1.2s var(--ease); }
 .reserve-head { text-align: center; max-width: 50ch; margin: 0 auto clamp(3rem,6vw,5rem); }
+
+/* ── reservation popup ── */
+#reserve.reserve-modal { position: fixed; inset: 0; z-index: 300; display: none; padding: 0; background: transparent; }
+#reserve.reserve-modal.is-open { display: block; }
+.reserve-veil { position: absolute; inset: 0; background: rgba(20,15,11,.6); backdrop-filter: blur(3px); animation: rvFade .3s ease; }
+.reserve-dialog { position: relative; z-index: 1; width: min(920px, 94vw);
+  margin: clamp(1rem,4vh,3.5rem) auto; max-height: calc(100dvh - clamp(2rem,8vh,7rem));
+  overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 10px;
+  padding: clamp(1.8rem,4vw,3rem); box-shadow: 0 40px 120px rgba(0,0,0,.55); animation: rvRise .4s var(--ease); }
+.reserve-dialog .chapter-no { display: none; }
+.reserve-dialog .wrap { max-width: none; padding: 0; }
+.reserve-dialog .reserve-head { margin-top: .4rem; margin-bottom: clamp(2rem,4vw,3rem); }
+.reserve-dialog [data-reveal] { opacity: 1 !important; transform: none !important; }
+.reserve-close { position: absolute; top: clamp(.8rem,2.5vw,1.3rem); right: clamp(.8rem,2.5vw,1.3rem);
+  width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg);
+  color: var(--fg); font-size: 1.05rem; line-height: 1; cursor: pointer; z-index: 3; transition: border-color .3s, color .3s; }
+.reserve-close:hover { border-color: var(--accent); color: var(--accent); }
+body.reserve-open { overflow: hidden; }
+@keyframes rvFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rvRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 .reserve-head h2 { font-size: clamp(2.4rem,6vw,5rem); margin-top: 1rem; }
 .paths { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .path { padding: clamp(2rem,3.4vw,3rem); border-left: 1px solid var(--line); cursor: none; position: relative;

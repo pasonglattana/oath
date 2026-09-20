@@ -36,7 +36,7 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Caveat:wght@400;500&display=swap" /></noscript>
   <link rel="preload" as="image" href="photos/landing-hero-1600.webp" />
 
-  <link rel="stylesheet" href="style.css?v=77" />
+  <link rel="stylesheet" href="style.css?v=78" />
 
   <!-- Structured data — local business -->
   <script type="application/ld+json">
@@ -141,7 +141,7 @@
       <div class="dn-group">
         <a data-go="calendar">Cultural Calendar</a>
         <a data-go="stories">The Journal</a>
-        <a href="mailto:reservation@oathhouse.co?subject=Oath%20House%20Reservation">Reservations</a>
+        <a href="#reserve" data-reserve-open>Reservations</a>
       </div>
     </nav>
     <div class="drawer-social">
@@ -152,7 +152,7 @@
   </aside>
 
   <div class="frame top-right">
-    <a class="reserve-btn" href="mailto:reservation@oathhouse.co?subject=Oath%20House%20Reservation" data-magnetic="0.35">Reserve</a>
+    <a class="reserve-btn" href="#reserve" data-reserve-open data-magnetic="0.35">Reserve</a>
     <div class="meta-stack">
       <div class="clock" id="clock">
         <span id="clockPhase">Afternoon</span>
@@ -299,7 +299,7 @@
             <span>Concrete</span><span>Linen</span><span>Soft shadow</span><span>Breath</span>
           </div>
           <div class="studio-actions" data-reveal>
-            <a href="mailto:reservation@oathhouse.co?subject=Oath%20House%20Reservation" class="btn-ghost">Book a session <i></i></a>
+            <a href="#reserve" data-reserve-open data-reserve-exp="class" class="btn-ghost">Book a session <i></i></a>
             <a href="programs.html" class="btn-ghost">Our program <i></i></a>
             <a href="instructors.html" class="btn-ghost">Our instructors <i></i></a>
           </div>
@@ -383,8 +383,11 @@
     </div>
   </section>
 
-  <!-- ═══ 05 · RESERVATIONS — hidden; the Reserve button opens an email instead ═══ -->
-  <section id="reserve" hidden>
+  <!-- ═══ 05 · RESERVATIONS — opens as a popup from the Reserve button ═══ -->
+  <section id="reserve" class="reserve-modal" aria-hidden="true">
+    <div class="reserve-veil" data-reserve-close></div>
+    <div class="reserve-dialog" role="dialog" aria-modal="true" aria-label="Reserve a place">
+    <button class="reserve-close" data-reserve-close aria-label="Close reservations">✕</button>
     <span class="chapter-no">05 — Reservations</span>
     <div class="wrap">
       <div class="reserve-head" data-reveal>
@@ -468,6 +471,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </section>
 
@@ -746,7 +750,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="main.js?v=77"></script>
-  <script src="oath-live.js?v=77"></script>
+  <script src="main.js?v=78"></script>
+  <script src="oath-live.js?v=78"></script>
 </body>
 </html>
