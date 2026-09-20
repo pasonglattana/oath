@@ -42,7 +42,7 @@ mimetypes.add_type("application/json", ".json")
 COLLECTIONS = {
     "events":      ["featured","date","day","month","room","title","description","time","image","published","sort"],
     "experiences": ["key","label","where_txt","party_type","slots","full","classes","published","sort"],
-    "stories":     ["featured","category","date","title","excerpt","body","image","link","published","sort"],
+    "stories":     ["featured","category","date","title","excerpt","body","image","gallery","link","published","sort"],
     "media":       ["key","label","image","caption","sort"],
     "music":       ["title","artist","src","active","sort"],
     "reservations":["status"],   # admin only flips status; rows are created via /api/reserve
@@ -55,7 +55,7 @@ UPLOAD_DIR = os.path.join(DATA_DIR, "uploads")
 ALLOWED_IMG = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif", ".svg"}
 ALLOWED_AUDIO = {".mp3", ".m4a", ".aac", ".wav", ".ogg", ".oga", ".flac"}
 ALLOWED_UPLOAD = ALLOWED_IMG | ALLOWED_AUDIO
-JSON_FIELDS = {"slots","full","classes"}   # stored as JSON text in SQLite
+JSON_FIELDS = {"slots","full","classes","gallery"}   # stored as JSON text in SQLite
 
 # ── database ─────────────────────────────────────────────────────────────────
 def db():
@@ -80,7 +80,7 @@ def init_db():
     CREATE TABLE IF NOT EXISTS stories (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       featured INTEGER DEFAULT 0, category TEXT, date TEXT, title TEXT,
-      excerpt TEXT, body TEXT, image TEXT, link TEXT, published INTEGER DEFAULT 1, sort INTEGER DEFAULT 0
+      excerpt TEXT, body TEXT, image TEXT, gallery TEXT, link TEXT, published INTEGER DEFAULT 1, sort INTEGER DEFAULT 0
     );
     CREATE TABLE IF NOT EXISTS media (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -117,6 +117,8 @@ def init_db():
     try: c.execute("ALTER TABLE media ADD COLUMN caption TEXT")
     except Exception: pass
     try: c.execute("ALTER TABLE events ADD COLUMN image TEXT")
+    except Exception: pass
+    try: c.execute("ALTER TABLE stories ADD COLUMN gallery TEXT")
     except Exception: pass
     # backfill the on-photo captions for the known slots when still empty
     for k, v in {"garden_gather":"The gathering room","garden_hands":"Warmth & texture",
@@ -475,7 +477,7 @@ class Handler(BaseHTTPRequestHandler):
         ev = [row_to_obj(r) for r in c.execute("SELECT * FROM events WHERE published=1 ORDER BY sort, id")]
         ex = [row_to_obj(r) for r in c.execute("SELECT * FROM experiences WHERE published=1 ORDER BY sort, id")]
         st = [row_to_obj(r) for r in c.execute("SELECT * FROM stories WHERE published=1 ORDER BY sort, id")]
-        for s in st: s.pop("body", None)        # keep the homepage payload lean
+        for s in st: s.pop("body", None); s.pop("gallery", None)   # keep the homepage payload lean
         md, mcaps = {}, {}
         for r in c.execute("SELECT key, image, caption FROM media"):
             md[r["key"]] = r["image"]

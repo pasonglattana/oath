@@ -47,7 +47,8 @@
         { k: 'date', t: 'text', label: 'Date (as shown)', placeholder: 'June 2026', half: true },
         { k: 'excerpt', t: 'textarea', label: 'Excerpt', hint: 'Short teaser shown on the cards' },
         { k: 'body', t: 'textarea', label: 'Full article', hint: 'The full story — leave a blank line between paragraphs' },
-        { k: 'image', t: 'image', label: 'Image' },
+        { k: 'image', t: 'image', label: 'Main image', hint: 'The hero image at the top of the article' },
+        { k: 'gallery', t: 'images', label: 'More photos', hint: 'Optional — extra photos shown through the article. Add as many as you like.' },
         { k: 'link', t: 'text', label: 'External link', hint: 'Optional — only if this story lives on another site' },
         { k: 'featured', t: 'toggle', label: 'Featured — large story' },
         { k: 'published', t: 'toggle', label: 'Published' },
@@ -272,6 +273,7 @@
         else if (f.t === 'classes') input = classesEditor(Array.isArray(val) ? val : []);
         else if (f.t === 'readonly') input = `<input type="hidden" data-readonly value="${esc(val)}"/><p style="font-family:var(--serif);font-size:1.05rem">${esc(val)}</p>`;
         else if (f.t === 'image') input = uploadField(f.k, val, 'image');
+        else if (f.t === 'images') input = galleryEditor(f.k, Array.isArray(val) ? val : []);
         else if (f.t === 'audio') input = uploadField(f.k, val, 'audio');
         else input = `<input type="text" data-f="${f.k}" value="${esc(val)}" placeholder="${f.placeholder || ''}"/>`;
         wrap.innerHTML = `<label>${f.label}</label>${input}${f.hint ? `<span class="hint">${f.hint}</span>` : ''}`;
@@ -290,6 +292,52 @@
     });
     bindClassEditor(form);
     bindUploadFields(form);
+    bindGalleryFields(form);
+  }
+
+  // ── multi-image gallery field ──
+  function galleryEditor(k, arr) {
+    const rows = arr.map(galleryRow).join('');
+    return `<div class="gallery" data-gallery="${k}">${rows}<button type="button" class="add-photo">+ Add photo</button></div>`;
+  }
+  function galleryRow(url = '') {
+    return `<div class="gl-item">
+        <div class="gl-preview">${url ? `<img src="${esc(url)}" alt=""/>` : '<span>No image</span>'}</div>
+        <div class="gl-controls">
+          <label class="img-upload">Upload<input type="file" accept="image/*" hidden/></label>
+          <span class="img-busy" hidden>Uploading…</span>
+          <input type="text" class="gl-path" value="${esc(url)}" placeholder="photos/… or uploads/…"/>
+        </div>
+        <button type="button" class="gl-del" title="Remove">✕</button>
+      </div>`;
+  }
+  function bindGalleryFields(form) {
+    form.querySelectorAll('[data-gallery]').forEach((box) => {
+      box.addEventListener('click', (e) => {
+        if (e.target.classList.contains('add-photo')) { e.target.insertAdjacentHTML('beforebegin', galleryRow()); }
+        if (e.target.classList.contains('gl-del')) { e.target.closest('.gl-item').remove(); }
+      });
+      box.addEventListener('input', (e) => {
+        if (!e.target.classList.contains('gl-path')) return;
+        const prev = e.target.closest('.gl-item').querySelector('.gl-preview');
+        prev.innerHTML = e.target.value ? `<img src="${esc(e.target.value)}" alt=""/>` : '<span>No image</span>';
+      });
+      box.addEventListener('change', async (e) => {
+        if (e.target.type !== 'file') return;
+        const item = e.target.closest('.gl-item');
+        const f = e.target.files[0]; if (!f) return;
+        const busy = item.querySelector('.img-busy'); const path = item.querySelector('.gl-path');
+        const prev = item.querySelector('.gl-preview');
+        busy.hidden = false;
+        try {
+          const dataUrl = await new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(f); });
+          const out = await api('POST', '/api/admin/upload', { name: f.name, data: dataUrl });
+          path.value = out.url; prev.innerHTML = `<img src="${esc(out.url)}" alt=""/>`;
+          toast('Image uploaded');
+        } catch (err) { toast(err.message || 'Upload failed'); }
+        finally { busy.hidden = true; e.target.value = ''; }
+      });
+    });
   }
 
   // ── image / audio upload field ──
@@ -363,6 +411,9 @@
         slots: ci.querySelector('.cl-slots').value.split(',').map(s => s.trim()).filter(Boolean),
       })).filter(c => c.name);
     }
+    form.querySelectorAll('[data-gallery]').forEach(g => {
+      out[g.dataset.gallery] = Array.from(g.querySelectorAll('.gl-path')).map(i => i.value.trim()).filter(Boolean);
+    });
     return out;
   }
 
