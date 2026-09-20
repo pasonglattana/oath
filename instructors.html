@@ -66,7 +66,7 @@
     </div>
     <footer class="foot">
       <a href="/#studio">← Back to Oath Studio</a>
-      <a href="/#reserve">Book a session →</a>
+      <a href="mailto:reservation@oathhouse.co?subject=Oath%20House%20Reservation">Book a session →</a>
     </footer>
   </main>
 
@@ -80,7 +80,7 @@
         if(!r.ok) throw 0;
         people = (await r.json()).instructors || [];
       }catch(e){
-        host.innerHTML = '<p class="msg">Our instructors will be introduced here soon. <a href="/#reserve">Book a session →</a></p>'; return;
+        host.innerHTML = '<p class="msg">Our instructors will be introduced here soon. <a href="mailto:reservation@oathhouse.co?subject=Oath%20House%20Reservation">Book a session →</a></p>'; return;
       }
       if(!people.length){ host.innerHTML = '<p class="msg">Our instructors will be introduced here soon.</p>'; return; }
       host.innerHTML = people.map(function(p){
