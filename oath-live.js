@@ -15,7 +15,7 @@
   if (!content) return;
 
   window.OATH_CONTENT = content;
-  if (content.media) hydrateMedia(content.media);
+  if (content.media) hydrateMedia(content.media, content.media_caps || {});
   if (Array.isArray(content.events)) hydrateCalendar(content.events);
   if (Array.isArray(content.stories)) hydrateStories(content.stories);
   if (Array.isArray(content.hours)) hydrateHours(content.hours);
@@ -85,12 +85,17 @@
   }
 
   // ── MEDIA (site photos) ──
-  function hydrateMedia(media) {
+  function hydrateMedia(media, caps) {
     document.querySelectorAll('[data-media]').forEach((node) => {
       const url = media[node.dataset.media];
       if (!url) return;
       if (node.tagName === 'IMG') { node.removeAttribute('srcset'); node.src = url; }
       else { node.style.backgroundImage = `url("${url}")`; }
+    });
+    // editable captions shown on each photo
+    document.querySelectorAll('[data-media-cap]').forEach((node) => {
+      const key = node.dataset.mediaCap;
+      if (Object.prototype.hasOwnProperty.call(caps, key)) node.textContent = caps[key];
     });
   }
 

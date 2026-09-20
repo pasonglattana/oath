@@ -86,11 +86,12 @@
       ],
     },
     media: {
-      title: 'Photos', sub: 'The main photography on the site. Upload a new image to swap any of these.',
+      title: 'Photos', sub: 'The main photography on the site. Upload a new image to swap any of these, and edit the caption shown on the photo.',
       empty: 'No photo slots.', noAdd: true, noDelete: true, thumbs: true,
       fields: [
         { k: 'label', t: 'readonly', label: 'Where this appears' },
         { k: 'image', t: 'image', label: 'Photo' },
+        { k: 'caption', t: 'text', label: 'Caption on the photo', hint: 'The small text label shown over this photo on the site (leave blank for none)' },
       ],
     },
     reservations: {

@@ -43,7 +43,7 @@ COLLECTIONS = {
     "events":      ["featured","date","day","month","room","title","description","time","published","sort"],
     "experiences": ["key","label","where_txt","party_type","slots","full","classes","published","sort"],
     "stories":     ["featured","category","date","title","excerpt","body","image","link","published","sort"],
-    "media":       ["key","label","image","sort"],
+    "media":       ["key","label","image","caption","sort"],
     "music":       ["title","artist","src","active","sort"],
     "reservations":["status"],   # admin only flips status; rows are created via /api/reserve
     "instructors": ["name","role","bio","image","specialties","published","sort"],
@@ -84,7 +84,7 @@ def init_db():
     );
     CREATE TABLE IF NOT EXISTS media (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      key TEXT UNIQUE, label TEXT, image TEXT, sort INTEGER DEFAULT 0
+      key TEXT UNIQUE, label TEXT, image TEXT, caption TEXT, sort INTEGER DEFAULT 0
     );
     CREATE TABLE IF NOT EXISTS music (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -114,6 +114,13 @@ def init_db():
     # migrations for databases created before a column existed
     try: c.execute("ALTER TABLE stories ADD COLUMN body TEXT")
     except Exception: pass
+    try: c.execute("ALTER TABLE media ADD COLUMN caption TEXT")
+    except Exception: pass
+    # backfill the on-photo captions for the known slots when still empty
+    for k, v in {"garden_gather":"The gathering room","garden_hands":"Warmth & texture",
+                 "garden_table":"The long table","garden_light":"Morning light",
+                 "studio_tool":"The studio tools","hero":""}.items():
+        c.execute("UPDATE media SET caption=? WHERE key=? AND (caption IS NULL OR caption='')", (v, k))
     c.commit()
     # seed only when empty, so the site looks identical until the team edits
     if c.execute("SELECT COUNT(*) n FROM events").fetchone()["n"] == 0:
@@ -159,14 +166,14 @@ def seed_media(c):
     # named photo "slots" on the site, pointed at the current images. Editing a
     # slot's image swaps that photo everywhere it appears on the site.
     media = [
-        ("hero",          "Landing — hero background",   "photos/landing-hero-1600.webp", 0),
-        ("garden_gather", "Oath Garden — gathering room","photos/garden/garden-gather.webp", 1),
-        ("garden_hands",  "Oath Garden — warmth & texture","photos/garden/garden-hands.webp", 2),
-        ("garden_table",  "Oath Garden — the long table","photos/garden/garden-table.webp", 3),
-        ("garden_light",  "Oath Garden — morning light", "photos/garden/garden-light.webp", 4),
-        ("studio_tool",   "Oath Studio — the studio",    "photos/studio/studio-tool.webp", 5),
+        ("hero",          "Landing — hero background",   "photos/landing-hero-1600.webp", "", 0),
+        ("garden_gather", "Oath Garden — gathering room","photos/garden/garden-gather.webp", "The gathering room", 1),
+        ("garden_hands",  "Oath Garden — warmth & texture","photos/garden/garden-hands.webp", "Warmth & texture", 2),
+        ("garden_table",  "Oath Garden — the long table","photos/garden/garden-table.webp", "The long table", 3),
+        ("garden_light",  "Oath Garden — morning light", "photos/garden/garden-light.webp", "Morning light", 4),
+        ("studio_tool",   "Oath Studio — the studio",    "photos/studio/studio-tool.webp", "The studio tools", 5),
     ]
-    c.executemany("INSERT INTO media (key,label,image,sort) VALUES (?,?,?,?)", media)
+    c.executemany("INSERT INTO media (key,label,image,caption,sort) VALUES (?,?,?,?,?)", media)
     c.commit()
 
 def seed(c):
@@ -458,11 +465,14 @@ class Handler(BaseHTTPRequestHandler):
         ex = [row_to_obj(r) for r in c.execute("SELECT * FROM experiences WHERE published=1 ORDER BY sort, id")]
         st = [row_to_obj(r) for r in c.execute("SELECT * FROM stories WHERE published=1 ORDER BY sort, id")]
         for s in st: s.pop("body", None)        # keep the homepage payload lean
-        md = {r["key"]: r["image"] for r in c.execute("SELECT key, image FROM media")}
+        md, mcaps = {}, {}
+        for r in c.execute("SELECT key, image, caption FROM media"):
+            md[r["key"]] = r["image"]
+            if r["caption"]: mcaps[r["key"]] = r["caption"]
         hr = [row_to_obj(r) for r in c.execute("SELECT * FROM hours WHERE published=1 ORDER BY sort, id")]
         song = c.execute("SELECT title, artist, src FROM music WHERE active=1 AND src!='' ORDER BY sort, id LIMIT 1").fetchone()
         c.close()
-        self.send_json({"events": ev, "experiences": ex, "stories": st, "media": md, "hours": hr,
+        self.send_json({"events": ev, "experiences": ex, "stories": st, "media": md, "media_caps": mcaps, "hours": hr,
                         "music": (row_to_obj(song) if song else None)})
 
     # -- instructors (for the Our Instructors page) --
