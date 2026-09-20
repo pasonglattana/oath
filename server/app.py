@@ -133,6 +133,15 @@ def init_db():
         seed_instructors(c)
     if c.execute("SELECT COUNT(*) n FROM hours").fetchone()["n"] == 0:
         seed_hours(c)
+    # ensure newer photo slots exist even on databases seeded before they existed
+    for key, label, image, caption, sort in [
+        ("studio_2", "Oath Studio — photo 1", "photos/garden/garden-light.webp", "Natural light", 6),
+        ("studio_3", "Oath Studio — photo 2", "photos/studio/studio-tool.webp",  "The practice",  7),
+        ("studio_4", "Oath Studio — photo 3", "photos/garden/garden-hands.webp", "Stillness",     8),
+    ]:
+        c.execute("INSERT OR IGNORE INTO media (key,label,image,caption,sort) VALUES (?,?,?,?,?)",
+                  (key, label, image, caption, sort))
+    c.commit()
     c.close()
 
 def seed_hours(c):
