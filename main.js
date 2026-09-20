@@ -816,50 +816,40 @@ if (hasGSAP && !window.ScrollTrigger) {
     else if (e.key === 'ArrowDown') { e.preventDefault(); setActive(active - 1); }
   });
 
-  /* ── move between floors by finger-swipe (touch) and mouse-drag (desktop) ──
-     swipe / drag UP   → rise to the floor above
-     swipe / drag DOWN → sink to the floor below                              */
+  /* ── moving between floors ──
+     Mobile: just scroll the page — the active floor follows your finger
+     naturally as the building passes through the screen (no gesture to learn,
+     nothing traps the scroll). Desktop: drag the building, arrows, or keys.  */
 
-  // desktop mouse / stylus drag (touch is handled by the touch listeners below)
-  let dragY = null;
-  towerEl.addEventListener('pointerdown', (e) => {
-    if (e.pointerType === 'touch') return;
-    dragY = e.clientY; moved = false;
-  });
-  window.addEventListener('pointermove', (e) => {
-    if (dragY !== null && Math.abs(e.clientY - dragY) > 6) moved = true;
-  });
-  window.addEventListener('pointerup', (e) => {
-    if (dragY === null) return;
-    const dy = e.clientY - dragY; dragY = null;
-    if (Math.abs(dy) > STEP) setActive(active + (dy < 0 ? 1 : -1)); // drag up → ascend
-  });
-
-  // touch finger-swipe — the building owns the vertical gesture (CSS sets
-  // touch-action:none), so swiping reliably moves between floors on iOS. Once
-  // you reach the top/bottom floor we hand the gesture back to the page by
-  // scrolling it ourselves, so a finger on the building is never a dead end.
-  let tY = null, tX = null, lastY = null, acc = 0;
-  towerEl.addEventListener('touchstart', (e) => {
-    if (e.touches.length !== 1) { tY = null; return; }
-    tY = lastY = e.touches[0].clientY; tX = e.touches[0].clientX; acc = 0; moved = false;
-  }, { passive: true });
-  towerEl.addEventListener('touchmove', (e) => {
-    if (tY === null || e.touches.length !== 1) return;
-    const y = e.touches[0].clientY, x = e.touches[0].clientX;
-    const dyInc = y - lastY; lastY = y;
-    if (Math.abs(x - tX) > Math.abs(y - tY) + 6) return;           // mostly sideways → ignore
-    if (Math.abs(y - tY) < 6) return;                             // tiny → keep it a tap
-    moved = true;
-    const goingUp = dyInc < 0;                                    // finger moving up the screen
-    const canStep = goingUp ? (active < N - 1) : (active > 0);
-    if (!canStep) { window.scrollBy(0, -dyInc); return; }         // end floor → scroll the page
-    if (e.cancelable) e.preventDefault();
-    acc += dyInc;
-    if (acc <= -STEP) { setActive(active + 1); acc = 0; }         // swipe up → ascend
-    else if (acc >= STEP) { setActive(active - 1); acc = 0; }     // swipe down → descend
-  }, { passive: false });
-  towerEl.addEventListener('touchend', () => { tY = null; }, { passive: true });
+  if (TOUCH) {
+    let ticking = false;
+    function syncToScroll() {
+      ticking = false;
+      const r = towerEl.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const span = r.height + vh;                          // full travel through the viewport
+      const prog = Math.max(0, Math.min(1, (vh - r.top) / span));
+      const idx = Math.round(prog * (N - 1));              // scroll down → rise through the floors
+      if (idx !== active) setActive(idx);
+    }
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(syncToScroll); }
+    }, { passive: true });
+    window.addEventListener('resize', syncToScroll);
+    syncToScroll();
+  } else {
+    // desktop: drag the building vertically to change floors
+    let dragY = null;
+    towerEl.addEventListener('pointerdown', (e) => { dragY = e.clientY; moved = false; });
+    window.addEventListener('pointermove', (e) => {
+      if (dragY !== null && Math.abs(e.clientY - dragY) > 6) moved = true;
+    });
+    window.addEventListener('pointerup', (e) => {
+      if (dragY === null) return;
+      const dy = e.clientY - dragY; dragY = null;
+      if (Math.abs(dy) > STEP) setActive(active + (dy < 0 ? 1 : -1)); // drag up → ascend
+    });
+  }
 
   layout();
   window.addEventListener('resize', layout);

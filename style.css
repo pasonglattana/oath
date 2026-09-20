@@ -1317,15 +1317,11 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   .cursor, .cursor-dot, .cursor-ring { display: none !important; }
 }
 
-/* Drag-control touch behaviour — set unconditionally so it applies on every
-   touch device regardless of how the browser reports pointer type.
-   Harmless on desktop (mouse drag is unaffected). */
-/* the tower owns vertical finger-gestures so iOS can't hijack them for page
-   scroll; the swipe handler manually scrolls the page once you reach the top/
-   bottom floor, so a finger on the building is never a dead end */
-.tower { touch-action: none; -webkit-user-select: none; user-select: none; }
+/* On desktop the building is finger/mouse-draggable; on touch the page scrolls
+   the floors naturally, so let native vertical scroll through. */
+.tower { touch-action: pan-y; -webkit-user-select: none; user-select: none; }
 
-/* swipe affordance — only shown where a finger is actually the input */
+/* the little floor hint appears only on touch, and fades away */
 .tower-hint { display: none; }
 @media (hover: none) and (pointer: coarse) {
   .tower-hint {
@@ -1336,6 +1332,8 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     animation: towerHintFade 5.5s ease-out forwards;
   }
   @keyframes towerHintFade { 0%,72% { opacity: .72; } 100% { opacity: 0; } }
+  /* the up / down arrows aren't needed on a phone — scrolling drives the floors */
+  .tower-arrows { display: none; }
 }
 
 /* Museum Mode has its own internal scroller — give it native momentum on iOS
