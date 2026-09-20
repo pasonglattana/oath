@@ -40,7 +40,7 @@ mimetypes.add_type("application/json", ".json")
 
 # ── collections: which DB columns are editable per content type ──────────────
 COLLECTIONS = {
-    "events":      ["featured","date","day","month","room","title","description","time","published","sort"],
+    "events":      ["featured","date","day","month","room","title","description","time","image","published","sort"],
     "experiences": ["key","label","where_txt","party_type","slots","full","classes","published","sort"],
     "stories":     ["featured","category","date","title","excerpt","body","image","link","published","sort"],
     "media":       ["key","label","image","caption","sort"],
@@ -70,7 +70,7 @@ def init_db():
     CREATE TABLE IF NOT EXISTS events (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       featured INTEGER DEFAULT 0, date TEXT, day TEXT, month TEXT, room TEXT,
-      title TEXT, description TEXT, time TEXT, published INTEGER DEFAULT 1, sort INTEGER DEFAULT 0
+      title TEXT, description TEXT, time TEXT, image TEXT, published INTEGER DEFAULT 1, sort INTEGER DEFAULT 0
     );
     CREATE TABLE IF NOT EXISTS experiences (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -115,6 +115,8 @@ def init_db():
     try: c.execute("ALTER TABLE stories ADD COLUMN body TEXT")
     except Exception: pass
     try: c.execute("ALTER TABLE media ADD COLUMN caption TEXT")
+    except Exception: pass
+    try: c.execute("ALTER TABLE events ADD COLUMN image TEXT")
     except Exception: pass
     # backfill the on-photo captions for the known slots when still empty
     for k, v in {"garden_gather":"The gathering room","garden_hands":"Warmth & texture",
@@ -180,15 +182,15 @@ def seed(c):
     events = [
         (1,"2026-06-21","21","Jun","Both rooms","Solstice — A Night of Gathering",
          "Once a year the whole house opens at once — fire and a long table in the garden, breath in the studio. A single evening where food, sound and movement become one ritual.",
-         "Sundown — Late",1,0),
+         "Sundown — Late","photos/garden/garden-table.webp",1,0),
         (0,"2026-06-19","19","Jun","Oath Garden","Natural Wine & Long Table",
-         "A shared harvest dinner. Low-intervention wine, fire-cooked vegetables, bread torn by hand.","18:30 — 22:00",1,2),
+         "A shared harvest dinner. Low-intervention wine, fire-cooked vegetables, bread torn by hand.","18:30 — 22:00","photos/garden/garden-gather.webp",1,2),
         (0,"2026-06-28","28","Jun","Oath Studio","Breathwork & Sound Bath",
-         "A morning of guided breath and resonant tone. Linen, concrete, and the body returning to stillness.","07:30 — 09:00",1,3),
+         "A morning of guided breath and resonant tone. Linen, concrete, and the body returning to stillness.","07:30 — 09:00","photos/studio/studio-tool.webp",1,3),
         (0,"2026-07-05","05","Jul","The House","Makers in Residence — Clay",
-         "A week-long open studio with a guest ceramicist. Throw, fire, gather. Closing exhibition Sunday.","All week",1,4),
+         "A week-long open studio with a guest ceramicist. Throw, fire, gather. Closing exhibition Sunday.","All week","photos/garden/garden-hands.webp",1,4),
     ]
-    c.executemany("INSERT INTO events (featured,date,day,month,room,title,description,time,published,sort) VALUES (?,?,?,?,?,?,?,?,?,?)", events)
+    c.executemany("INSERT INTO events (featured,date,day,month,room,title,description,time,image,published,sort) VALUES (?,?,?,?,?,?,?,?,?,?,?)", events)
     experiences = [
         ("table","Table · Oath Garden","Oath Garden","guests",
          json.dumps(["08:00","09:30","11:00","12:30","14:00","18:00","19:30","21:00"]), json.dumps(["12:30"]), json.dumps(None),1,0),

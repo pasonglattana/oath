@@ -106,35 +106,53 @@
   }
   function hydrateCalendar(events) {
     if (!events.length) return;
-    const feature = events.find(e => e.featured) || events[0];
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const isPast = (e) => { if (!e.date) return false; const d = new Date(e.date + 'T00:00'); return !isNaN(d) && d < today; };
+
+    // feature an upcoming event when there is one, otherwise fall back
+    const upcoming = events.filter(e => !isPast(e));
+    const feature = upcoming.find(e => e.featured) || upcoming[0] || events.find(e => e.featured) || events[0];
     const rest = events.filter(e => e !== feature);
 
     // featured card
     const cf = document.querySelector('.cal-feature');
     if (cf && feature) {
+      const past = isPast(feature);
+      cf.classList.toggle('is-past', past);
       const cap = cf.querySelector('.plate-cap'); if (cap) cap.textContent = feature.title;
+      const plate = cf.querySelector('.fg-circle .plate');
+      if (plate && feature.image) {
+        plate.classList.add('has-photo');
+        plate.style.backgroundImage = `url("${feature.image}")`;
+        plate.style.backgroundSize = 'cover'; plate.style.backgroundPosition = 'center';
+      }
       const body = cf.querySelector('.cf-body');
       if (body) body.innerHTML =
-        `<p class="cf-tag">Featured · ${esc(feature.room || 'The House')}</p>
+        `<p class="cf-tag">${past ? 'Past · ' : 'Featured · '}${esc(feature.room || 'The House')}</p>
          <h3>${esc(feature.title)}</h3>
          <div class="cf-meta"><span>${esc(longDate(feature.date, feature.day, feature.month))}</span><span>${esc(feature.time || '')}</span><span>${esc(feature.room || '')}</span></div>
          <p>${esc(feature.description || '')}</p>`;
     }
 
-    // event list
+    // event list — past events stay, just dimmed
     const journal = document.querySelector('#calendar .journal');
     if (journal) {
-      journal.innerHTML = rest.map(ev => `
-        <article>
+      journal.innerHTML = rest.map(ev => {
+        const past = isPast(ev);
+        const media = ev.image ? `<div class="j-media"><img src="${esc(ev.image)}" alt="" loading="lazy"></div>` : '';
+        return `
+        <article class="${past ? 'is-past' : ''}">
           <span class="j-hover"></span>
           <div class="j-date"><span class="d">${esc(ev.day || '')}</span><span class="m">${esc(ev.month || '')}</span></div>
           <div class="j-body">
-            <p class="j-room">${esc(ev.room || '')}</p>
+            <p class="j-room">${esc(ev.room || '')}${past ? ' <span class="j-pasttag">Past</span>' : ''}</p>
             <h3>${esc(ev.title || '')}</h3>
             <p>${esc(ev.description || '')}</p>
+            ${media}
           </div>
           <div class="j-time">${esc(ev.time || '')}</div>
-        </article>`).join('');
+        </article>`;
+      }).join('');
     }
   }
 

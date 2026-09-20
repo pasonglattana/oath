@@ -17,6 +17,7 @@
         { k: 'month', t: 'text', label: 'Month', placeholder: 'Jun', half: true },
         { k: 'date', t: 'date', label: 'Full date', hint: 'Optional — powers the “Add to calendar” button' },
         { k: 'description', t: 'textarea', label: 'Description' },
+        { k: 'image', t: 'image', label: 'Photo', hint: 'Shown on the event card. Upload an image or paste a path.' },
         { k: 'featured', t: 'toggle', label: 'Featured — show as the large card at the top' },
         { k: 'published', t: 'toggle', label: 'Published — visible on the live site' },
         { k: 'sort', t: 'number', label: 'Order (lower shows first)' },
