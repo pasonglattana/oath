@@ -1063,8 +1063,8 @@ body.artifact-open { overflow: hidden; }
   .collector { text-align: left; }
   .cal-feature { grid-template-columns: 1fr; gap: 1.8rem; }
   .cal-feature .frame-gather { max-width: 320px; }
-  .studio-logo { width: min(360px, 92%); }
-  .garden-logo { width: min(210px, 64%); }
+  .studio-logo { width: min(230px, 62%); }
+  .garden-logo { width: min(148px, 46%); }
 }
 
 /* — phones — */
