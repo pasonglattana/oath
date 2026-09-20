@@ -139,18 +139,22 @@
     if (journal) {
       journal.innerHTML = rest.map(ev => {
         const past = isPast(ev);
-        const media = ev.image ? `<div class="j-media"><img src="${esc(ev.image)}" alt="" loading="lazy"></div>` : '';
+        const dayMon = [ev.day, ev.month].filter(Boolean).join(' ');
+        // left column: the photo if there is one, otherwise the date block
+        const left = ev.image
+          ? `<div class="j-media"><img src="${esc(ev.image)}" alt="" loading="lazy"></div>`
+          : `<div class="j-date"><span class="d">${esc(ev.day || '')}</span><span class="m">${esc(ev.month || '')}</span></div>`;
+        // meta line: include the date here when the photo has taken the left slot
+        const meta = [ev.image ? dayMon : '', ev.room, ev.time].filter(Boolean).join(' · ');
         return `
         <article class="${past ? 'is-past' : ''}">
           <span class="j-hover"></span>
-          <div class="j-date"><span class="d">${esc(ev.day || '')}</span><span class="m">${esc(ev.month || '')}</span></div>
+          ${left}
           <div class="j-body">
-            <p class="j-room">${esc(ev.room || '')}${past ? ' <span class="j-pasttag">Past</span>' : ''}</p>
+            <p class="j-room">${esc(meta)}${past ? ' <span class="j-pasttag">Past</span>' : ''}</p>
             <h3>${esc(ev.title || '')}</h3>
             <p>${esc(ev.description || '')}</p>
-            ${media}
           </div>
-          <div class="j-time">${esc(ev.time || '')}</div>
         </article>`;
       }).join('');
     }
